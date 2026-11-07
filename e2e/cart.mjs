@@ -12,7 +12,6 @@ const check = (name, ok, detail = "") => {
   results.push(ok);
   console.log(`${ok ? "✔" : "✘"} ${name}${detail ? ` — ${detail}` : ""}`);
 };
-const pesos = (text) => Number(text.replace(/\D/g, ""));
 const price = (n) => `$${NBSP}${new Intl.NumberFormat("es-AR").format(n)}`;
 
 const browser = await chromium.launch();
