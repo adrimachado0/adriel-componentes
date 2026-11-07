@@ -21,6 +21,10 @@ MSYS_NO_PATHCONV=1 wsl.exe -d Ubuntu-26.04 --cd /home/adriel/projects/adriel-com
 - Run git from WSL (`wsl.exe … -- git …`), not Windows git, so line endings and file modes stay Linux.
 
 Scripts: `lint`, `typecheck`, `test`, `build`, `format`, and `check` (lint + typecheck + test + build).
+
+Browser checks (headless Playwright, Docker): with the dev server up, `docker compose run --rm e2e <script>.mjs`
+runs `e2e/<script>.mjs` against localhost:3000 and saves screenshots to `e2e/shots/` (open them to review the UI).
+Fail on console errors (that is how hydration errors are caught).
 **Before calling a step done, `npm run check` must pass.**
 
 ## Stack

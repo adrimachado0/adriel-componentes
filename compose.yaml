@@ -12,5 +12,27 @@ services:
       - "3000:3000"
     command: npm run dev -- --hostname 0.0.0.0
 
+  # Headless browser checks against the running dev server (shares its network,
+  # so the page is reached at localhost:3000). Only runs on demand:
+  #   docker compose up -d
+  #   docker compose run --rm e2e cart.mjs
+  e2e:
+    profiles: ["e2e"]
+    image: mcr.microsoft.com/playwright:v1.65.0-noble
+    network_mode: "service:app"
+    ipc: host
+    working_dir: /runner
+    volumes:
+      - ./e2e:/e2e
+      - e2e-runner:/runner
+    entrypoint:
+      - bash
+      - -c
+      - |
+        [ -d node_modules/playwright ] || npm i --silent --no-audit --no-fund playwright@1.65.0
+        mkdir -p /e2e/shots && cp "/e2e/$$1" . && node "$$1"
+      - e2e
+
 volumes:
   npm-cache:
+  e2e-runner:
