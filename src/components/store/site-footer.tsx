@@ -90,7 +90,7 @@ function FooterLink({
 }
 
 /** Cached so the year can be part of the static shell. */
-async function CopyrightYear() {
+export async function CopyrightYear() {
   "use cache";
   cacheLife("days");
   return new Date().getFullYear();
