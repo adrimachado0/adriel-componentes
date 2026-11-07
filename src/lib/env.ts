@@ -23,10 +23,6 @@ export const env = {
     "NEXT_PUBLIC_WHATSAPP_NUMBER",
     process.env.NEXT_PUBLIC_WHATSAPP_NUMBER,
   ),
-  instagramUrl: required(
-    "NEXT_PUBLIC_INSTAGRAM_URL",
-    process.env.NEXT_PUBLIC_INSTAGRAM_URL,
-  ),
   contactEmail: required(
     "NEXT_PUBLIC_CONTACT_EMAIL",
     process.env.NEXT_PUBLIC_CONTACT_EMAIL,

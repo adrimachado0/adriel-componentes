@@ -2,7 +2,7 @@ import "server-only";
 import { ImageResponse } from "next/og";
 import sharp from "sharp";
 
-// Open Graph images are shared on WhatsApp / Instagram, whose crawlers don't
+// Open Graph images are shared on WhatsApp and social networks, whose crawlers don't
 // reliably support WebP, so everything is emitted as JPEG.
 // Colors are literal here: Satori/sharp can't read the CSS tokens. They mirror
 // --color-page, --color-hero-*, --color-primary and --color-hero-text.

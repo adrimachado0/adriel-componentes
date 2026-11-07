@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
-import { Mail } from "lucide-react";
+import Link from "next/link";
+import { Lock, Mail } from "lucide-react";
 import { cacheLife } from "next/cache";
-import { InstagramIcon, WhatsAppIcon } from "@/components/icons";
+import { WhatsAppIcon } from "@/components/icons";
 import { Logo } from "@/components/logo";
 import { contact, SITE_NAME } from "@/lib/site";
 
@@ -16,18 +17,7 @@ export function SiteFooter() {
             WhatsApp.
           </p>
         </div>
-        <nav
-          aria-label="Redes y contacto"
-          className="flex flex-wrap gap-2 sm:gap-2.5"
-        >
-          <FooterLink
-            href={contact.instagramUrl}
-            external
-            icon={<InstagramIcon className="size-[17px] sm:size-[18px]" />}
-            iconClassName="bg-primary-tint text-primary"
-          >
-            Instagram
-          </FooterLink>
+        <nav aria-label="Contacto" className="flex flex-wrap gap-2 sm:gap-2.5">
           <FooterLink
             href={contact.whatsappGeneralUrl}
             external
@@ -52,9 +42,20 @@ export function SiteFooter() {
         </nav>
       </div>
       <div className="border-t border-line-subtle">
-        <p className="container-page py-4 text-[13px] text-muted sm:py-[18px]">
-          © <CopyrightYear /> {SITE_NAME}
-        </p>
+        <div className="container-page flex flex-wrap items-center justify-between gap-x-4 gap-y-1 py-2 text-[13px] text-muted sm:py-1.5">
+          <p>
+            © <CopyrightYear /> {SITE_NAME}
+          </p>
+          {/* Discreet on purpose: the panel is only for the store owner. */}
+          <Link
+            href="/admin"
+            prefetch={false}
+            className="-mx-2 flex min-h-11 items-center gap-1.5 rounded-full px-2 font-semibold transition-colors hover:text-ink"
+          >
+            <Lock className="size-3.5" strokeWidth={2} aria-hidden />
+            Acceso administradores
+          </Link>
+        </div>
       </div>
     </footer>
   );

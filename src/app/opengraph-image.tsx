@@ -5,7 +5,7 @@ export const alt = "Adriel Componentes: componentes de PC usados";
 export const size = OG_SIZE;
 export const contentType = "image/jpeg";
 
-/** Link preview for the home page (WhatsApp / Instagram). */
+/** Link preview for the home page (WhatsApp and social networks). */
 export default async function Image() {
   return new Response(await renderHomeOgImage(), {
     headers: { "Content-Type": "image/jpeg" },

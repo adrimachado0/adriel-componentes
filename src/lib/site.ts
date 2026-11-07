@@ -6,7 +6,6 @@ export const SITE_NAME = "Adriel Componentes";
 export const contact = {
   whatsappNumber: env.whatsappNumber,
   whatsappGeneralUrl: whatsappUrl(env.whatsappNumber, GENERAL_MESSAGE),
-  instagramUrl: env.instagramUrl,
   email: env.contactEmail,
 } as const;
 

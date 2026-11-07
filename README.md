@@ -36,7 +36,6 @@ Si cambia `Dockerfile.dev`: `docker compose build`.
    | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | la _publishable key_ (`sb_publishable_…`). **Nunca** la `service_role` / secret |
    | `NEXT_PUBLIC_SITE_URL`          | `https://tudominio.com` (sin `/` final)                                         |
    | `NEXT_PUBLIC_WHATSAPP_NUMBER`   | `5493416165720`                                                                 |
-   | `NEXT_PUBLIC_INSTAGRAM_URL`     | `https://www.instagram.com/adrielmachado0`                                      |
    | `NEXT_PUBLIC_CONTACT_EMAIL`     | `adrielmachadodev@gmail.com`                                                    |
 
    Son `NEXT_PUBLIC_*`: se incrustan al compilar, así que **si cambiás una, volvé a desplegar**.

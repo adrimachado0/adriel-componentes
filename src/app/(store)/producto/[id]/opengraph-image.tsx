@@ -8,7 +8,7 @@ export const alt = "Componente de PC en venta en Adriel Componentes";
 export const size = OG_SIZE;
 export const contentType = "image/jpeg";
 
-/** Link preview for WhatsApp / Instagram: the cover photo, or a branded card. */
+/** Link preview for WhatsApp and social networks: the cover photo, or a branded card. */
 export default async function Image({
   params,
 }: {
