@@ -21,6 +21,15 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,
+  experimental: {
+    // Client router cache: pages already visited are reused instead of
+    // refetched (back/forward and repeat visits). Saving from the panel
+    // still refreshes them right away (updateTag / revalidatePath).
+    staleTimes: {
+      dynamic: 30, // admin pages (per-session, never prerendered)
+      static: 300, // store pages and fully prefetched links
+    },
+  },
   images: {
     // Only product photos from our public bucket can be optimized.
     remotePatterns: [

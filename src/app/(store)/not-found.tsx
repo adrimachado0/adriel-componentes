@@ -17,7 +17,7 @@ export default function StoreNotFound() {
       title="No encontramos esta página"
       actions={
         <>
-          <Link href="/" className={primaryActionClass}>
+          <Link prefetch href="/" className={primaryActionClass}>
             Ver componentes
           </Link>
           <a

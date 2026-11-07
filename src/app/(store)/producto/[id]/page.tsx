@@ -86,6 +86,7 @@ async function ProductDetail({
     <>
       {/* Mobile: back link. Desktop: breadcrumb. */}
       <Link
+        prefetch
         href="/#componentes"
         className="-ml-2 inline-flex min-h-11 items-center gap-1.5 self-start px-2 text-sm font-semibold text-muted sm:hidden"
       >
@@ -97,6 +98,7 @@ async function ProductDetail({
         className="mb-6 hidden min-w-0 items-center gap-2 text-sm text-muted sm:flex"
       >
         <Link
+          prefetch
           href="/"
           className="font-semibold whitespace-nowrap hover:underline"
         >
@@ -108,6 +110,7 @@ async function ProductDetail({
           aria-hidden
         />
         <Link
+          prefetch
           href="/#componentes"
           className="font-semibold whitespace-nowrap hover:underline"
         >

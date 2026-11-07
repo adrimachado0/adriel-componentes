@@ -22,6 +22,7 @@ export function RelatedProducts({ products }: { products: StoreProduct[] }) {
             También te puede interesar
           </h2>
           <Link
+            prefetch
             href="/#componentes"
             className="hidden min-h-11 items-center gap-1.5 text-sm font-bold text-primary hover:underline sm:flex"
           >
@@ -44,6 +45,7 @@ export function RelatedProducts({ products }: { products: StoreProduct[] }) {
 function RelatedCard({ product }: { product: StoreProduct }) {
   return (
     <Link
+      prefetch
       href={`/producto/${product.id}`}
       className="flex w-full flex-col gap-2 rounded-card-sm border border-line bg-surface p-1.5 text-ink shadow-card transition-[translate,box-shadow] duration-200 ease-out hover:-translate-y-[3px] hover:shadow-card-hover motion-reduce:hover:translate-y-0 sm:gap-3 sm:rounded-card sm:p-2.5"
     >

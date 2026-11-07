@@ -25,6 +25,7 @@ export function BrandChips({ brands, activeBrand }: BrandChipsProps) {
         const active = brand === activeBrand;
         return (
           <Link
+            prefetch
             key={label}
             href={brandHref(brand)}
             scroll={false}

@@ -32,6 +32,7 @@ export function ProductCard({ product, preload = false }: ProductCardProps) {
         />
         {/* Whole photo opens the detail; the title link is the accessible one. */}
         <Link
+          prefetch
           href={href}
           tabIndex={-1}
           aria-hidden
@@ -79,7 +80,7 @@ export function ProductCard({ product, preload = false }: ProductCardProps) {
 
       <div className="flex flex-1 flex-col gap-1 px-1 pb-1 sm:gap-1.5 sm:px-1.5 sm:pt-0.5 sm:pb-1.5">
         <h3 className="line-clamp-2 text-sm leading-[1.3] font-bold sm:text-[15px] sm:leading-[1.35]">
-          <Link href={href} className="text-ink hover:underline">
+          <Link prefetch href={href} className="text-ink hover:underline">
             {product.title}
           </Link>
         </h3>

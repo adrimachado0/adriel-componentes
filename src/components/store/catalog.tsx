@@ -4,7 +4,8 @@ import { PackageSearch } from "lucide-react";
 import { ProductCard } from "@/components/product/product-card";
 import { Reveal } from "@/components/reveal";
 import { BrandChips } from "@/components/store/brand-chips";
-import { getBrands, getStoreProducts } from "@/lib/data/products";
+import { cacheLife, cacheTag } from "next/cache";
+import { getBrands, getStoreProducts, PRODUCTS_TAG } from "@/lib/data/products";
 
 /** Cards in the first row(s) get their cover preloaded. */
 const PRELOAD_COUNT = 4;
@@ -14,13 +15,26 @@ export async function Catalog({
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  const [{ marca }, products] = await Promise.all([
-    searchParams,
-    getStoreProducts(),
-  ]);
+  const { marca } = await searchParams;
+  return (
+    <CachedCatalog
+      requested={typeof marca === "string" ? marca.trim().slice(0, 60) : ""}
+    />
+  );
+}
 
+/**
+ * The rendered grid is cached per brand filter (not only the data), so a
+ * <Link prefetch> to "/" or "/?marca=X" can include it and the navigation is
+ * instant. Saving a product invalidates the "products" tag.
+ */
+async function CachedCatalog({ requested }: { requested: string }) {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(PRODUCTS_TAG);
+
+  const products = await getStoreProducts();
   const brands = getBrands(products);
-  const requested = typeof marca === "string" ? marca.trim() : "";
   const activeBrand = requested
     ? brands.find(
         (b) =>
@@ -111,6 +125,7 @@ function EmptyCatalog({ filtered }: { filtered: boolean }) {
       </p>
       {filtered ? (
         <Link
+          prefetch
           href="/"
           scroll={false}
           className="mt-1.5 flex h-[46px] items-center rounded-full bg-primary px-[22px] text-sm font-bold text-white transition-colors hover:bg-primary-hover"
