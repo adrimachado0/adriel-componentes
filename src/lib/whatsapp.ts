@@ -22,3 +22,24 @@ export function whatsappUrl(phoneNumber: string, message: string): string {
 export function productMessage(product: ProductForMessage): string {
   return `Hola Adriel! Me interesa: ${titleWithBrand(product)} a ${formatPrice(product.price)}. ¿Sigue disponible?`;
 }
+
+type CartLineForMessage = ProductForMessage & { quantity: number };
+
+/**
+ * Hola Adriel! Te consulto por estos componentes:
+ * • 2 × <title> (<brand>) — $ 76.000
+ * Total estimado: $ 213.000
+ */
+export function cartMessage(lines: readonly CartLineForMessage[]): string {
+  let total = 0;
+  const rows = lines.map((line) => {
+    const subtotal = line.price * line.quantity;
+    total += subtotal;
+    return `• ${line.quantity} × ${titleWithBrand(line)} — ${formatPrice(subtotal)}`;
+  });
+  return [
+    "Hola Adriel! Te consulto por estos componentes:",
+    ...rows,
+    `Total estimado: ${formatPrice(total)}`,
+  ].join("\n");
+}
