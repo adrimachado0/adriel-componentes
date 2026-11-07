@@ -1,0 +1,205 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens — single source of truth (see design/*.dc.html).
+ * Every token here is both a CSS variable (var(--color-primary)) and a
+ * Tailwind utility (bg-primary, text-ink, rounded-card, shadow-card…).
+ * Do not hardcode these values anywhere else.
+ */
+@theme {
+  --font-sans:
+    var(--font-jakarta), Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Surfaces */
+  --color-page: #f3f6fc;
+  --color-surface: #ffffff;
+  --color-field: #f7f9fd;
+  --color-sheet: #f5f7fc;
+
+  /* Text */
+  --color-ink: #0f1a33;
+  --color-muted: #5f6b85;
+  --color-body: #3b4763;
+  --color-placeholder: #67728c;
+
+  /* Borders */
+  --color-line: #e6ebf5;
+  --color-line-strong: #e1e7f3;
+  --color-line-chip: #dce3f1;
+  --color-line-subtle: #eef2f8;
+  --color-dropzone: #b9c6e2;
+  --color-handle: #c9d2e3;
+
+  /* Primary */
+  --color-primary: #1f5bef;
+  --color-primary-hover: #1747c7;
+  --color-primary-tint: color-mix(in srgb, var(--color-primary) 10%, white);
+  --color-primary-tint-strong: color-mix(
+    in srgb,
+    var(--color-primary) 12%,
+    white
+  );
+  --color-primary-soft: color-mix(in srgb, var(--color-primary) 30%, white);
+  --color-photo: color-mix(in srgb, var(--color-primary) 11%, white);
+  --color-photo-strong: color-mix(in srgb, var(--color-primary) 12%, white);
+
+  /* Hero (dark) */
+  --color-hero-from: #060e24;
+  --color-hero-via: #0b1b4b;
+  --color-hero-to: #102c78;
+  --color-hero-text: #c9d5f5;
+  --color-hero-badge: #c3d3ff;
+  --color-live: #4ade9b;
+
+  /* WhatsApp */
+  --color-whatsapp: #0d8243;
+  --color-whatsapp-fab: #16a04f;
+  --color-whatsapp-tint: #e3f5ea;
+
+  /* Status */
+  --color-success: #0d7a3e;
+  --color-success-bg: #e3f5ea;
+  --color-warning: #a04a00;
+  --color-warning-bg: #fff4e5;
+  --color-pending: #d6a100;
+  --color-danger: #b42318;
+  --color-danger-strong: #c4271d;
+  --color-danger-text: #a11d13;
+  --color-danger-bg: #fef2f1;
+  --color-danger-border: #f8cfca;
+  --color-danger-input: #d92d20;
+
+  /* Overlays */
+  --color-overlay: rgb(6 14 36 / 0.5);
+  --color-chip-dark: rgb(15 26 51 / 0.78);
+
+  /* Radii */
+  --radius-card: 22px;
+  --radius-card-sm: 18px;
+  --radius-photo: 16px;
+  --radius-photo-sm: 13px;
+  --radius-field: 14px;
+  --radius-hero: 28px;
+  --radius-hero-sm: 24px;
+  --radius-sheet: 26px;
+  --radius-dialog: 24px;
+
+  /* Shadows */
+  --shadow-card: 0 1px 2px rgb(15 26 51 / 0.04);
+  --shadow-card-hover: 0 20px 40px -20px rgb(15 26 51 / 0.3);
+  --shadow-primary: 0 12px 24px -12px var(--color-primary);
+  --shadow-logo: 0 6px 14px -6px var(--color-primary);
+  --shadow-float: 0 6px 14px -6px rgb(15 26 51 / 0.25);
+  --shadow-whatsapp: 0 12px 24px -12px rgb(13 130 67 / 0.8);
+  --shadow-fab:
+    0 0 0 6px rgb(22 160 79 / 0.14), 0 14px 28px -10px rgb(13 130 67 / 0.7);
+  --shadow-sheet-side: -24px 0 60px -30px rgb(6 14 36 / 0.6);
+  --shadow-sheet-bottom: 0 -20px 50px -20px rgb(6 14 36 / 0.5);
+  --shadow-dialog: 0 40px 80px -30px rgb(6 14 36 / 0.6);
+  --shadow-bar: 0 -12px 30px -18px rgb(15 26 51 / 0.3);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-shimmer: shimmer 1.4s linear infinite;
+
+  @keyframes shimmer {
+    from {
+      background-position: 150% 0;
+    }
+    to {
+      background-position: -50% 0;
+    }
+  }
+}
+
+/* Page container: max 1200px with fluid side padding. */
+@utility container-page {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 24px);
+}
+
+/* Hero background: dark gradient + primary glow. */
+@utility bg-hero {
+  background:
+    radial-gradient(
+      circle at 76% 50%,
+      color-mix(in srgb, var(--color-primary) 60%, transparent) 0%,
+      transparent 52%
+    ),
+    linear-gradient(
+      115deg,
+      var(--color-hero-from) 0%,
+      var(--color-hero-via) 55%,
+      var(--color-hero-to) 100%
+    );
+}
+
+/* Light-blue radial behind product photos / placeholders. */
+@utility bg-photo {
+  background: radial-gradient(
+    circle at 50% 42%,
+    var(--color-surface) 0%,
+    var(--color-photo) 72%
+  );
+}
+
+/* Skeleton block with shimmer. */
+@utility skeleton {
+  background: linear-gradient(
+      90deg,
+      var(--color-line-subtle) 0%,
+      var(--color-surface) 50%,
+      var(--color-line-subtle) 100%
+    )
+    var(--color-line-subtle);
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-page);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::placeholder {
+    color: var(--color-placeholder);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
