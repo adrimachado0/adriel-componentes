@@ -1,7 +1,7 @@
 // Headless check of the product detail page against the running dev server.
 //   docker compose run --rm [-e SOLD_OUT_ID=<uuid>] e2e detail.mjs
 // Works with whatever products exist (needs at least one in stock).
-// SOLD_OUT_ID (optional): a product with stock 0, to check "Sin stock".
+// SOLD_OUT_ID (optional): a product with stock 0, to check "Vendido".
 import { chromium } from "playwright";
 
 const BASE = "http://localhost:3000";
@@ -53,7 +53,7 @@ let detailUrl;
   const priceText = infoText.match(/\$\s?[\d.]+/)?.[0] ?? "";
   const amount = Number(priceText.replace(/\D/g, ""));
   check("price shown", amount > 0, priceText);
-  const stockTag = infoText.match(/Última unidad|(\d+) disponibles|Sin stock/);
+  const stockTag = infoText.match(/Última unidad|(\d+) disponibles|Vendido/);
   check("stock tag", Boolean(stockTag), stockTag?.[0] ?? "");
   const stock =
     stockTag?.[0] === "Última unidad" ? 1 : Number(stockTag?.[1] ?? 0);
@@ -178,11 +178,11 @@ let detailUrl;
     await page.goto(`${BASE}/producto/${process.env.SOLD_OUT_ID}`, {
       waitUntil: "networkidle",
     });
-    if (await page.getByRole("button", { name: "Sin stock" }).count()) {
+    if (await page.getByRole("button", { name: "Vendido" }).count()) {
       check(
-        "sold out: disabled 'Sin stock' button",
+        "sold out: disabled 'Vendido' button",
         await page
-          .getByRole("button", { name: "Sin stock" })
+          .getByRole("button", { name: "Vendido" })
           .first()
           .isDisabled(),
       );

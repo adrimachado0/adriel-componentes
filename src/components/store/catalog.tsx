@@ -5,7 +5,13 @@ import { ProductCard } from "@/components/product/product-card";
 import { Reveal } from "@/components/reveal";
 import { BrandChips } from "@/components/store/brand-chips";
 import { cacheLife, cacheTag } from "next/cache";
-import { getBrands, getStoreProducts, PRODUCTS_TAG } from "@/lib/data/products";
+import {
+  getBrands,
+  getSoldProducts,
+  getStoreProducts,
+  PRODUCTS_TAG,
+  type StoreProduct,
+} from "@/lib/data/products";
 
 /** Cards in the first row(s) get their cover preloaded. */
 const PRELOAD_COUNT = 4;
@@ -33,7 +39,10 @@ async function CachedCatalog({ requested }: { requested: string }) {
   cacheLife("hours");
   cacheTag(PRODUCTS_TAG);
 
-  const products = await getStoreProducts();
+  const [products, soldProducts] = await Promise.all([
+    getStoreProducts(),
+    getSoldProducts(),
+  ]);
   const brands = getBrands(products);
   const activeBrand = requested
     ? brands.find(
@@ -44,6 +53,9 @@ async function CachedCatalog({ requested }: { requested: string }) {
   const visible = requested
     ? products.filter((p) => p.brand === activeBrand)
     : products;
+  const sold = requested
+    ? soldProducts.filter((p) => p.brand === activeBrand)
+    : soldProducts;
 
   return (
     <CatalogLayout
@@ -63,7 +75,42 @@ async function CachedCatalog({ requested }: { requested: string }) {
       ) : (
         <EmptyCatalog filtered={Boolean(requested)} />
       )}
+      <SoldProducts products={sold} />
     </CatalogLayout>
+  );
+}
+
+/** "Ya vendidos": sold parts stay visible below the catalog. */
+function SoldProducts({ products }: { products: StoreProduct[] }) {
+  if (products.length === 0) return null;
+  return (
+    <section
+      aria-labelledby="sold-title"
+      className="flex flex-col gap-3.5 pt-10 sm:gap-5 sm:pt-14"
+    >
+      <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 sm:items-end">
+        <h2
+          id="sold-title"
+          className="text-[21px] font-extrabold tracking-[-0.02em] sm:text-[26px]"
+        >
+          Ya vendidos
+        </h2>
+        <span className="shrink-0 text-[13px] font-medium text-muted sm:text-sm">
+          {products.length === 1
+            ? "1 componente"
+            : `${products.length} componentes`}
+        </span>
+      </div>
+      <Reveal>
+        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-[repeat(auto-fill,minmax(min(250px,100%),1fr))] sm:gap-5">
+          {products.map((product) => (
+            <li key={product.id} className="flex">
+              <ProductCard product={product} />
+            </li>
+          ))}
+        </ul>
+      </Reveal>
+    </section>
   );
 }
 

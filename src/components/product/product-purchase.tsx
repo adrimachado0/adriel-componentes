@@ -49,7 +49,7 @@ export function ProductPurchase({
       disabled
       className="flex h-12 w-full items-center justify-center rounded-full bg-line-chip text-sm font-bold text-muted sm:h-[54px] sm:text-[15px]"
     >
-      Sin stock
+      Vendido
     </button>
   ) : allInCart ? (
     <button

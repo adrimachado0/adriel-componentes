@@ -2,6 +2,7 @@ import Link from "next/link";
 import { WhatsAppIcon } from "@/components/icons";
 import { CardCartControl } from "@/components/cart/card-cart-control";
 import { ProductPhoto } from "@/components/product/product-photo";
+import { StockBadge } from "@/components/product/stock-badge";
 import type { StoreProduct } from "@/lib/data/products";
 import { formatBrandAvailability, formatPrice } from "@/lib/format";
 import { contact } from "@/lib/site";
@@ -19,17 +20,25 @@ export function ProductCard({ product, preload = false }: ProductCardProps) {
   const href = `/producto/${product.id}`;
   const photoCount = product.images.length;
   const askUrl = whatsappUrl(contact.whatsappNumber, productMessage(product));
+  // Every part is a single unit: stock 0 means it was sold (see "Ya vendidos").
+  const sold = product.stock < 1;
 
   return (
     <article className="flex w-full flex-col gap-2 rounded-card-sm border border-line bg-surface p-1.5 shadow-card transition-[translate,box-shadow] duration-200 ease-out hover:-translate-y-[3px] hover:shadow-card-hover motion-reduce:hover:translate-y-0 sm:gap-3 sm:rounded-card sm:p-2.5">
       <div className="relative aspect-square overflow-hidden rounded-photo-sm bg-photo sm:aspect-[4/3] sm:rounded-photo">
-        <ProductPhoto
-          path={product.images[0]}
-          alt={product.title}
-          sizes="(min-width: 1200px) 280px, (min-width: 640px) 34vw, 50vw"
-          placeholderClassName="size-[52px] sm:size-[72px]"
-          preload={preload}
-        />
+        <div
+          className={
+            sold ? "absolute inset-0 opacity-60 grayscale" : "contents"
+          }
+        >
+          <ProductPhoto
+            path={product.images[0]}
+            alt={product.title}
+            sizes="(min-width: 1200px) 280px, (min-width: 640px) 34vw, 50vw"
+            placeholderClassName="size-[52px] sm:size-[72px]"
+            preload={preload}
+          />
+        </div>
         {/* Whole photo opens the detail; the title link is the accessible one. */}
         <Link
           prefetch
@@ -39,24 +48,25 @@ export function ProductCard({ product, preload = false }: ProductCardProps) {
           className="absolute inset-0"
         />
 
-        {product.stock === 1 ? (
-          <span className="absolute top-2 left-2 flex h-[22px] items-center rounded-full bg-primary px-2 text-[11px] font-bold text-white sm:top-3 sm:left-3 sm:h-[26px] sm:px-2.5 sm:text-xs">
-            Última unidad
-          </span>
-        ) : null}
+        <StockBadge
+          stock={product.stock}
+          className="top-2 left-2 sm:top-3 sm:left-3"
+        />
 
-        <a
-          href={askUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Preguntar por WhatsApp: ${product.title}`}
-          title="Preguntar por WhatsApp"
-          className="group/ask absolute top-0 right-0 flex size-11 items-start justify-end rounded-full sm:top-2 sm:right-2 sm:items-center sm:justify-center"
-        >
-          <span className="mt-1.5 mr-1.5 flex size-8 items-center justify-center rounded-full bg-surface text-whatsapp shadow-float sm:m-0 sm:size-11">
-            <WhatsAppIcon className="size-[18px] sm:size-5" />
-          </span>
-        </a>
+        {sold ? null : (
+          <a
+            href={askUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Preguntar por WhatsApp: ${product.title}`}
+            title="Preguntar por WhatsApp"
+            className="group/ask absolute top-0 right-0 flex size-11 items-start justify-end rounded-full sm:top-2 sm:right-2 sm:items-center sm:justify-center"
+          >
+            <span className="mt-1.5 mr-1.5 flex size-8 items-center justify-center rounded-full bg-surface text-whatsapp shadow-float sm:m-0 sm:size-11">
+              <WhatsAppIcon className="size-[18px] sm:size-5" />
+            </span>
+          </a>
+        )}
 
         {photoCount > 1 ? (
           <div
@@ -90,7 +100,9 @@ export function ProductCard({ product, preload = false }: ProductCardProps) {
           </p>
         ) : null}
         <p className="hidden text-[13px] font-semibold text-muted sm:block">
-          {formatBrandAvailability(product.brand, product.stock)}
+          {sold
+            ? product.brand || "Vendido"
+            : formatBrandAvailability(product.brand, product.stock)}
         </p>
         {product.description ? (
           <p className="hidden text-[13px] leading-normal text-muted sm:line-clamp-2">
@@ -99,10 +111,14 @@ export function ProductCard({ product, preload = false }: ProductCardProps) {
         ) : null}
 
         <div className="mt-auto flex flex-col gap-1.5 pt-1 sm:gap-3 sm:pt-1.5">
-          <span className="text-[17px] font-extrabold tracking-[-0.02em] tabular-nums sm:text-[21px]">
+          <span
+            className={`text-[17px] font-extrabold tracking-[-0.02em] tabular-nums sm:text-[21px] ${sold ? "text-muted" : ""}`}
+          >
             {formatPrice(product.price)}
           </span>
-          <CardCartControl productId={product.id} stock={product.stock} />
+          {sold ? null : (
+            <CardCartControl productId={product.id} stock={product.stock} />
+          )}
         </div>
       </div>
     </article>

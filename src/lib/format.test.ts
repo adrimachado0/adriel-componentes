@@ -59,7 +59,7 @@ describe("formatBrandAvailability", () => {
 
 describe("formatStockLabel", () => {
   it("covers sold out, last unit and several units", () => {
-    expect(formatStockLabel(0)).toBe("Sin stock");
+    expect(formatStockLabel(0)).toBe("Vendido");
     expect(formatStockLabel(1)).toBe("Última unidad");
     expect(formatStockLabel(3)).toBe("3 disponibles");
   });

@@ -1,6 +1,7 @@
 "use client";
 
 import { ShoppingCart } from "lucide-react";
+import { StockBadge } from "@/components/product/stock-badge";
 import { ImagePlaceholderIcon, WhatsAppIcon } from "@/components/icons";
 import { formatBrandAvailability, formatPrice } from "@/lib/format";
 
@@ -45,11 +46,7 @@ export function PreviewCard({
               <ImagePlaceholderIcon className="size-[72px]" />
             </span>
           )}
-          {stock === 1 ? (
-            <span className="absolute top-3 left-3 flex h-[26px] items-center rounded-full bg-primary px-2.5 text-xs font-bold text-white">
-              Última unidad
-            </span>
-          ) : null}
+          <StockBadge stock={stock} className="top-3 left-3" />
           <span className="absolute top-2 right-2 flex size-11 items-center justify-center rounded-full bg-surface text-whatsapp shadow-float">
             <WhatsAppIcon className="size-5" />
           </span>

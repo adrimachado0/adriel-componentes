@@ -17,7 +17,7 @@ import { contact, SITE_NAME } from "@/lib/site";
 import { productShareImagePath, SHARE_IMAGE } from "@/lib/share-image";
 import { productMessage, whatsappUrl } from "@/lib/whatsapp";
 
-/** Prerender every product in stock; new ones get the App Shell, then their own entry. */
+/** Prerender every product in stock (sold ones render on demand); new ones get the App Shell, then their own entry. */
 export async function generateStaticParams() {
   const products = await getStoreProducts();
   // Cache Components needs at least one param; the placeholder renders a 404.
@@ -150,7 +150,7 @@ async function ProductDetail({
           <ProductGallery
             images={product.images}
             title={product.title}
-            lastUnit={product.stock === 1}
+            stock={product.stock}
           />
         </div>
 
@@ -211,7 +211,7 @@ async function ProductDetail({
 function StockTag({ stock }: { stock: number }) {
   const tone =
     stock < 1
-      ? "bg-danger-bg text-danger"
+      ? "bg-line-subtle text-muted"
       : stock === 1
         ? "bg-warning-bg text-warning"
         : "bg-success-bg text-success";

@@ -177,7 +177,7 @@ export function ProductForm({ product, brands }: ProductFormProps) {
         ? { label: "Cambios sin guardar", dot: "bg-pending" }
         : stock > 0
           ? { label: "Publicado", dot: "bg-success" }
-          : { label: "Sin stock · oculto", dot: "bg-danger" };
+          : { label: "Vendido", dot: "bg-muted" };
 
   return (
     <form onSubmit={onSubmit} noValidate className="flex flex-1 flex-col">

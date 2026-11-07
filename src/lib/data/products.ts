@@ -23,11 +23,11 @@ const STORE_COLUMNS =
   "id, title, description, brand, price, stock, images, og_image, updated_at";
 
 /**
- * Every product in stock, newest first. The catalog is small, so one cached
- * list feeds the grid, the brand chips and the hero count; brand filtering
- * happens on the server over this list.
+ * Every product (in stock and sold), in the order chosen by the admin. The
+ * catalog is small, so one cached list feeds the grid, "Ya vendidos", the
+ * brand chips and the hero count; filtering happens on the server over it.
  */
-export async function getStoreProducts(): Promise<StoreProduct[]> {
+async function getAllStoreProducts(): Promise<StoreProduct[]> {
   "use cache";
   cacheLife("hours");
   cacheTag(PRODUCTS_TAG);
@@ -35,16 +35,25 @@ export async function getStoreProducts(): Promise<StoreProduct[]> {
   const { data, error } = await createPublicClient()
     .from("products")
     .select(STORE_COLUMNS)
-    .gt("stock", 0)
-    .order("created_at", { ascending: false });
+    .order("sort_order", { ascending: true });
 
   if (error) throw new Error(`Could not load products: ${error.message}`);
   return data;
 }
 
+/** Products in stock, in the admin's order. */
+export async function getStoreProducts(): Promise<StoreProduct[]> {
+  return (await getAllStoreProducts()).filter((p) => p.stock > 0);
+}
+
+/** Sold products (stock 0, every part is a single unit), shown under "Ya vendidos". */
+export async function getSoldProducts(): Promise<StoreProduct[]> {
+  return (await getAllStoreProducts()).filter((p) => p.stock < 1);
+}
+
 /**
  * One product for the detail page (also when stock is 0, so shared links show
- * "Sin stock" instead of a 404). Returns null for unknown or malformed ids.
+ * "Vendido" instead of a 404). Returns null for unknown or malformed ids.
  */
 export async function getProduct(id: string): Promise<StoreProduct | null> {
   "use cache";
@@ -64,7 +73,7 @@ export async function getProduct(id: string): Promise<StoreProduct | null> {
 
 /**
  * "También te puede interesar": other products in stock, same brand first,
- * then the newest ones.
+ * then the rest in the admin's order.
  */
 export async function getRelatedProducts(
   product: Pick<StoreProduct, "id" | "brand">,

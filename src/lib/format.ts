@@ -29,9 +29,9 @@ export function formatBrandAvailability(brand: string, stock: number): string {
   return brand ? `${brand} · ${availability}` : availability;
 }
 
-/** Stock tag on the detail page and related cards. */
+/** Stock tag on the detail page and related cards (stock 0 = sold). */
 export function formatStockLabel(stock: number): string {
-  if (stock < 1) return "Sin stock";
+  if (stock < 1) return "Vendido";
   if (stock === 1) return "Última unidad";
   return `${stock} disponibles`;
 }

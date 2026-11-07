@@ -5,12 +5,14 @@ import Image from "next/image";
 import { AnimatePresence, m, type PanInfo } from "motion/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ImagePlaceholderIcon } from "@/components/icons";
+import { StockBadge } from "@/components/product/stock-badge";
 import { productImageUrl } from "@/lib/site";
 
 type ProductGalleryProps = {
   images: string[];
   title: string;
-  lastUnit: boolean;
+  /** Shows "Última unidad" (1) or "Vendido" (0) over the photo. */
+  stock: number;
 };
 
 const SWIPE_THRESHOLD = 50;
@@ -19,11 +21,7 @@ const SWIPE_THRESHOLD = 50;
  * Detail gallery: crossfade between photos, arrows + thumbnails on desktop,
  * swipe + dots on mobile, ← → keys when focused.
  */
-export function ProductGallery({
-  images,
-  title,
-  lastUnit,
-}: ProductGalleryProps) {
+export function ProductGallery({ images, title, stock }: ProductGalleryProps) {
   const [index, setIndex] = useState(0);
   const count = images.length;
   const hasMany = count > 1;
@@ -91,11 +89,11 @@ export function ProductGallery({
           </span>
         )}
 
-        {lastUnit ? (
-          <span className="absolute top-3.5 left-3.5 flex h-7 items-center rounded-full bg-primary px-[11px] text-xs font-bold text-white sm:top-4 sm:left-4 sm:h-[30px] sm:px-3 sm:text-[13px]">
-            Última unidad
-          </span>
-        ) : null}
+        <StockBadge
+          stock={stock}
+          size="lg"
+          className="top-3.5 left-3.5 sm:top-4 sm:left-4"
+        />
 
         {hasMany ? (
           <>

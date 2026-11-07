@@ -1,6 +1,6 @@
 -- Development seed: the sample products from design/ (no photos).
 -- Staggered created_at so the Home order matches Main.dc.html (newest first).
--- The last one has stock 0 to exercise "Sin stock · oculto" in the admin list.
+-- The last one has stock 0 to exercise "Vendido" (admin list and "Ya vendidos").
 
 insert into public.products (title, description, brand, price, stock, created_at) values
   ('Memoria RAM Fury Beast 16 GB (2×8) DDR4 3200 MHz',
