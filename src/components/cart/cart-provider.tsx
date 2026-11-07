@@ -10,14 +10,10 @@ import {
   type ReactNode,
   type RefObject,
 } from "react";
-import { LazyMotion, MotionConfig } from "motion/react";
 import { addItem } from "@/lib/cart";
 import { updateCart } from "./cart-store";
 import { CartDrawer } from "./cart-drawer";
 import { AddedToast } from "./added-toast";
-
-const loadFeatures = () =>
-  import("@/components/motion-features").then((mod) => mod.default);
 
 type CartActions = {
   openCart: () => void;
@@ -89,13 +85,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
   return (
     <ActionsContext value={actions}>
       <UiContext value={ui}>
-        <LazyMotion features={loadFeatures} strict>
-          <MotionConfig reducedMotion="user">
-            {children}
-            <CartDrawer />
-            <AddedToast />
-          </MotionConfig>
-        </LazyMotion>
+        {children}
+        <CartDrawer />
+        <AddedToast />
       </UiContext>
     </ActionsContext>
   );
