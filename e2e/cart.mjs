@@ -68,6 +68,10 @@ async function readCards(page) {
   const toast = page.getByText("Agregado al carrito");
   await toast.waitFor();
   check("toast appears after adding", await toast.isVisible());
+  // Product URLs use slugs; the cart is keyed by id.
+  const firstId = await page.evaluate(
+    () => Object.keys(JSON.parse(localStorage.getItem("adriel-cart:v1")))[0],
+  );
   check(
     "badge shows 1",
     (await cartButton.getAttribute("aria-label")) === "Abrir carrito (1)",
@@ -176,16 +180,12 @@ async function readCards(page) {
   );
 
   // Reconcile: stored quantity above stock + a product that doesn't exist.
-  const firstId = await cards
-    .nth(0)
-    .getByRole("link", { name: first.title, exact: true })
-    .getAttribute("href");
   await page.evaluate((id) => {
     localStorage.setItem(
       "adriel-cart:v1",
       JSON.stringify({ [id]: 99, "00000000-0000-4000-8000-000000000000": 1 }),
     );
-  }, firstId.split("/").pop());
+  }, firstId);
   await page.reload({ waitUntil: "networkidle" });
   await cartButton.click();
   await dialog.getByRole("link", { name: /Preguntar por WhatsApp/ }).waitFor();

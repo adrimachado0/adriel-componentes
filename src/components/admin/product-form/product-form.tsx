@@ -17,6 +17,7 @@ import { useToast } from "@/components/admin/toast-provider";
 import { saveProduct, type SaveProductState } from "@/lib/actions/products";
 import type { EditableProduct } from "@/lib/data/admin-products";
 import { formatThousands } from "@/lib/format";
+import { finishSlug, sanitizeSlugInput, slugify } from "@/lib/slug";
 import {
   DESCRIPTION_MAX,
   errorSummary,
@@ -24,6 +25,7 @@ import {
   parsePriceInput,
   productFromFormData,
   productSchema,
+  SLUG_MAX,
   STOCK_MAX,
   TITLE_MAX,
   BRAND_MAX,
@@ -39,6 +41,7 @@ import { useShareImage } from "./use-share-image";
 const FIELD_ORDER: ProductField[] = [
   "images",
   "title",
+  "slug",
   "brand",
   "description",
   "price",
@@ -49,6 +52,7 @@ const FIELD_INPUT_ID: Record<ProductField, string> = {
   images: "product-photos",
   og_image: "product-share-image",
   title: "product-title",
+  slug: "product-slug",
   brand: "product-brand",
   description: "product-description",
   price: "product-price",
@@ -58,9 +62,11 @@ const FIELD_INPUT_ID: Record<ProductField, string> = {
 type ProductFormProps = {
   product?: EditableProduct;
   brands: string[];
+  /** Host shown before the product link, e.g. "adrielcomponentes.com.ar". */
+  siteHost: string;
 };
 
-export function ProductForm({ product, brands }: ProductFormProps) {
+export function ProductForm({ product, brands, siteHost }: ProductFormProps) {
   const isEdit = Boolean(product);
   const router = useRouter();
   const notify = useToast();
@@ -70,6 +76,10 @@ export function ProductForm({ product, brands }: ProductFormProps) {
   const uploading = photos.uploading || shareImage.uploading;
 
   const [title, setTitle] = useState(product?.title ?? "");
+  const [slug, setSlug] = useState(product?.slug ?? "");
+  // New products: the link follows the title until the admin edits it.
+  // Saved products keep theirs, so links already shared keep working.
+  const [slugTouched, setSlugTouched] = useState(Boolean(product));
   const [brand, setBrand] = useState(product?.brand ?? "");
   const [description, setDescription] = useState(product?.description ?? "");
   const [priceText, setPriceText] = useState(
@@ -105,6 +115,7 @@ export function ProductForm({ product, brands }: ProductFormProps) {
   const dirty =
     !product ||
     title !== product.title ||
+    finishSlug(slug) !== product.slug ||
     brand !== product.brand ||
     description !== product.description ||
     price !== product.price ||
@@ -116,7 +127,7 @@ export function ProductForm({ product, brands }: ProductFormProps) {
   // Warn before closing/reloading the tab with unsaved changes.
   const hasChanges = product
     ? dirty
-    : Boolean(title || brand || description || priceText) ||
+    : Boolean(title || slug || brand || description || priceText) ||
       photos.photos.length > 0 ||
       shareImage.image !== null;
   const savedRef = useRef(false);
@@ -256,6 +267,10 @@ export function ProductForm({ product, brands }: ProductFormProps) {
                   onChange={(e) => {
                     setTitle(e.target.value);
                     clearError("title");
+                    if (!slugTouched) {
+                      setSlug(slugify(e.target.value, SLUG_MAX));
+                      clearError("slug");
+                    }
                   }}
                   placeholder="Ej: Memoria RAM Fury Beast 16 GB DDR4"
                   autoComplete="off"
@@ -265,6 +280,57 @@ export function ProductForm({ product, brands }: ProductFormProps) {
                   }
                   className={inputClass(errors.title)}
                 />
+              </Field>
+
+              <Field
+                id={FIELD_INPUT_ID.slug}
+                label="Link"
+                error={errors.slug}
+                help={
+                  isEdit
+                    ? "Si lo cambiás, los links que ya compartiste con el nombre anterior dejan de funcionar."
+                    : "Se completa solo con el título. Podés cambiarlo."
+                }
+              >
+                <div
+                  className={`flex h-[50px] w-full items-center rounded-field border-[1.5px] bg-field focus-within:border-primary ${
+                    errors.slug ? "border-danger-input" : "border-line-strong"
+                  }`}
+                >
+                  <span
+                    aria-hidden
+                    className="max-w-[45%] shrink-0 truncate pl-3.5 text-[15px] text-muted sm:pl-4"
+                  >
+                    <span className="hidden sm:inline">{siteHost}</span>
+                    /producto/
+                  </span>
+                  <input
+                    id={FIELD_INPUT_ID.slug}
+                    name="slug"
+                    value={slug}
+                    maxLength={SLUG_MAX}
+                    onChange={(e) => {
+                      const next = sanitizeSlugInput(e.target.value, SLUG_MAX);
+                      setSlug(next);
+                      // Emptied on a new product: follow the title again
+                      // (an empty link is also generated from the title).
+                      setSlugTouched(isEdit || next !== "");
+                      clearError("slug");
+                    }}
+                    onBlur={() => setSlug((s) => finishSlug(s))}
+                    placeholder="memoria-ram-fury-16-gb"
+                    autoComplete="off"
+                    autoCapitalize="none"
+                    spellCheck={false}
+                    aria-invalid={Boolean(errors.slug) || undefined}
+                    aria-describedby={
+                      errors.slug
+                        ? `${FIELD_INPUT_ID.slug}-error`
+                        : `${FIELD_INPUT_ID.slug}-help`
+                    }
+                    className="h-full min-w-0 flex-1 bg-transparent pr-3.5 text-base outline-none sm:pr-4 sm:text-[15px]"
+                  />
+                </div>
               </Field>
 
               <Field
@@ -576,7 +642,9 @@ function Field({
       {error ? (
         <FieldMessage id={`${id}-error`}>{error}</FieldMessage>
       ) : help ? (
-        <p className="text-[13px] text-muted">{help}</p>
+        <p id={`${id}-help`} className="text-[13px] text-muted">
+          {help}
+        </p>
       ) : null}
     </div>
   );

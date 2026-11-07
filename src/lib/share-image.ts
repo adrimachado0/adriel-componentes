@@ -16,7 +16,7 @@ export const HOME_SHARE_IMAGE_PATH = "/compartir.jpg";
  * Product share image. `v` changes whenever the product is saved, so
  * WhatsApp/Facebook (which cache previews by URL) pick up the new image.
  */
-export function productShareImagePath(id: string, updatedAt: string): string {
+export function productShareImagePath(slug: string, updatedAt: string): string {
   const version = Date.parse(updatedAt);
-  return `/producto/${id}/compartir.jpg?v=${Number.isNaN(version) ? 0 : version}`;
+  return `/producto/${slug}/compartir.jpg?v=${Number.isNaN(version) ? 0 : version}`;
 }

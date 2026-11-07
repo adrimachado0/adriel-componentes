@@ -42,6 +42,7 @@ describe("productSchema via productFromFormData", () => {
     expect(result.success).toBe(true);
     expect(result.data).toEqual({
       title: "Placa de video GTX 1660",
+      slug: "placa-de-video-gtx-1660",
       brand: "MSI",
       description: "Línea 1\nLínea 2",
       price: 185000,
@@ -70,6 +71,7 @@ describe("productSchema via productFromFormData", () => {
   it("enforces lengths, stock and price limits", () => {
     const result = productSchema.safeParse({
       title: "x".repeat(81),
+      slug: "x",
       brand: "b".repeat(41),
       description: "d".repeat(1001),
       price: 0,
@@ -84,6 +86,7 @@ describe("productSchema via productFromFormData", () => {
   it("rejects foreign image paths and more than 8 photos", () => {
     const bad = productSchema.safeParse({
       title: "a",
+      slug: "a",
       brand: "",
       description: "",
       price: 1,
@@ -94,6 +97,7 @@ describe("productSchema via productFromFormData", () => {
 
     const tooMany = productSchema.safeParse({
       title: "a",
+      slug: "a",
       brand: "",
       description: "",
       price: 1,
@@ -112,6 +116,39 @@ describe("productSchema via productFromFormData", () => {
       ),
     );
     expect(result.success).toBe(false);
+  });
+});
+
+describe("slug", () => {
+  it("is generated from the title when left empty", () => {
+    const result = productSchema.safeParse(
+      productFromFormData(
+        form({ title: "Fuente 650W Ñ", slug: "", price: "1", stock: "1" }),
+      ),
+    );
+    expect(result.data?.slug).toBe("fuente-650w-n");
+  });
+
+  it("keeps the admin's slug, without a trailing hyphen", () => {
+    const result = productSchema.safeParse(
+      productFromFormData(
+        form({ title: "a", slug: "mi-fuente-", price: "1", stock: "1" }),
+      ),
+    );
+    expect(result.data?.slug).toBe("mi-fuente");
+  });
+
+  it("rejects invalid slugs", () => {
+    for (const slug of [
+      "Con Espacios",
+      "a--b",
+      "0f8fad5b-d9cb-469f-a165-70867728950e",
+    ]) {
+      const result = productSchema.safeParse(
+        productFromFormData(form({ title: "a", slug, price: "1", stock: "1" })),
+      );
+      expect(fieldErrorsOf(result.error!).slug).toBeDefined();
+    }
   });
 });
 

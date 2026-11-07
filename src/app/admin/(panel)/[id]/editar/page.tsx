@@ -5,6 +5,7 @@ import { ProductForm } from "@/components/admin/product-form/product-form";
 import { ProductFormSkeleton } from "@/components/admin/product-form/product-form-skeleton";
 import { requireAdminPage } from "@/lib/auth";
 import { getEditableProduct, getUsedBrands } from "@/lib/data/admin-products";
+import { getSiteUrl } from "@/lib/site-url";
 
 export const metadata: Metadata = { title: "Editar componente" };
 
@@ -31,5 +32,12 @@ async function EditProduct({
   ]);
   if (!product) notFound();
   // key: a fresh form state per product.
-  return <ProductForm key={product.id} product={product} brands={brands} />;
+  return (
+    <ProductForm
+      key={product.id}
+      product={product}
+      brands={brands}
+      siteHost={new URL(getSiteUrl()).host}
+    />
+  );
 }

@@ -22,15 +22,15 @@ export async function generateStaticParams() {
   const products = await getStoreProducts();
   // Cache Components needs at least one param; the placeholder renders a 404.
   return products.length > 0
-    ? products.map((p) => ({ id: p.id }))
-    : [{ id: "placeholder" }];
+    ? products.map((p) => ({ slug: p.slug }))
+    : [{ slug: "placeholder" }];
 }
 
 export async function generateMetadata({
   params,
-}: PageProps<"/producto/[id]">): Promise<Metadata> {
-  const { id } = await params;
-  const product = await getProduct(id);
+}: PageProps<"/producto/[slug]">): Promise<Metadata> {
+  const { slug } = await params;
+  const product = await getProduct(slug);
   if (!product) return { title: "Componente no encontrado" };
 
   const title = product.brand
@@ -42,7 +42,7 @@ export async function generateMetadata({
     `${formatPrice(product.price)} · Consultá por WhatsApp.`;
   // Custom share image if uploaded, else the cover (see compartir.jpg/route.ts).
   const shareImage = {
-    url: productShareImagePath(product.id, product.updated_at),
+    url: productShareImagePath(product.slug, product.updated_at),
     width: SHARE_IMAGE.width,
     height: SHARE_IMAGE.height,
     type: "image/jpeg",
@@ -52,14 +52,14 @@ export async function generateMetadata({
   return {
     title,
     description,
-    alternates: { canonical: `/producto/${product.id}` },
+    alternates: { canonical: `/producto/${product.slug}` },
     openGraph: {
       type: "website",
       locale: "es_AR",
       siteName: SITE_NAME,
       title: shareTitle,
       description,
-      url: `/producto/${product.id}`,
+      url: `/producto/${product.slug}`,
       images: [shareImage],
     },
     twitter: {
@@ -71,7 +71,7 @@ export async function generateMetadata({
   };
 }
 
-export default function ProductPage({ params }: PageProps<"/producto/[id]">) {
+export default function ProductPage({ params }: PageProps<"/producto/[slug]">) {
   return (
     <div className="container-page flex flex-1 flex-col pt-1.5 pb-9 sm:pt-5 sm:pb-20">
       <Suspense fallback={<ProductDetailSkeleton />}>
@@ -83,9 +83,9 @@ export default function ProductPage({ params }: PageProps<"/producto/[id]">) {
 
 async function ProductDetail({
   params,
-}: Pick<PageProps<"/producto/[id]">, "params">) {
-  const { id } = await params;
-  const product = await getProduct(id);
+}: Pick<PageProps<"/producto/[slug]">, "params">) {
+  const { slug } = await params;
+  const product = await getProduct(slug);
   if (!product) notFound();
 
   const related = await getRelatedProducts(product);

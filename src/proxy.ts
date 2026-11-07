@@ -1,19 +1,57 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
+import { createClient } from "@supabase/supabase-js";
 import { env } from "@/lib/env";
 import {
   SESSION_ONLY_COOKIE,
   withRememberPreference,
 } from "@/lib/supabase/cookies";
+import type { Database } from "@/types/database";
 
 const LOGIN_PATH = "/admin/login";
 
 /**
- * Runs only on /admin/*: refreshes the Supabase session cookies and redirects
+ * Runs on /admin/* and on old product links (/producto/<uuid>, see config).
+ */
+export async function proxy(request: NextRequest) {
+  if (request.nextUrl.pathname.startsWith("/producto/")) {
+    return redirectOldProductLink(request);
+  }
+  return adminProxy(request);
+}
+
+/**
+ * Product pages used to live at /producto/<id>. Links already shared on
+ * WhatsApp or Facebook get a permanent redirect to /producto/<slug>.
+ */
+async function redirectOldProductLink(request: NextRequest) {
+  const [, , id, ...rest] = request.nextUrl.pathname.split("/");
+  const supabase = createClient<Database>(
+    env.supabaseUrl,
+    env.supabaseAnonKey,
+    {
+      auth: { persistSession: false, autoRefreshToken: false },
+    },
+  );
+  const { data } = await supabase
+    .from("products")
+    .select("slug")
+    .eq("id", id ?? "")
+    .maybeSingle();
+  // Unknown id: the page itself answers with the store's 404.
+  if (!data) return NextResponse.next();
+
+  const url = request.nextUrl.clone();
+  url.pathname = ["", "producto", data.slug, ...rest].join("/");
+  return NextResponse.redirect(url, 308);
+}
+
+/**
+ * /admin/*: refreshes the Supabase session cookies and redirects
  * to the login when there is no admin session. This is an optimistic check;
  * pages and Server Actions verify the session again.
  */
-export async function proxy(request: NextRequest) {
+async function adminProxy(request: NextRequest) {
   let response = NextResponse.next({ request });
   const sessionOnly = request.cookies.get(SESSION_ONLY_COOKIE)?.value === "1";
 
@@ -79,5 +117,8 @@ function redirectKeepingCookies(url: URL, from: NextResponse) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: [
+    "/admin/:path*",
+    "/producto/:id([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})/:rest*",
+  ],
 };

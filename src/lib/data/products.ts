@@ -1,7 +1,8 @@
 import "server-only";
 import { cacheLife, cacheTag } from "next/cache";
 import { createPublicClient } from "@/lib/supabase/public";
-import { isProductId, type FreshProduct } from "@/lib/cart";
+import type { FreshProduct } from "@/lib/cart";
+import { isSlug } from "@/lib/slug";
 import type { Tables } from "@/types/database";
 
 export const PRODUCTS_TAG = "products";
@@ -9,6 +10,7 @@ export const PRODUCTS_TAG = "products";
 export type StoreProduct = Pick<
   Tables<"products">,
   | "id"
+  | "slug"
   | "title"
   | "description"
   | "brand"
@@ -20,7 +22,7 @@ export type StoreProduct = Pick<
 >;
 
 const STORE_COLUMNS =
-  "id, title, description, brand, price, stock, images, og_image, updated_at";
+  "id, slug, title, description, brand, price, stock, images, og_image, updated_at";
 
 /**
  * Every product (in stock and sold), in the order chosen by the admin. The
@@ -53,18 +55,18 @@ export async function getSoldProducts(): Promise<StoreProduct[]> {
 
 /**
  * One product for the detail page (also when stock is 0, so shared links show
- * "Vendido" instead of a 404). Returns null for unknown or malformed ids.
+ * "Vendido" instead of a 404). Returns null for unknown or malformed slugs.
  */
-export async function getProduct(id: string): Promise<StoreProduct | null> {
+export async function getProduct(slug: string): Promise<StoreProduct | null> {
   "use cache";
   cacheLife("hours");
   cacheTag(PRODUCTS_TAG);
 
-  if (!isProductId(id)) return null;
+  if (!isSlug(slug)) return null;
   const { data, error } = await createPublicClient()
     .from("products")
     .select(STORE_COLUMNS)
-    .eq("id", id)
+    .eq("slug", slug)
     .maybeSingle();
 
   if (error) throw new Error(`Could not load product: ${error.message}`);

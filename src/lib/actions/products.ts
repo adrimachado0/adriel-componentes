@@ -22,13 +22,23 @@ const NOT_ALLOWED: ActionResult = {
 
 const BUCKET = "product-images";
 
-/** Public pages read cached data tagged "products"; the admin list is dynamic. */
-function revalidateProduct(id: string) {
+/**
+ * Public pages read cached data tagged "products"; the admin list is dynamic.
+ * Pass every slug the product had (old and new when it changed).
+ */
+function revalidateProduct(...slugs: string[]) {
   updateTag(PRODUCTS_TAG);
   revalidatePath("/");
-  revalidatePath(`/producto/${id}`);
+  for (const slug of new Set(slugs)) revalidatePath(`/producto/${slug}`);
   revalidatePath("/admin");
 }
+
+/** Postgres unique_violation on products.slug. */
+function isSlugTaken(error: { code?: string; message?: string }) {
+  return error.code === "23505" && Boolean(error.message?.includes("slug"));
+}
+
+const SLUG_TAKEN = "Ya hay otro componente con este link. Probá con otro.";
 
 const stockSchema = z.object({
   id: z.uuid(),
@@ -49,12 +59,12 @@ export async function updateStock(input: {
     .from("products")
     .update({ stock: parsed.data.stock })
     .eq("id", parsed.data.id)
-    .select("id");
+    .select("slug");
 
-  if (error || data.length === 0) {
+  if (error || !data[0]) {
     return { ok: false, error: "No se pudo actualizar el stock." };
   }
-  revalidateProduct(parsed.data.id);
+  revalidateProduct(data[0].slug);
   return { ok: true };
 }
 
@@ -100,9 +110,9 @@ export async function deleteProduct(id: string): Promise<ActionResult> {
     .from("products")
     .delete()
     .eq("id", parsed.data)
-    .select("images, og_image");
+    .select("slug, images, og_image");
 
-  if (error || data.length === 0) {
+  if (error || !data[0]) {
     return { ok: false, error: "No se pudo eliminar el componente." };
   }
 
@@ -122,7 +132,7 @@ export async function deleteProduct(id: string): Promise<ActionResult> {
     }
   }
 
-  revalidateProduct(parsed.data);
+  revalidateProduct(data[0].slug);
   return { ok: true };
 }
 
@@ -171,6 +181,13 @@ export async function saveProduct(
       .select("id")
       .single();
     if (error) {
+      if (isSlugTaken(error)) {
+        return {
+          status: "error",
+          message: null,
+          fieldErrors: { slug: SLUG_TAKEN },
+        };
+      }
       console.error("Could not create product", error);
       return {
         status: "error",
@@ -178,13 +195,13 @@ export async function saveProduct(
         fieldErrors: {},
       };
     }
-    revalidateProduct(data.id);
+    revalidateProduct(values.slug);
     return { status: "success", id: data.id, created: true };
   }
 
   const { data: before, error: readError } = await supabase
     .from("products")
-    .select("images, og_image")
+    .select("slug, images, og_image")
     .eq("id", id)
     .maybeSingle();
   if (readError || !before) {
@@ -197,6 +214,13 @@ export async function saveProduct(
 
   const { error } = await supabase.from("products").update(values).eq("id", id);
   if (error) {
+    if (isSlugTaken(error)) {
+      return {
+        status: "error",
+        message: null,
+        fieldErrors: { slug: SLUG_TAKEN },
+      };
+    }
     console.error("Could not update product", error);
     return {
       status: "error",
@@ -223,6 +247,6 @@ export async function saveProduct(
       console.error("Could not remove images", removed, storageError);
   }
 
-  revalidateProduct(id);
+  revalidateProduct(before.slug, values.slug);
   return { status: "success", id, created: false };
 }

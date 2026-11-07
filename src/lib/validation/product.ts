@@ -1,6 +1,9 @@
 import { z } from "zod";
+import { finishSlug, isSlug, slugify } from "@/lib/slug";
 
 export const TITLE_MAX = 80;
+export const SLUG_MAX = 80;
+const SLUG_REQUIRED = "Escribí el link del componente.";
 export const BRAND_MAX = 40;
 export const DESCRIPTION_MAX = 1000;
 export const MAX_PHOTOS = 8;
@@ -18,6 +21,15 @@ export const productSchema = z.object({
     .trim()
     .min(1, "Escribí un título.")
     .max(TITLE_MAX, `Usá ${TITLE_MAX} caracteres como máximo.`),
+  /** URL of the detail page: /producto/<slug>. */
+  slug: z
+    .string()
+    .min(1, SLUG_REQUIRED)
+    .max(SLUG_MAX, `Usá ${SLUG_MAX} caracteres como máximo.`)
+    .refine(
+      (value) => isSlug(value, SLUG_MAX),
+      "Usá solo letras minúsculas, números y guiones.",
+    ),
   brand: z
     .string()
     .trim()
@@ -66,8 +78,13 @@ export function productFromFormData(
     images = null;
   }
   const stock = String(formData.get("stock") ?? "").trim();
+  const title = String(formData.get("title") ?? "");
   return {
-    title: String(formData.get("title") ?? ""),
+    title,
+    // Empty → generated from the title (the form prefills it the same way).
+    slug:
+      finishSlug(String(formData.get("slug") ?? "")) ||
+      slugify(title, SLUG_MAX),
     brand: String(formData.get("brand") ?? ""),
     description: String(formData.get("description") ?? "").replace(
       /\r\n/g,
@@ -89,11 +106,14 @@ export function fieldErrorsOf(error: z.ZodError): FieldErrors {
       errors[field as ProductField] = issue.message;
     }
   }
+  // An empty link comes from an empty title: asking for the title is enough.
+  if (errors.title && errors.slug === SLUG_REQUIRED) delete errors.slug;
   return errors;
 }
 
 const FIELD_NAMES: Record<ProductField, string> = {
   title: "el título",
+  slug: "el link",
   brand: "la marca",
   description: "la descripción",
   price: "el precio",

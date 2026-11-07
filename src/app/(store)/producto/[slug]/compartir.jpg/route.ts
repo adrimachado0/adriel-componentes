@@ -14,10 +14,10 @@ import { productImageUrl } from "@/lib/site";
  */
 export async function GET(
   _request: Request,
-  { params }: RouteContext<"/producto/[id]/compartir.jpg">,
+  { params }: RouteContext<"/producto/[slug]/compartir.jpg">,
 ) {
-  const { id } = await params;
-  const jpeg = await renderProductShareImage(id);
+  const { slug } = await params;
+  const jpeg = await renderProductShareImage(slug);
   if (!jpeg) return new Response("Not found", { status: 404 });
   return new Response(jpeg, {
     headers: {
@@ -29,13 +29,13 @@ export async function GET(
 }
 
 async function renderProductShareImage(
-  id: string,
+  slug: string,
 ): Promise<Uint8Array<ArrayBuffer> | null> {
   "use cache";
   cacheLife("days");
   cacheTag(PRODUCTS_TAG);
 
-  const product = await getProduct(id);
+  const product = await getProduct(slug);
   if (!product) return null;
 
   const custom = product.og_image;

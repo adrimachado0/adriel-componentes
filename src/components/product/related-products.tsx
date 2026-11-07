@@ -46,7 +46,7 @@ function RelatedCard({ product }: { product: StoreProduct }) {
   return (
     <Link
       prefetch
-      href={`/producto/${product.id}`}
+      href={`/producto/${product.slug}`}
       className="flex w-full flex-col gap-2 rounded-card-sm border border-line bg-surface p-1.5 text-ink shadow-card transition-[translate,box-shadow] duration-200 ease-out hover:-translate-y-[3px] hover:shadow-card-hover motion-reduce:hover:translate-y-0 sm:gap-3 sm:rounded-card sm:p-2.5"
     >
       <div className="relative aspect-[4/3] overflow-hidden rounded-photo-sm bg-photo sm:rounded-photo">

@@ -24,8 +24,9 @@ export type Database = {
           images: string[]
           og_image: string | null
           price: number
-          stock: number
+          slug: string
           sort_order: number
+          stock: number
           title: string
           updated_at: string
         }
@@ -37,8 +38,9 @@ export type Database = {
           images?: string[]
           og_image?: string | null
           price: number
-          stock?: number
+          slug: string
           sort_order?: number
+          stock?: number
           title: string
           updated_at?: string
         }
@@ -50,8 +52,9 @@ export type Database = {
           images?: string[]
           og_image?: string | null
           price?: number
-          stock?: number
+          slug?: string
           sort_order?: number
+          stock?: number
           title?: string
           updated_at?: string
         }

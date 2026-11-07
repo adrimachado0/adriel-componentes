@@ -17,7 +17,7 @@ type ProductCardProps = {
 };
 
 export function ProductCard({ product, preload = false }: ProductCardProps) {
-  const href = `/producto/${product.id}`;
+  const href = `/producto/${product.slug}`;
   const photoCount = product.images.length;
   const askUrl = whatsappUrl(contact.whatsappNumber, productMessage(product));
   // Every part is a single unit: stock 0 means it was sold (see "Ya vendidos").

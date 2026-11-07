@@ -4,6 +4,7 @@ import { ProductForm } from "@/components/admin/product-form/product-form";
 import { ProductFormSkeleton } from "@/components/admin/product-form/product-form-skeleton";
 import { requireAdminPage } from "@/lib/auth";
 import { getUsedBrands } from "@/lib/data/admin-products";
+import { getSiteUrl } from "@/lib/site-url";
 
 export const metadata: Metadata = { title: "Nuevo componente" };
 
@@ -18,5 +19,5 @@ export default function NewProductPage() {
 async function NewProduct() {
   const { supabase } = await requireAdminPage();
   const brands = await getUsedBrands(supabase);
-  return <ProductForm brands={brands} />;
+  return <ProductForm brands={brands} siteHost={new URL(getSiteUrl()).host} />;
 }
