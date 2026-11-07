@@ -14,6 +14,7 @@ import {
 } from "@/lib/data/products";
 import { formatPrice, formatStockLabel } from "@/lib/format";
 import { contact, SITE_NAME } from "@/lib/site";
+import { productShareImagePath, SHARE_IMAGE } from "@/lib/share-image";
 import { productMessage, whatsappUrl } from "@/lib/whatsapp";
 
 /** Prerender every product in stock; new ones get the App Shell, then their own entry. */
@@ -35,9 +36,18 @@ export async function generateMetadata({
   const title = product.brand
     ? `${product.title} (${product.brand})`
     : product.title;
+  const shareTitle = `${title} · ${formatPrice(product.price)}`;
   const description =
-    product.description.replace(/\s+/g, " ").trim().slice(0, 160) ||
+    excerpt(product.description, 160) ||
     `${formatPrice(product.price)} · Consultá por WhatsApp.`;
+  // Custom share image if uploaded, else the cover (see compartir.jpg/route.ts).
+  const shareImage = {
+    url: productShareImagePath(product.id, product.updated_at),
+    width: SHARE_IMAGE.width,
+    height: SHARE_IMAGE.height,
+    type: "image/jpeg",
+    alt: product.title,
+  };
 
   return {
     title,
@@ -47,11 +57,17 @@ export async function generateMetadata({
       type: "website",
       locale: "es_AR",
       siteName: SITE_NAME,
-      title: `${title} · ${formatPrice(product.price)}`,
+      title: shareTitle,
       description,
       url: `/producto/${product.id}`,
+      images: [shareImage],
     },
-    twitter: { card: "summary_large_image" },
+    twitter: {
+      card: "summary_large_image",
+      title: shareTitle,
+      description,
+      images: [shareImage],
+    },
   };
 }
 
@@ -207,4 +223,13 @@ function StockTag({ stock }: { stock: number }) {
       {formatStockLabel(stock)}
     </span>
   );
+}
+
+/** Single-line excerpt cut at a word boundary, with "…" when shortened. */
+function excerpt(text: string, max: number): string {
+  const clean = text.replace(/\s+/g, " ").trim();
+  if (clean.length <= max) return clean;
+  const cut = clean.slice(0, max - 1);
+  const lastSpace = cut.lastIndexOf(" ");
+  return `${(lastSpace > max * 0.6 ? cut.slice(0, lastSpace) : cut).replace(/[\s.,;:–-]+$/, "")}…`;
 }

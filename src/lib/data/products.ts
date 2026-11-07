@@ -8,10 +8,19 @@ export const PRODUCTS_TAG = "products";
 
 export type StoreProduct = Pick<
   Tables<"products">,
-  "id" | "title" | "description" | "brand" | "price" | "stock" | "images"
+  | "id"
+  | "title"
+  | "description"
+  | "brand"
+  | "price"
+  | "stock"
+  | "images"
+  | "og_image"
+  | "updated_at"
 >;
 
-const STORE_COLUMNS = "id, title, description, brand, price, stock, images";
+const STORE_COLUMNS =
+  "id, title, description, brand, price, stock, images, og_image, updated_at";
 
 /**
  * Every product in stock, newest first. The catalog is small, so one cached

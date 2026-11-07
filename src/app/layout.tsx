@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
-import { env } from "@/lib/env";
+import { SITE_NAME } from "@/lib/site";
+import { getSiteUrl } from "@/lib/site-url";
+import { HOME_SHARE_IMAGE_PATH, SHARE_IMAGE } from "@/lib/share-image";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -10,14 +12,41 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
+const DESCRIPTION =
+  "Componentes de PC usados que tengo libres. Elegí lo que te sirva y consultame directo por WhatsApp.";
+
+const homeShareImage = {
+  url: HOME_SHARE_IMAGE_PATH,
+  width: SHARE_IMAGE.width,
+  height: SHARE_IMAGE.height,
+  type: "image/jpeg",
+  alt: "Adriel Componentes: componentes de PC usados",
+};
+
 export const metadata: Metadata = {
-  metadataBase: new URL(env.siteUrl),
+  // Absolute URLs for Open Graph: social crawlers can't resolve relative ones.
+  metadataBase: new URL(getSiteUrl()),
   title: {
-    default: "Adriel Componentes",
-    template: "%s · Adriel Componentes",
+    default: SITE_NAME,
+    template: `%s · ${SITE_NAME}`,
   },
-  description:
-    "Componentes de PC usados que tengo libres. Elegí lo que te sirva y consultame directo por WhatsApp.",
+  description: DESCRIPTION,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "es_AR",
+    siteName: SITE_NAME,
+    url: "/",
+    title: `${SITE_NAME} · Componentes de PC usados`,
+    description: DESCRIPTION,
+    images: [homeShareImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} · Componentes de PC usados`,
+    description: DESCRIPTION,
+    images: [homeShareImage],
+  },
 };
 
 export const viewport: Viewport = {

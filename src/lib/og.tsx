@@ -13,6 +13,21 @@ const HERO_TEXT = "#c9d5f5";
 
 export const OG_SIZE = { width: 1200, height: 630 } as const;
 
+/**
+ * Custom share image (made for 1200×630): fills the frame, cropping from the
+ * center if its proportions differ, as JPEG.
+ */
+export async function shareImageToOgJpeg(
+  image: ArrayBuffer,
+): Promise<Uint8Array> {
+  const jpeg = await sharp(Buffer.from(image))
+    .resize(OG_SIZE.width, OG_SIZE.height, { fit: "cover", position: "centre" })
+    .flatten({ background: PAGE_BG })
+    .jpeg({ quality: 84, mozjpeg: true })
+    .toBuffer();
+  return new Uint8Array(jpeg);
+}
+
 /** Product photo letterboxed on the page background, as JPEG. */
 export async function photoToOgJpeg(photo: ArrayBuffer): Promise<Uint8Array> {
   const jpeg = await sharp(Buffer.from(photo))
