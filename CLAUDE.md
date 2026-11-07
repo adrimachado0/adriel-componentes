@@ -67,6 +67,8 @@ visible focus, AA contrast, keyboard support in cart/dialogs/gallery.
 ## Data
 
 - Table `public.products` (see `supabase/migrations/`). `images` stores Storage **paths** (bucket `product-images`), `[0]` = cover.
+  `og_image` (optional path) is the share image; share images are served as 1200×630 JPEG by
+  `app/(store)/producto/[id]/compartir.jpg/route.ts` (cover fallback) with a `?v=<updated_at>` URL.
 - RLS: public `select`; `insert/update/delete` (and Storage upload/delete) only for `authenticated` users with
   `app_metadata.role = 'admin'` via `private.is_admin()`. Sign-ups and anonymous sign-ins are disabled.
   Granting admin is a data change: `update auth.users set raw_app_meta_data = raw_app_meta_data || '{"role":"admin"}' where email = …`.
