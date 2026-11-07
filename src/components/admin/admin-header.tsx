@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import { LogOut, SquareArrowOutUpRight } from "lucide-react";
+import { Link2, LogOut, SquareArrowOutUpRight } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { signOut } from "@/lib/actions/auth";
 import { getAdminSession } from "@/lib/auth";
@@ -20,6 +20,14 @@ export function AdminHeader() {
           </span>
         </Link>
         <div className="flex items-center gap-2">
+          <Link
+            href="/admin/links"
+            aria-label="Links para compartir"
+            className="flex size-11 items-center justify-center gap-2 rounded-full border border-line-strong bg-surface text-sm font-bold whitespace-nowrap transition-colors hover:border-primary hover:text-primary sm:w-auto sm:pr-4 sm:pl-3.5"
+          >
+            <Link2 className="size-[18px]" strokeWidth={1.9} aria-hidden />
+            <span className="hidden sm:inline">Links</span>
+          </Link>
           <Link
             href="/"
             aria-label="Ver tienda"

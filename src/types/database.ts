@@ -60,12 +60,31 @@ export type Database = {
         }
         Relationships: []
       }
+      share_links: {
+        Row: {
+          created_at: string
+          slug: string
+          source: string
+        }
+        Insert: {
+          created_at?: string
+          slug: string
+          source: string
+        }
+        Update: {
+          created_at?: string
+          slug?: string
+          source?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
       reorder_products: { Args: { ids: string[] }; Returns: undefined }
+      share_link_source: { Args: { link_slug: string }; Returns: string }
     }
     Enums: {
       [_ in never]: never
