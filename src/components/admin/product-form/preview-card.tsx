@@ -39,7 +39,7 @@ export function PreviewCard({
         <div className="relative aspect-[4/3] overflow-hidden rounded-photo bg-photo">
           {cover ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={cover} alt="" className="size-full object-cover" />
+            <img src={cover} alt="" className="size-full object-contain" />
           ) : (
             <span className="absolute inset-0 flex items-center justify-center text-primary">
               <ImagePlaceholderIcon className="size-[72px]" />

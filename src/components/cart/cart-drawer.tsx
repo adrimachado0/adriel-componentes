@@ -264,7 +264,7 @@ function CartLineItem({ line }: { line: CartLine }) {
             alt=""
             fill
             sizes="80px"
-            className="object-cover"
+            className="object-contain"
           />
         ) : (
           <span className="absolute inset-0 flex items-center justify-center text-primary">

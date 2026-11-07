@@ -41,7 +41,7 @@ export function AdminProductRow({ product }: { product: AdminProduct }) {
               alt=""
               fill
               sizes="68px"
-              className="object-cover"
+              className="object-contain"
             />
           ) : (
             <span className="absolute inset-0 flex items-center justify-center text-primary">

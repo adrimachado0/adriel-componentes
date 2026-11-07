@@ -233,7 +233,7 @@ function SortablePhoto({
           src={photo.preview}
           alt=""
           draggable={false}
-          className="pointer-events-none size-full object-cover select-none"
+          className="pointer-events-none size-full object-contain select-none"
         />
       </div>
 

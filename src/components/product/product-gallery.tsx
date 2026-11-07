@@ -80,7 +80,7 @@ export function ProductGallery({
                 sizes="(min-width: 1200px) 620px, (min-width: 640px) 52vw, 100vw"
                 preload={index === 0}
                 draggable={false}
-                className="pointer-events-none object-cover select-none"
+                className="pointer-events-none object-contain select-none"
               />
             </m.div>
           </AnimatePresence>
@@ -147,7 +147,7 @@ export function ProductGallery({
                 alt=""
                 fill
                 sizes="84px"
-                className="object-cover"
+                className="object-contain"
               />
             </button>
           ))}

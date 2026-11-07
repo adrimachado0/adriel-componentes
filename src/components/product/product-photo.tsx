@@ -40,7 +40,7 @@ export function ProductPhoto({
       fill
       sizes={sizes}
       preload={preload}
-      className="object-cover"
+      className="object-contain"
     />
   );
 }
