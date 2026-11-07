@@ -49,6 +49,7 @@
   --color-hero-to: #102c78;
   --color-hero-text: #c9d5f5;
   --color-hero-badge: #c3d3ff;
+  --color-hero-chip: #6f97ff;
   --color-live: #4ade9b;
 
   /* WhatsApp */
@@ -88,6 +89,7 @@
   --shadow-card: 0 1px 2px rgb(15 26 51 / 0.04);
   --shadow-card-hover: 0 20px 40px -20px rgb(15 26 51 / 0.3);
   --shadow-primary: 0 12px 24px -12px var(--color-primary);
+  --shadow-primary-sm: 0 8px 18px -10px var(--color-primary);
   --shadow-logo: 0 6px 14px -6px var(--color-primary);
   --shadow-float: 0 6px 14px -6px rgb(15 26 51 / 0.25);
   --shadow-whatsapp: 0 12px 24px -12px rgb(13 130 67 / 0.8);
@@ -97,6 +99,7 @@
   --shadow-sheet-bottom: 0 -20px 50px -20px rgb(6 14 36 / 0.5);
   --shadow-dialog: 0 40px 80px -30px rgb(6 14 36 / 0.6);
   --shadow-bar: 0 -12px 30px -18px rgb(15 26 51 / 0.3);
+  --shadow-live: 0 0 0 3px rgb(74 222 155 / 0.2);
 
   /* Motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -121,20 +124,35 @@
   padding-inline: clamp(16px, 4vw, 24px);
 }
 
-/* Hero background: dark gradient + primary glow. */
+/* Hero background: dark gradient + primary glow (mobile variant below sm). */
 @utility bg-hero {
   background:
     radial-gradient(
-      circle at 76% 50%,
-      color-mix(in srgb, var(--color-primary) 60%, transparent) 0%,
-      transparent 52%
+      circle at 92% 18%,
+      color-mix(in srgb, var(--color-primary) 55%, transparent) 0%,
+      transparent 58%
     ),
     linear-gradient(
-      115deg,
+      150deg,
       var(--color-hero-from) 0%,
-      var(--color-hero-via) 55%,
+      var(--color-hero-via) 60%,
       var(--color-hero-to) 100%
     );
+
+  @media (width >= 40rem) {
+    background:
+      radial-gradient(
+        circle at 76% 50%,
+        color-mix(in srgb, var(--color-primary) 60%, transparent) 0%,
+        transparent 52%
+      ),
+      linear-gradient(
+        115deg,
+        var(--color-hero-from) 0%,
+        var(--color-hero-via) 55%,
+        var(--color-hero-to) 100%
+      );
+  }
 }
 
 /* Light-blue radial behind product photos / placeholders. */
