@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const TITLE_MAX = 80;
 export const BRAND_MAX = 40;
-export const DESCRIPTION_MAX = 400;
+export const DESCRIPTION_MAX = 1000;
 export const MAX_PHOTOS = 8;
 export const PRICE_MAX = 999_999_999;
 export const STOCK_MAX = 9999;

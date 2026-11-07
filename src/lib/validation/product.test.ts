@@ -70,7 +70,7 @@ describe("productSchema via productFromFormData", () => {
     const result = productSchema.safeParse({
       title: "x".repeat(81),
       brand: "b".repeat(41),
-      description: "d".repeat(401),
+      description: "d".repeat(1001),
       price: 0,
       stock: -1,
       images: [],
