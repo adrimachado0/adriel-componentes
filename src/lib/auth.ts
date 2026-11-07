@@ -1,5 +1,6 @@
 import "server-only";
 import { redirect } from "next/navigation";
+import { connection } from "next/server";
 import { createServerSupabase } from "@/lib/supabase/server";
 
 export type AdminSession = {
@@ -13,6 +14,9 @@ export type AdminSession = {
  * signature; the role comes from app_metadata, which users cannot edit.
  */
 export async function getAdminSession(): Promise<AdminSession | null> {
+  // The session check reads the clock (JWT expiry): it only makes sense at
+  // request time, never while prerendering the panel.
+  await connection();
   const supabase = await createServerSupabase();
   const { data, error } = await supabase.auth.getClaims();
   if (error || !data) return null;
