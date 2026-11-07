@@ -21,6 +21,9 @@ services:
     image: mcr.microsoft.com/playwright:v1.65.0-noble
     network_mode: "service:app"
     ipc: host
+    env_file:
+      - path: .env.e2e
+        required: false
     working_dir: /runner
     volumes:
       - ./e2e:/e2e
