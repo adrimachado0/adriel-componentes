@@ -19,7 +19,7 @@ import {
   useSortable,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Camera, CircleAlert, Upload, X } from "lucide-react";
+import { Camera, CircleAlert, Lightbulb, Upload, X } from "lucide-react";
 import { MAX_PHOTOS } from "@/lib/validation/product";
 import type { Photo, PhotosController } from "./use-photos";
 
@@ -147,11 +147,33 @@ export function PhotosField({
         multiple
         disabled={full}
         className="sr-only"
+        aria-describedby="photos-tip"
         onChange={(e) => {
           void addFiles([...(e.target.files ?? [])]);
           e.target.value = "";
         }}
       />
+
+      <div
+        id="photos-tip"
+        className="flex gap-2.5 rounded-field bg-primary-tint px-3.5 py-3 text-[13px] leading-normal text-body"
+      >
+        <Lightbulb
+          className="mt-px size-4 shrink-0 text-primary"
+          strokeWidth={2}
+          aria-hidden
+        />
+        <p>
+          <strong className="font-bold text-ink">Para que se vean bien:</strong>{" "}
+          fotos horizontales 4:3, idealmente{" "}
+          <span className="font-semibold whitespace-nowrap text-ink">
+            1600 × 1200 px
+          </span>{" "}
+          (mínimo <span className="whitespace-nowrap">1200 × 900 px</span>), con
+          el componente centrado, algo de aire alrededor y fondo liso. Las
+          verticales se ven completas, pero más chicas.
+        </p>
+      </div>
 
       {photos.length > 0 ? (
         <DndContext
