@@ -146,7 +146,7 @@ if (!E2E_EMAIL || !E2E_PASSWORD) {
   );
   check(
     "sold-out label",
-    (await page.getByText("Sin stock · oculto").count()) >= 1,
+    (await page.getByText("Vendido").count()) >= 1,
   );
   await page.screenshot({ path: `${OUT}/23-admin-list.png`, fullPage: true });
 
@@ -166,11 +166,11 @@ if (!E2E_EMAIL || !E2E_PASSWORD) {
   });
   const soldOutRows = await rows.count();
   check(
-    "tab: Sin stock",
+    "tab: Vendidos",
     soldOutRows >= 1 &&
       (await page.getByText("En venta", { exact: true }).count()) === 0,
   );
-  const tab = page.getByRole("link", { name: /Sin stock/ });
+  const tab = page.getByRole("link", { name: /Vendidos/ });
   check(
     "active tab marked",
     (await tab.getAttribute("aria-current")) === "page",
@@ -202,7 +202,7 @@ if (!E2E_EMAIL || !E2E_PASSWORD) {
   await page.reload({ waitUntil: "networkidle" });
   check(
     "stock restored to 0",
-    await rows.first().getByText("Sin stock · oculto").isVisible(),
+    await rows.first().getByText("Vendido").isVisible(),
   );
 
   // Delete dialog (open / Esc / cancel — no deletion)

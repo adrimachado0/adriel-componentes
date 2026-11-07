@@ -8,14 +8,14 @@ export type AdminProduct = Pick<
   "id" | "title" | "brand" | "price" | "stock" | "images"
 >;
 
-/** Every product, including those without stock (never cached: admin data). */
+/** Every product, sold ones included, in the manual order (never cached: admin data). */
 export async function getAdminProducts(
   supabase: AdminSession["supabase"],
 ): Promise<AdminProduct[]> {
   const { data, error } = await supabase
     .from("products")
     .select("id, title, brand, price, stock, images")
-    .order("created_at", { ascending: false });
+    .order("sort_order", { ascending: true });
 
   if (error) throw new Error(`Could not load products: ${error.message}`);
   return data;

@@ -25,6 +25,7 @@ export type Database = {
           og_image: string | null
           price: number
           stock: number
+          sort_order: number
           title: string
           updated_at: string
         }
@@ -37,6 +38,7 @@ export type Database = {
           og_image?: string | null
           price: number
           stock?: number
+          sort_order?: number
           title: string
           updated_at?: string
         }
@@ -49,6 +51,7 @@ export type Database = {
           og_image?: string | null
           price?: number
           stock?: number
+          sort_order?: number
           title?: string
           updated_at?: string
         }
@@ -59,7 +62,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      reorder_products: { Args: { ids: string[] }; Returns: undefined }
     }
     Enums: {
       [_ in never]: never

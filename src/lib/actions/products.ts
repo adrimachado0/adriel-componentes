@@ -58,6 +58,37 @@ export async function updateStock(input: {
   return { ok: true };
 }
 
+const reorderSchema = z
+  .array(z.uuid())
+  .min(2)
+  .max(500)
+  .refine((ids) => new Set(ids).size === ids.length);
+
+/**
+ * Saves the order of the listed products (the visible ones in the admin,
+ * maybe filtered): they swap the places they already had among themselves.
+ */
+export async function reorderProducts(ids: string[]): Promise<ActionResult> {
+  const parsed = reorderSchema.safeParse(ids);
+  if (!parsed.success) return { ok: false, error: "Orden inválido." };
+
+  const admin = await verifyAdminAction();
+  if (!admin) return NOT_ALLOWED;
+
+  const { error } = await admin.supabase.rpc("reorder_products", {
+    ids: parsed.data,
+  });
+  if (error) {
+    console.error("Could not reorder products", error);
+    return { ok: false, error: "No se pudo guardar el orden." };
+  }
+
+  updateTag(PRODUCTS_TAG);
+  revalidatePath("/");
+  revalidatePath("/admin");
+  return { ok: true };
+}
+
 export async function deleteProduct(id: string): Promise<ActionResult> {
   const parsed = z.uuid().safeParse(id);
   if (!parsed.success) return { ok: false, error: "Componente inválido." };

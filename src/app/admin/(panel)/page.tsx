@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import { Plus, Search } from "lucide-react";
+import { GripVertical, Plus, Search } from "lucide-react";
 import { AdminListSkeleton } from "@/components/admin/admin-list-skeleton";
-import { AdminProductRow } from "@/components/admin/admin-product-row";
+import { AdminProductList } from "@/components/admin/admin-product-list";
 import { ChipIcon } from "@/components/icons";
 import {
   filterAdminProducts,
@@ -17,7 +17,7 @@ import { getAdminProducts } from "@/lib/data/admin-products";
 const STATUS_LABELS: Record<StatusFilter, string> = {
   todos: "Todos",
   "en-venta": "En venta",
-  "sin-stock": "Sin stock",
+  "sin-stock": "Vendidos",
 };
 
 export default function AdminPage({ searchParams }: PageProps<"/admin">) {
@@ -88,19 +88,21 @@ async function AdminList({
         </div>
       ) : null}
 
+      {visible.length > 1 ? (
+        <p className="-mt-1.5 text-[13px] text-muted">
+          Arrastrá{" "}
+          <GripVertical className="inline size-4 align-[-3px]" aria-hidden />{" "}
+          para elegir el orden en que se ven en la tienda.
+        </p>
+      ) : null}
+
       <div className="overflow-hidden rounded-card border border-line bg-surface shadow-card">
         {products.length === 0 ? (
           <EmptyState />
         ) : visible.length === 0 ? (
           <NoResults />
         ) : (
-          <ul className="divide-y divide-line-subtle">
-            {visible.map((product) => (
-              <li key={product.id}>
-                <AdminProductRow product={product} />
-              </li>
-            ))}
-          </ul>
+          <AdminProductList products={visible} />
         )}
       </div>
     </>

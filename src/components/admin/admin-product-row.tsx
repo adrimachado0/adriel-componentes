@@ -1,6 +1,6 @@
 "use client";
 
-import { useOptimistic, useTransition } from "react";
+import { useOptimistic, useTransition, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Minus, Pencil, Plus } from "lucide-react";
@@ -13,7 +13,14 @@ import { productImageUrl } from "@/lib/site";
 import { DeleteProductButton } from "./delete-product-dialog";
 import { useToast } from "./toast-provider";
 
-export function AdminProductRow({ product }: { product: AdminProduct }) {
+export function AdminProductRow({
+  product,
+  dragHandle,
+}: {
+  product: AdminProduct;
+  /** Grip to reorder the list (see AdminProductList). */
+  dragHandle?: ReactNode;
+}) {
   const [stock, setOptimisticStock] = useOptimistic(product.stock);
   const [, startTransition] = useTransition();
   const notify = useToast();
@@ -34,6 +41,7 @@ export function AdminProductRow({ product }: { product: AdminProduct }) {
   return (
     <div className="flex flex-wrap items-center gap-x-7 gap-y-3.5 px-4 py-3.5 sm:px-[18px]">
       <div className="flex min-w-0 flex-[1_1_320px] items-center gap-3.5">
+        {dragHandle}
         <span className="relative size-[68px] shrink-0 overflow-hidden rounded-photo bg-photo">
           {cover ? (
             <Image
@@ -58,11 +66,11 @@ export function AdminProductRow({ product }: { product: AdminProduct }) {
               className={`flex h-6 items-center gap-1.5 rounded-full px-[9px] text-xs font-bold ${
                 onSale
                   ? "bg-success-bg text-success"
-                  : "bg-danger-bg text-danger"
+                  : "bg-line-subtle text-muted"
               }`}
             >
               <span className="size-1.5 rounded-full bg-current" />
-              {onSale ? "En venta" : "Sin stock · oculto"}
+              {onSale ? "En venta" : "Vendido"}
             </span>
             {product.brand ? (
               <>
