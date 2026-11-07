@@ -44,6 +44,10 @@ export function usePhotos(
     })),
   );
   const photosRef = useRef(photos);
+  /** Set synchronously by markSaved. */
+  const savedRef = useRef(false);
+  /** True once the form unmounted (uploads that finish later get deleted). */
+  const leftRef = useRef(false);
   useEffect(() => {
     photosRef.current = photos;
   }, [photos]);
@@ -104,6 +108,11 @@ export function usePhotos(
               accessToken,
               onProgress: (progress) => update(item.key, { progress }),
             });
+            if (leftRef.current && !savedRef.current) {
+              // The form was left while this photo was uploading.
+              void supabase().storage.from(BUCKET).remove([path]);
+              return;
+            }
             update(item.key, { status: "done", path, progress: 1 });
           } catch (error) {
             const message =
@@ -156,6 +165,7 @@ export function usePhotos(
 
   /** Cancel: delete everything uploaded in this visit. */
   const discardUnsaved = useCallback(() => {
+    if (savedRef.current) return;
     removeFromStorage(
       photosRef.current.flatMap((p) => (p.unsaved && p.path ? [p.path] : [])),
     );
@@ -163,18 +173,24 @@ export function usePhotos(
 
   /** After a successful save the new uploads belong to the product. */
   const markSaved = useCallback(() => {
+    // Synchronous flag: the form navigates away right after saving, before
+    // this state update commits, and the unmount cleanup must not delete them.
+    savedRef.current = true;
     setPhotos((list) => list.map((p) => ({ ...p, unsaved: false })));
   }, []);
 
-  // Free object URLs when leaving the form.
-  useEffect(
-    () => () => {
+  // Leaving the form by any route (header link, back button…) without saving
+  // deletes this visit's uploads, and frees the local preview URLs.
+  useEffect(() => {
+    leftRef.current = false;
+    return () => {
+      leftRef.current = true;
+      discardUnsaved();
       for (const p of photosRef.current) {
         if (p.preview.startsWith("blob:")) URL.revokeObjectURL(p.preview);
       }
-    },
-    [],
-  );
+    };
+  }, [discardUnsaved]);
 
   const paths = useMemo(
     () =>

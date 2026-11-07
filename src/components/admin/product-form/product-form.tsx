@@ -4,6 +4,7 @@ import {
   startTransition,
   useActionState,
   useCallback,
+  useEffect,
   useRef,
   useState,
   type FormEvent,
@@ -76,6 +77,7 @@ export function ProductForm({ product, brands }: ProductFormProps) {
     async (prev: SaveProductState, formData: FormData) => {
       const result = await saveProduct(prev, formData);
       if (result.status === "success") {
+        savedRef.current = true;
         photos.markSaved();
         notify(result.created ? "Componente publicado" : "Cambios guardados");
         router.push("/admin");
@@ -102,6 +104,22 @@ export function ProductForm({ product, brands }: ProductFormProps) {
     stock !== product.stock ||
     photos.paths.join() !== product.images.join() ||
     photos.uploading;
+
+  // Warn before closing/reloading the tab with unsaved changes.
+  const hasChanges = product
+    ? dirty
+    : Boolean(title || brand || description || priceText) ||
+      photos.photos.length > 0;
+  const savedRef = useRef(false);
+  useEffect(() => {
+    if (!hasChanges) return;
+    const onBeforeUnload = (event: BeforeUnloadEvent) => {
+      if (savedRef.current) return;
+      event.preventDefault();
+    };
+    window.addEventListener("beforeunload", onBeforeUnload);
+    return () => window.removeEventListener("beforeunload", onBeforeUnload);
+  }, [hasChanges]);
 
   function clearError(field: ProductField) {
     setErrors((e) => (e[field] ? { ...e, [field]: undefined } : e));
@@ -135,8 +153,8 @@ export function ProductForm({ product, brands }: ProductFormProps) {
     startTransition(() => dispatch(formData));
   }
 
+  // Leaving the form deletes its unsaved uploads (see usePhotos cleanup).
   function cancel() {
-    photos.discardUnsaved();
     router.push("/admin");
   }
 
