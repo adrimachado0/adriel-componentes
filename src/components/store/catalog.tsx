@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { PackageSearch } from "lucide-react";
 import { ProductCard } from "@/components/product/product-card";
+import { Reveal } from "@/components/reveal";
 import { BrandChips } from "@/components/store/brand-chips";
 import { getBrands, getStoreProducts } from "@/lib/data/products";
 
@@ -36,13 +37,15 @@ export async function Catalog({
       chips={<BrandChips brands={brands} activeBrand={activeBrand} />}
     >
       {visible.length > 0 ? (
-        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-[repeat(auto-fill,minmax(min(250px,100%),1fr))] sm:gap-5">
-          {visible.map((product, i) => (
-            <li key={product.id} className="flex">
-              <ProductCard product={product} preload={i < PRELOAD_COUNT} />
-            </li>
-          ))}
-        </ul>
+        <Reveal>
+          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-[repeat(auto-fill,minmax(min(250px,100%),1fr))] sm:gap-5">
+            {visible.map((product, i) => (
+              <li key={product.id} className="flex">
+                <ProductCard product={product} preload={i < PRELOAD_COUNT} />
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       ) : (
         <EmptyCatalog filtered={Boolean(requested)} />
       )}

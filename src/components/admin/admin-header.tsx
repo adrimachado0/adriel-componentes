@@ -23,7 +23,7 @@ export function AdminHeader() {
           <Link
             href="/"
             aria-label="Ver tienda"
-            className="flex size-11 items-center justify-center gap-2 rounded-full border border-line-strong bg-surface text-sm font-bold whitespace-nowrap sm:w-auto sm:pr-4 sm:pl-3.5"
+            className="flex size-11 items-center justify-center gap-2 rounded-full border border-line-strong bg-surface text-sm font-bold whitespace-nowrap transition-colors hover:border-primary hover:text-primary sm:w-auto sm:pr-4 sm:pl-3.5"
           >
             <SquareArrowOutUpRight
               className="size-[18px]"

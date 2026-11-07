@@ -19,7 +19,7 @@ export function SiteHeader() {
           <Link
             href="/admin"
             aria-label="Iniciar sesión"
-            className="flex size-11 items-center justify-center gap-2 rounded-full border border-line-strong bg-surface text-sm font-bold text-ink sm:w-auto sm:px-4"
+            className="flex size-11 items-center justify-center gap-2 rounded-full border border-line-strong bg-surface text-sm font-bold text-ink transition-colors hover:border-primary hover:text-primary sm:w-auto sm:px-4"
           >
             <User className="size-[19px]" strokeWidth={1.8} aria-hidden />
             <span className="hidden sm:inline">Iniciar sesión</span>

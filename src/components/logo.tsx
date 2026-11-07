@@ -28,6 +28,7 @@ export function Logo({ variant = "header", compact = false }: LogoProps) {
         />
       </span>
       <span
+        translate="no"
         className={`flex items-baseline gap-1 tracking-[-0.02em] whitespace-nowrap sm:gap-[5px] ${
           isHeader ? "text-[17px] sm:text-[19px]" : "text-base sm:text-[17px]"
         }`}

@@ -26,7 +26,16 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es-AR" className={jakarta.variable}>
+    <html lang="es-AR" className={jakarta.variable} suppressHydrationWarning>
+      <head>
+        {/* Marks JS as available before paint, so <Reveal> can hide sections
+            without ever leaving them invisible when JS is off. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js')",
+          }}
+        />
+      </head>
       <body className="flex min-h-dvh flex-col">{children}</body>
     </html>
   );

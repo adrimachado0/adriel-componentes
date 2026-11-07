@@ -18,7 +18,7 @@ export function CartButton() {
       aria-haspopup="dialog"
       aria-expanded={isOpen}
       onClick={openCart}
-      className="relative flex size-11 items-center justify-center rounded-full border border-line-strong bg-surface text-ink"
+      className="relative flex size-11 items-center justify-center rounded-full border border-line-strong bg-surface text-ink transition-colors hover:border-primary hover:text-primary"
     >
       <ShoppingCart className="size-5" strokeWidth={1.8} aria-hidden />
       {units > 0 ? (

@@ -77,7 +77,7 @@ function FooterLink({
     <a
       href={href}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      className="flex h-[46px] items-center gap-2 rounded-full border border-line-strong pr-4 pl-1.5 text-sm font-bold text-ink sm:h-12 sm:gap-2.5 sm:pr-[18px] sm:pl-[7px]"
+      className="flex h-[46px] items-center gap-2 rounded-full border border-line-strong pr-4 pl-1.5 text-sm font-bold text-ink transition-colors hover:border-primary sm:h-12 sm:gap-2.5 sm:pr-[18px] sm:pl-[7px]"
     >
       <span
         className={`flex size-[34px] items-center justify-center rounded-full ${iconClassName}`}

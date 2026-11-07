@@ -189,6 +189,20 @@
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
+    /* Keep focused/anchored elements clear of the sticky header and bottom bars. */
+    scroll-padding-top: 80px;
+    scroll-padding-bottom: calc(24px + var(--bottom-bar-h, 0px));
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  a,
+  button,
+  label,
+  input,
+  select,
+  textarea,
+  [role="button"] {
+    touch-action: manipulation;
   }
 
   body {
@@ -227,6 +241,19 @@
   }
   html:has([data-bottom-bar]) body {
     padding-bottom: var(--bottom-bar-h);
+  }
+}
+
+/* Fade-up on first view (<Reveal>). Hidden only when JS runs and motion is allowed. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .reveal:not([data-revealed]) {
+    opacity: 0;
+    translate: 0 12px;
+  }
+  .reveal {
+    transition:
+      opacity 280ms var(--ease-out),
+      translate 280ms var(--ease-out);
   }
 }
 

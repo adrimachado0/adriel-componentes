@@ -72,6 +72,8 @@ export function LoginForm({ next }: { next: string }) {
             required
             autoComplete="username"
             inputMode="email"
+            spellCheck={false}
+            autoCapitalize="none"
             placeholder="tu@email.com"
             defaultValue={state.email}
             aria-invalid={hasError || undefined}
