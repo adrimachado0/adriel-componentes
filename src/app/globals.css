@@ -211,6 +211,11 @@
   }
 }
 
+/* The floating WhatsApp button hides while the cart is open (set by CartProvider). */
+html[data-cart-open] [data-whatsapp-fab] {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
