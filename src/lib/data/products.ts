@@ -1,7 +1,7 @@
 import "server-only";
 import { cacheLife, cacheTag } from "next/cache";
 import { createPublicClient } from "@/lib/supabase/public";
-import type { FreshProduct } from "@/lib/cart";
+import { isProductId, type FreshProduct } from "@/lib/cart";
 import type { Tables } from "@/types/database";
 
 export const PRODUCTS_TAG = "products";
@@ -31,6 +31,42 @@ export async function getStoreProducts(): Promise<StoreProduct[]> {
 
   if (error) throw new Error(`Could not load products: ${error.message}`);
   return data;
+}
+
+/**
+ * One product for the detail page (also when stock is 0, so shared links show
+ * "Sin stock" instead of a 404). Returns null for unknown or malformed ids.
+ */
+export async function getProduct(id: string): Promise<StoreProduct | null> {
+  "use cache";
+  cacheLife("hours");
+  cacheTag(PRODUCTS_TAG);
+
+  if (!isProductId(id)) return null;
+  const { data, error } = await createPublicClient()
+    .from("products")
+    .select(STORE_COLUMNS)
+    .eq("id", id)
+    .maybeSingle();
+
+  if (error) throw new Error(`Could not load product: ${error.message}`);
+  return data;
+}
+
+/**
+ * "También te puede interesar": other products in stock, same brand first,
+ * then the newest ones.
+ */
+export async function getRelatedProducts(
+  product: Pick<StoreProduct, "id" | "brand">,
+  limit = 4,
+): Promise<StoreProduct[]> {
+  const others = (await getStoreProducts()).filter((p) => p.id !== product.id);
+  const sameBrand = product.brand
+    ? others.filter((p) => p.brand === product.brand)
+    : [];
+  const rest = others.filter((p) => !sameBrand.includes(p));
+  return [...sameBrand, ...rest].slice(0, limit);
 }
 
 /**

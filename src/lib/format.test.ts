@@ -3,6 +3,7 @@ import {
   formatAvailability,
   formatBrandAvailability,
   formatPrice,
+  formatStockLabel,
   formatThousands,
 } from "./format";
 
@@ -53,5 +54,13 @@ describe("formatBrandAvailability", () => {
 
   it("omits an empty brand", () => {
     expect(formatBrandAvailability("", 1)).toBe("1 disponible");
+  });
+});
+
+describe("formatStockLabel", () => {
+  it("covers sold out, last unit and several units", () => {
+    expect(formatStockLabel(0)).toBe("Sin stock");
+    expect(formatStockLabel(1)).toBe("Última unidad");
+    expect(formatStockLabel(3)).toBe("3 disponibles");
   });
 });
