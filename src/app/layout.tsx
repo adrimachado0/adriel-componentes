@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { env } from "@/lib/env";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -10,6 +11,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(env.siteUrl),
   title: {
     default: "Adriel Componentes",
     template: "%s · Adriel Componentes",

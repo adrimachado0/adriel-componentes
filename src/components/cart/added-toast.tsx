@@ -22,7 +22,7 @@ export function AddedToast() {
     // The live region is always mounted so screen readers announce the change.
     <div
       role="status"
-      className="pointer-events-none fixed inset-x-0 bottom-[84px] z-50 flex justify-center px-4 sm:bottom-6 sm:px-24"
+      className="pointer-events-none fixed inset-x-0 bottom-[calc(84px+var(--bottom-bar-h))] z-50 flex justify-center px-4 sm:bottom-6 sm:px-24"
     >
       <AnimatePresence>
         {toastId ? (

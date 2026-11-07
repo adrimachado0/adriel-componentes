@@ -211,6 +211,23 @@
   }
 }
 
+/*
+ * Mobile product page: a fixed bottom bar ([data-bottom-bar]) is shown.
+ * --bottom-bar-h lifts the floating WhatsApp button and the toast above it and
+ * pads the page so the footer is not hidden behind the bar. No JS needed.
+ */
+:root {
+  --bottom-bar-h: 0px;
+}
+@media (width < 40rem) {
+  html:has([data-bottom-bar]) {
+    --bottom-bar-h: calc(75px + env(safe-area-inset-bottom));
+  }
+  html:has([data-bottom-bar]) body {
+    padding-bottom: var(--bottom-bar-h);
+  }
+}
+
 /* The floating WhatsApp button hides while the cart is open (set by CartProvider). */
 html[data-cart-open] [data-whatsapp-fab] {
   display: none;
