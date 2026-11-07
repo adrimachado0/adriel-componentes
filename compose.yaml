@@ -1,0 +1,16 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: adriel-componentes-dev
+    init: true
+    volumes:
+      - .:/app
+      - npm-cache:/home/node/.npm
+    ports:
+      - "3000:3000"
+    command: npm run dev -- --hostname 0.0.0.0
+
+volumes:
+  npm-cache:
