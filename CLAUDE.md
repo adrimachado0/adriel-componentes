@@ -38,7 +38,8 @@ Scripts: `lint`, `typecheck`, `test`, `build`, `format`, and `check` (lint + typ
   (server with cookies, browser, public cookie-less for cached reads). Anon key only — **never** the service_role key.
 - Data access in `src/lib/data/*` with `import 'server-only'`.
 - Validation with zod; the same schema is used on client and server. Mutations = Server Actions + `useActionState`.
-  Every Server Action re-checks the session (`supabase.auth.getUser()`), in addition to RLS.
+  Every Server Action re-checks the session (`supabase.auth.getUser()`) **and** `app_metadata.role === 'admin'`,
+  in addition to RLS.
 - Animations: `motion/react`, 150–300 ms, ease-out, always honor `useReducedMotion`. Nothing decorative.
 - Icons: `lucide-react`. WhatsApp icon is a custom SVG copied from the design files.
 - Prices: integers in ARS, formatted with `Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 })`.
@@ -62,7 +63,10 @@ visible focus, AA contrast, keyboard support in cart/dialogs/gallery.
 ## Data
 
 - Table `public.products` (see `supabase/migrations/`). `images` stores Storage **paths** (bucket `product-images`), `[0]` = cover.
-- RLS: public `select`; `insert/update/delete` only for `authenticated` (sign-ups disabled → only the admin).
+- RLS: public `select`; `insert/update/delete` (and Storage upload/delete) only for `authenticated` users with
+  `app_metadata.role = 'admin'` via `private.is_admin()`. Sign-ups and anonymous sign-ins are disabled.
+  Granting admin is a data change: `update auth.users set raw_app_meta_data = raw_app_meta_data || '{"role":"admin"}' where email = …`.
+- `npm run test:rls` checks anonymous access against the real project.
 - Types generated into `src/types/database.ts` (do not edit by hand).
 
 ## Skills to use
