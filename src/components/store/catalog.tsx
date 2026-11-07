@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { PackageSearch } from "lucide-react";
 import { ProductCard } from "@/components/product/product-card";
+import { TrackEvent } from "@/components/analytics";
 import { Reveal } from "@/components/reveal";
 import { BrandChips } from "@/components/store/brand-chips";
 import { cacheLife, cacheTag } from "next/cache";
@@ -76,6 +77,9 @@ async function CachedCatalog({ requested }: { requested: string }) {
         <EmptyCatalog filtered={Boolean(requested)} />
       )}
       <SoldProducts products={sold} />
+      {activeBrand ? (
+        <TrackEvent event="filtrar-marca" data={{ marca: activeBrand }} />
+      ) : null}
     </CatalogLayout>
   );
 }

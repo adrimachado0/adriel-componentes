@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { TrackEvent } from "@/components/analytics";
 import { ProductDetailSkeleton } from "@/components/product/product-detail-skeleton";
 import { ProductGallery } from "@/components/product/product-gallery";
 import { ProductPurchase } from "@/components/product/product-purchase";
@@ -196,6 +197,8 @@ async function ProductDetail({
           <hr className="border-line" />
           <ProductPurchase
             productId={product.id}
+            title={product.title}
+            brand={product.brand}
             price={product.price}
             stock={product.stock}
             whatsappHref={whatsappHref}
@@ -204,6 +207,10 @@ async function ProductDetail({
       </article>
 
       <RelatedProducts products={related} />
+      <TrackEvent
+        event="ver-producto"
+        data={{ producto: product.title, marca: product.brand || "Sin marca" }}
+      />
     </>
   );
 }

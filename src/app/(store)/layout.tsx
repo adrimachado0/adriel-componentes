@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Analytics } from "@/components/analytics";
 import { CartProvider } from "@/components/cart/cart-provider";
 import { MotionProvider } from "@/components/motion-provider";
 import { SiteFooter } from "@/components/store/site-footer";
@@ -21,6 +22,8 @@ export default function StoreLayout({ children }: { children: ReactNode }) {
         </main>
         <SiteFooter />
         <WhatsAppFab />
+        {/* Only the production deploy is counted (not local or preview builds). */}
+        <Analytics enabled={process.env.VERCEL_ENV === "production"} />
       </CartProvider>
     </MotionProvider>
   );

@@ -30,6 +30,7 @@ import { formatPrice } from "@/lib/format";
 import { SM_QUERY, useMediaQuery } from "@/lib/hooks/use-media-query";
 import { useModal } from "@/lib/hooks/use-modal";
 import { contact, productImageUrl } from "@/lib/site";
+import { whatsappEvent } from "@/lib/analytics";
 import { cartMessage, whatsappUrl } from "@/lib/whatsapp";
 import { useCartActions, useCartUi } from "./cart-provider";
 import { getCartItems, updateCart, useCartItems } from "./cart-store";
@@ -362,6 +363,10 @@ function CartSummary({ lines, units }: { lines: CartLine[]; units: number }) {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
+        {...whatsappEvent("carrito", {
+          componentes: units,
+          total: cartTotal(lines),
+        })}
         className="mt-0.5 flex h-[54px] items-center justify-center gap-2.5 rounded-full bg-whatsapp text-[15px] font-bold text-white shadow-whatsapp sm:mt-1"
       >
         <WhatsAppIcon className="size-5" />

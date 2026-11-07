@@ -1,6 +1,7 @@
 "use client";
 
 import { Minus, Plus, ShoppingCart } from "lucide-react";
+import { track } from "@/lib/analytics";
 import { setQuantity } from "@/lib/cart";
 import { useCartActions } from "./cart-provider";
 import { updateCart, useCartQuantity } from "./cart-store";
@@ -8,10 +9,18 @@ import { updateCart, useCartQuantity } from "./cart-store";
 type CardCartControlProps = {
   productId: string;
   stock: number;
+  /** For analytics. */
+  title: string;
+  brand: string;
 };
 
 /** "Agregar al carrito", which becomes "− cantidad +" (capped at stock) once in the cart. */
-export function CardCartControl({ productId, stock }: CardCartControlProps) {
+export function CardCartControl({
+  productId,
+  stock,
+  title,
+  brand,
+}: CardCartControlProps) {
   const { addToCart } = useCartActions();
   const quantity = useCartQuantity(productId);
 
@@ -19,7 +28,14 @@ export function CardCartControl({ productId, stock }: CardCartControlProps) {
     return (
       <button
         type="button"
-        onClick={() => addToCart(productId, stock)}
+        onClick={() => {
+          addToCart(productId, stock);
+          track("agregar-carrito", {
+            producto: title,
+            marca: brand || "Sin marca",
+            origen: "tarjeta",
+          });
+        }}
         className="flex h-11 items-center justify-center gap-1.5 rounded-full bg-primary text-[13px] font-bold text-white shadow-primary-sm transition-colors hover:bg-primary-hover sm:gap-2 sm:text-sm"
       >
         <Plus className="size-4 sm:hidden" strokeWidth={2.2} aria-hidden />

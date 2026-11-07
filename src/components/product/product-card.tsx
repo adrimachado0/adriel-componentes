@@ -3,6 +3,7 @@ import { WhatsAppIcon } from "@/components/icons";
 import { CardCartControl } from "@/components/cart/card-cart-control";
 import { ProductPhoto } from "@/components/product/product-photo";
 import { StockBadge } from "@/components/product/stock-badge";
+import { whatsappEvent } from "@/lib/analytics";
 import type { StoreProduct } from "@/lib/data/products";
 import { formatBrandAvailability, formatPrice } from "@/lib/format";
 import { contact } from "@/lib/site";
@@ -60,6 +61,7 @@ export function ProductCard({ product, preload = false }: ProductCardProps) {
             rel="noopener noreferrer"
             aria-label={`Preguntar por WhatsApp: ${product.title}`}
             title="Preguntar por WhatsApp"
+            {...whatsappEvent("tarjeta", { producto: product.title })}
             className="group/ask absolute top-0 right-0 flex size-11 items-start justify-end rounded-full sm:top-2 sm:right-2 sm:items-center sm:justify-center"
           >
             <span className="mt-1.5 mr-1.5 flex size-8 items-center justify-center rounded-full bg-surface text-whatsapp shadow-float sm:m-0 sm:size-11">
@@ -117,7 +119,12 @@ export function ProductCard({ product, preload = false }: ProductCardProps) {
             {formatPrice(product.price)}
           </span>
           {sold ? null : (
-            <CardCartControl productId={product.id} stock={product.stock} />
+            <CardCartControl
+              productId={product.id}
+              stock={product.stock}
+              title={product.title}
+              brand={product.brand}
+            />
           )}
         </div>
       </div>

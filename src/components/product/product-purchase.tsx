@@ -5,6 +5,7 @@ import { Minus, Plus, ShoppingCart } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons";
 import { useCartActions } from "@/components/cart/cart-provider";
 import { useCartQuantity } from "@/components/cart/cart-store";
+import { track, whatsappEvent } from "@/lib/analytics";
 import {
   formatAvailability,
   formatPrice,
@@ -13,6 +14,9 @@ import {
 
 type ProductPurchaseProps = {
   productId: string;
+  /** For analytics. */
+  title: string;
+  brand: string;
   price: number;
   stock: number;
   /** Prebuilt wa.me link with the product message. */
@@ -25,6 +29,8 @@ type ProductPurchaseProps = {
  */
 export function ProductPurchase({
   productId,
+  title,
+  brand,
   price,
   stock,
   whatsappHref,
@@ -35,11 +41,17 @@ export function ProductPurchase({
   const [selected, setSelected] = useState(1);
   const quantity = Math.min(selected, Math.max(available, 1));
 
+  const askEvent = whatsappEvent("detalle", { producto: title });
   const soldOut = stock < 1;
   const allInCart = !soldOut && available < 1;
 
   function add() {
     addToCart(productId, stock, { amount: quantity });
+    track("agregar-carrito", {
+      producto: title,
+      marca: brand || "Sin marca",
+      origen: "detalle",
+    });
     setSelected(1);
   }
 
@@ -132,6 +144,7 @@ export function ProductPurchase({
             href={whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
+            {...askEvent}
             className="flex h-[54px] items-center justify-center gap-2.5 rounded-full border-[1.5px] border-whatsapp bg-surface text-[15px] font-bold text-whatsapp transition-colors hover:bg-whatsapp-tint"
           >
             <WhatsAppIcon className="size-5" />
@@ -159,6 +172,7 @@ export function ProductPurchase({
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Preguntar por WhatsApp"
+            {...askEvent}
             className="flex size-12 shrink-0 items-center justify-center rounded-full border-[1.5px] border-whatsapp bg-surface text-whatsapp"
           >
             <WhatsAppIcon className="size-[21px]" />

@@ -4,6 +4,7 @@ import { Lock, Mail } from "lucide-react";
 import { cacheLife } from "next/cache";
 import { WhatsAppIcon } from "@/components/icons";
 import { Logo } from "@/components/logo";
+import { whatsappEvent } from "@/lib/analytics";
 import { contact, SITE_NAME } from "@/lib/site";
 
 export function SiteFooter() {
@@ -21,6 +22,7 @@ export function SiteFooter() {
           <FooterLink
             href={contact.whatsappGeneralUrl}
             external
+            event={whatsappEvent("pie")}
             icon={<WhatsAppIcon className="size-[17px] sm:size-[18px]" />}
             iconClassName="bg-whatsapp-tint text-whatsapp"
           >
@@ -66,10 +68,13 @@ function FooterLink({
   external = false,
   icon,
   iconClassName,
+  event,
   children,
 }: {
   href: string;
   external?: boolean;
+  /** Analytics click attributes (see whatsappEvent). */
+  event?: Record<string, string>;
   icon: ReactNode;
   iconClassName: string;
   children: ReactNode;
@@ -78,6 +83,7 @@ function FooterLink({
     <a
       href={href}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      {...event}
       className="flex h-[46px] items-center gap-2 rounded-full border border-line-strong pr-4 pl-1.5 text-sm font-bold text-ink transition-colors hover:border-primary sm:h-12 sm:gap-2.5 sm:pr-[18px] sm:pl-[7px]"
     >
       <span

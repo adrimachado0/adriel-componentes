@@ -6,6 +6,7 @@ import {
   secondaryActionClass,
   StatusMessage,
 } from "@/components/status-message";
+import { whatsappEvent } from "@/lib/analytics";
 import { contact } from "@/lib/site";
 
 /** 404 inside the store (unknown product, notFound()). */
@@ -25,6 +26,7 @@ export default function StoreNotFound() {
             target="_blank"
             rel="noopener noreferrer"
             className={secondaryActionClass}
+            {...whatsappEvent("error-404")}
           >
             <WhatsAppIcon className="size-[18px] text-whatsapp" />
             Consultar por WhatsApp
