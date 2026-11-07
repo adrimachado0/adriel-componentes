@@ -69,7 +69,7 @@ export async function deleteProduct(id: string): Promise<ActionResult> {
     .from("products")
     .delete()
     .eq("id", parsed.data)
-    .select("images");
+    .select("images, og_image");
 
   if (error || data.length === 0) {
     return { ok: false, error: "No se pudo eliminar el componente." };
@@ -77,9 +77,11 @@ export async function deleteProduct(id: string): Promise<ActionResult> {
 
   // Remove its photos. The row is already gone, so a Storage failure only
   // leaves orphan files: log it instead of failing the whole action.
-  const paths = (data[0]?.images ?? []).filter((p) =>
-    p.startsWith("products/"),
-  );
+  const deleted = data[0];
+  const paths = [
+    ...(deleted?.images ?? []),
+    ...(deleted?.og_image ? [deleted.og_image] : []),
+  ].filter((p) => p.startsWith("products/"));
   if (paths.length > 0) {
     const { error: storageError } = await admin.supabase.storage
       .from(BUCKET)
@@ -151,7 +153,7 @@ export async function saveProduct(
 
   const { data: before, error: readError } = await supabase
     .from("products")
-    .select("images")
+    .select("images, og_image")
     .eq("id", id)
     .maybeSingle();
   if (readError || !before) {
@@ -172,10 +174,16 @@ export async function saveProduct(
     };
   }
 
-  // Photos removed in the form are deleted only once the change is saved.
-  const removed = removedImages(before.images, values.images).filter((p) =>
-    p.startsWith("products/"),
-  );
+  // Photos removed in the form are deleted only once the change is saved,
+  // and never a file the product still uses (as a photo or share image).
+  const stillUsed = new Set([...values.images, values.og_image ?? ""]);
+  const removed = [
+    ...removedImages(before.images, values.images),
+    // Share image replaced or removed.
+    ...(before.og_image && before.og_image !== values.og_image
+      ? [before.og_image]
+      : []),
+  ].filter((p) => p.startsWith("products/") && !stillUsed.has(p));
   if (removed.length > 0) {
     const { error: storageError } = await supabase.storage
       .from(BUCKET)

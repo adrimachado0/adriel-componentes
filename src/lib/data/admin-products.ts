@@ -23,7 +23,14 @@ export async function getAdminProducts(
 
 export type EditableProduct = Pick<
   Tables<"products">,
-  "id" | "title" | "brand" | "description" | "price" | "stock" | "images"
+  | "id"
+  | "title"
+  | "brand"
+  | "description"
+  | "price"
+  | "stock"
+  | "images"
+  | "og_image"
 >;
 
 /** One product for the edit form (null if it does not exist). */
@@ -34,7 +41,7 @@ export async function getEditableProduct(
   if (!isProductId(id)) return null;
   const { data, error } = await supabase
     .from("products")
-    .select("id, title, brand, description, price, stock, images")
+    .select("id, title, brand, description, price, stock, images, og_image")
     .eq("id", id)
     .maybeSingle();
   if (error) throw new Error(`Could not load product: ${error.message}`);

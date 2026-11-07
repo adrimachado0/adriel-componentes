@@ -32,7 +32,9 @@ import {
 } from "@/lib/validation/product";
 import { FieldMessage, PhotosField } from "./photos-field";
 import { PreviewCard } from "./preview-card";
+import { ShareImageField } from "./share-image-field";
 import { usePhotos } from "./use-photos";
+import { useShareImage } from "./use-share-image";
 
 const FIELD_ORDER: ProductField[] = [
   "images",
@@ -41,9 +43,11 @@ const FIELD_ORDER: ProductField[] = [
   "description",
   "price",
   "stock",
+  "og_image",
 ];
 const FIELD_INPUT_ID: Record<ProductField, string> = {
   images: "product-photos",
+  og_image: "product-share-image",
   title: "product-title",
   brand: "product-brand",
   description: "product-description",
@@ -62,6 +66,8 @@ export function ProductForm({ product, brands }: ProductFormProps) {
   const notify = useToast();
   const onPhotoError = useCallback((m: string) => notify(m, "error"), [notify]);
   const photos = usePhotos(product?.images ?? [], onPhotoError);
+  const shareImage = useShareImage(product?.og_image ?? null, onPhotoError);
+  const uploading = photos.uploading || shareImage.uploading;
 
   const [title, setTitle] = useState(product?.title ?? "");
   const [brand, setBrand] = useState(product?.brand ?? "");
@@ -79,6 +85,7 @@ export function ProductForm({ product, brands }: ProductFormProps) {
       if (result.status === "success") {
         savedRef.current = true;
         photos.markSaved();
+        shareImage.markSaved();
         notify(result.created ? "Componente publicado" : "Cambios guardados");
         router.push("/admin");
       } else if (result.status === "error") {
@@ -103,13 +110,15 @@ export function ProductForm({ product, brands }: ProductFormProps) {
     price !== product.price ||
     stock !== product.stock ||
     photos.paths.join() !== product.images.join() ||
-    photos.uploading;
+    (shareImage.image?.path ?? null) !== product.og_image ||
+    uploading;
 
   // Warn before closing/reloading the tab with unsaved changes.
   const hasChanges = product
     ? dirty
     : Boolean(title || brand || description || priceText) ||
-      photos.photos.length > 0;
+      photos.photos.length > 0 ||
+      shareImage.image !== null;
   const savedRef = useRef(false);
   useEffect(() => {
     if (!hasChanges) return;
@@ -127,11 +136,12 @@ export function ProductForm({ product, brands }: ProductFormProps) {
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (photos.uploading || pending) return;
+    if (uploading || pending) return;
 
     const formData = new FormData(event.currentTarget);
     formData.set("price", String(Number.isFinite(price) ? price : ""));
     formData.set("images", JSON.stringify(photos.paths));
+    formData.set("og_image", shareImage.path ?? "");
     if (product) formData.set("id", product.id);
 
     // Same zod schema as the server: instant inline errors.
@@ -159,7 +169,7 @@ export function ProductForm({ product, brands }: ProductFormProps) {
   }
 
   const summary = errorSummary(errors);
-  const status = photos.uploading
+  const status = uploading
     ? { label: "Subiendo fotos…", dot: "bg-pending" }
     : !isEdit
       ? { label: "Sin publicar", dot: "bg-pending" }
@@ -218,6 +228,14 @@ export function ProductForm({ product, brands }: ProductFormProps) {
             </div>
 
             <PhotosField controller={photos} error={errors.images} />
+
+            <ShareImageField
+              controller={shareImage}
+              coverPreview={previewPhotos[0]}
+              title={title.trim()}
+              price={price}
+              error={errors.og_image}
+            />
 
             <FormSection
               id="sec-info"
@@ -466,7 +484,7 @@ export function ProductForm({ product, brands }: ProductFormProps) {
             </button>
             <button
               type="submit"
-              disabled={pending || photos.uploading}
+              disabled={pending || uploading}
               className="flex h-[50px] flex-1 items-center justify-center gap-2 rounded-full bg-primary pr-[26px] pl-[22px] text-[15px] font-bold text-white shadow-primary transition-colors hover:bg-primary-hover disabled:opacity-70 sm:flex-none"
             >
               <Check className="size-[18px]" strokeWidth={2.2} aria-hidden />
@@ -476,7 +494,7 @@ export function ProductForm({ product, brands }: ProductFormProps) {
                 ) : (
                   "Publicando…"
                 )
-              ) : photos.uploading ? (
+              ) : uploading ? (
                 "Subiendo fotos…"
               ) : (
                 <>

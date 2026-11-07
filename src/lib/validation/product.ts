@@ -37,6 +37,12 @@ export const productSchema = z.object({
   images: z
     .array(z.string().regex(IMAGE_PATH_RE, "Foto inválida."))
     .max(MAX_PHOTOS, `Podés subir hasta ${MAX_PHOTOS} fotos.`),
+  /** Optional share image (Open Graph). null → the cover photo is used. */
+  og_image: z
+    .string()
+    .regex(IMAGE_PATH_RE, "Imagen inválida.")
+    .nullable()
+    .default(null),
 });
 
 export type ProductInput = z.infer<typeof productSchema>;
@@ -70,6 +76,7 @@ export function productFromFormData(
     price: parsePriceInput(String(formData.get("price") ?? "")),
     stock: stock === "" ? Number.NaN : Number(stock),
     images,
+    og_image: String(formData.get("og_image") ?? "").trim() || null,
   };
 }
 
@@ -92,6 +99,7 @@ const FIELD_NAMES: Record<ProductField, string> = {
   price: "el precio",
   stock: "la cantidad",
   images: "las fotos",
+  og_image: "la imagen para compartir",
 };
 
 /** "Faltan 2 datos para publicar" + "Completá el título y el precio." */

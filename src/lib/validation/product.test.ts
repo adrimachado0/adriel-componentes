@@ -47,6 +47,7 @@ describe("productSchema via productFromFormData", () => {
       price: 185000,
       stock: 1,
       images: [PHOTO],
+      og_image: null,
     });
   });
 
@@ -128,5 +129,40 @@ describe("errorSummary", () => {
       title: "Falta 1 dato para publicar",
       detail: "Revisá el título.",
     });
+  });
+});
+
+describe("og_image (share image)", () => {
+  it("is optional and empty means null (use the cover)", () => {
+    const result = productSchema.safeParse(
+      productFromFormData(
+        form({ title: "a", price: "1", stock: "1", og_image: "" }),
+      ),
+    );
+    expect(result.success).toBe(true);
+    expect(result.data?.og_image).toBeNull();
+  });
+
+  it("accepts an uploaded path", () => {
+    const result = productSchema.safeParse(
+      productFromFormData(
+        form({ title: "a", price: "1", stock: "1", og_image: PHOTO }),
+      ),
+    );
+    expect(result.data?.og_image).toBe(PHOTO);
+  });
+
+  it("rejects foreign paths", () => {
+    const result = productSchema.safeParse(
+      productFromFormData(
+        form({
+          title: "a",
+          price: "1",
+          stock: "1",
+          og_image: "https://evil.example/x.jpg",
+        }),
+      ),
+    );
+    expect(fieldErrorsOf(result.error!).og_image).toBe("Imagen inválida.");
   });
 });

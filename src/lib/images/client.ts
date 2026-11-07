@@ -10,7 +10,13 @@ export const MAX_SOURCE_BYTES = 30 * 1024 * 1024;
 export const MAX_UPLOAD_BYTES = 5 * 1024 * 1024;
 const MAX_SIDE = 1600;
 
-export type CompressedImage = { blob: Blob; extension: "webp" | "jpg" };
+export type CompressedImage = {
+  blob: Blob;
+  extension: "webp" | "jpg";
+  /** Final size in pixels, after resizing. */
+  width: number;
+  height: number;
+};
 
 export class ImageError extends Error {}
 
@@ -62,7 +68,7 @@ export async function compressImage(file: File): Promise<CompressedImage> {
       "La foto sigue pesando más de 5 MB después de comprimirla.",
     );
   }
-  return { blob, extension };
+  return { blob, extension, width, height };
 }
 
 /**
