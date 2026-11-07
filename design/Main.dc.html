@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Adriel Componentes — Home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0;background:#F3F6FC}
+a{color:#1F5BEF}
+.ac-card{transition:transform .2s ease,box-shadow .2s ease}
+.ac-card:hover{transform:translateY(-3px);box-shadow:0 20px 40px -20px rgba(15,26,51,0.30)}
+.ac-tl{text-decoration:none}
+.ac-tl:hover{text-decoration:underline}
+.ac-chips::-webkit-scrollbar{display:none}
+@media (max-width:760px){.ac-hero-art{display:none}}
+@media (max-width:560px){.ac-hide-sm{display:none}}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-direction: column; background: #F3F6FC; color: #0F1A33; font-family: 'Plus Jakarta Sans', Inter, system-ui, -apple-system, 'Segoe UI', sans-serif">
+
+<header style="position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,0.9); backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px); border-bottom: 1px solid #E6EBF5">
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 24px); height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 16px">
+<a href="Main.dc.html" aria-label="Adriel Componentes, inicio" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #0F1A33">
+<span style="width: 38px; height: 38px; border-radius: 12px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; flex: 0 0 38px; box-shadow: 0 6px 14px -6px {{accent}}">
+<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"></rect><rect x="9.5" y="9.5" width="5" height="5" rx="0.5"></rect><path d="M9 2.5v3M15 2.5v3M9 18.5v3M15 18.5v3M2.5 9h3M2.5 15h3M18.5 9h3M18.5 15h3"></path></svg>
+</span>
+<span style="display: flex; align-items: baseline; gap: 5px; font-size: 19px; letter-spacing: -0.02em; white-space: nowrap">
+<span style="font-weight: 800; color: #0F1A33">Adriel</span>
+<span style="font-weight: 700; color: {{accent}}">Componentes</span>
+</span>
+</a>
+<div style="display: flex; align-items: center; gap: 10px">
+<button type="button" aria-label="Abrir carrito (4)" style="position: relative; width: 44px; height: 44px; border: 1px solid #E1E7F3; border-radius: 999px; background: #FFFFFF; color: #0F1A33; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.7a1.5 1.5 0 0 0 1.5-1.1L21 8H6.2"></path><circle cx="9.5" cy="20" r="1.2"></circle><circle cx="17" cy="20" r="1.2"></circle></svg>
+<span style="position: absolute; top: -4px; right: -4px; min-width: 20px; height: 20px; padding: 0 5px; box-sizing: border-box; border-radius: 999px; background: {{accent}}; color: #FFFFFF; border: 2px solid #FFFFFF; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center">4</span>
+</button>
+<a href="Login.dc.html" aria-label="Iniciar sesión" style="height: 44px; padding: 0 16px; box-sizing: border-box; border: 1px solid #E1E7F3; border-radius: 999px; background: #FFFFFF; color: #0F1A33; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; text-decoration: none">
+<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.8"></circle><path d="M4.5 20c1.2-3.6 4.1-5.3 7.5-5.3s6.3 1.7 7.5 5.3"></path></svg>
+<span class="ac-hide-sm">Iniciar sesión</span>
+</a>
+</div>
+</div>
+</header>
+
+<div style="width: 100%; max-width: 1200px; box-sizing: border-box; margin: 0 auto; padding: 24px clamp(16px, 4vw, 24px) 0">
+<section aria-label="Presentación" style="position: relative; overflow: hidden; border-radius: 28px; min-height: 220px; box-sizing: border-box; padding: 36px clamp(24px, 5vw, 56px); display: flex; align-items: center; justify-content: space-between; gap: 24px; background: radial-gradient(circle at 76% 50%, color-mix(in srgb, {{accent}} 60%, transparent) 0%, transparent 52%), linear-gradient(115deg, #060E24 0%, #0B1B4B 55%, #102C78 100%); color: #FFFFFF">
+<div style="position: relative; display: flex; flex-direction: column; gap: 12px; max-width: 540px">
+<span style="align-self: flex-start; height: 30px; padding: 0 12px; border-radius: 999px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.16); display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #C3D3FF">
+<span style="width: 7px; height: 7px; border-radius: 999px; background: #4ADE9B; box-shadow: 0 0 0 3px rgba(74,222,155,0.2)"></span>
+<span>8 componentes disponibles</span>
+</span>
+<h1 style="margin: 0; font-size: clamp(32px, 4.4vw, 46px); font-weight: 800; line-height: 1.04; letter-spacing: -0.03em; color: #FFFFFF">Componentes de PC</h1>
+<p style="margin: 0; max-width: 440px; font-size: 16px; line-height: 1.55; color: #C9D5F5; text-wrap: pretty">Hardware que tengo libre para vender. Elegí lo que te sirva y consultame directo por WhatsApp.</p>
+</div>
+<svg class="ac-hero-art" width="360" height="200" viewBox="0 20 360 200" fill="none" aria-hidden="true" style="position: relative; flex: 0 0 auto">
+<g stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M250 80h30l14-14h40"></path>
+<path d="M250 100h56l8 8h30"></path>
+<path d="M250 140h44l12 12h34"></path>
+<path d="M250 160h22l18 18h44"></path>
+<path d="M110 80H80L66 66H26"></path>
+<path d="M110 100H54l-8 8H16"></path>
+<path d="M110 140H66l-12 12H20"></path>
+<path d="M110 160H88l-18 18H26"></path>
+<path d="M160 50V36l-10-10"></path>
+<path d="M200 50V28"></path>
+<path d="M160 190v14l-10 10"></path>
+<path d="M200 190v22"></path>
+</g>
+<g fill="#FFFFFF" fill-opacity="0.5">
+<circle cx="334" cy="66" r="3.5"></circle><circle cx="344" cy="108" r="3.5"></circle><circle cx="340" cy="152" r="3.5"></circle><circle cx="334" cy="178" r="3.5"></circle>
+<circle cx="26" cy="66" r="3.5"></circle><circle cx="16" cy="108" r="3.5"></circle><circle cx="20" cy="152" r="3.5"></circle><circle cx="26" cy="178" r="3.5"></circle>
+<circle cx="150" cy="26" r="3.5"></circle><circle cx="200" cy="28" r="3.5"></circle><circle cx="150" cy="214" r="3.5"></circle><circle cx="200" cy="212" r="3.5"></circle>
+</g>
+<g stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="2.4" stroke-linecap="round">
+<path d="M140 50v8M160 50v8M180 50v8M200 50v8M220 50v8M140 182v8M160 182v8M180 182v8M200 182v8M220 182v8M110 80h8M110 100h8M110 120h8M110 140h8M110 160h8M242 80h8M242 100h8M242 120h8M242 140h8M242 160h8"></path>
+</g>
+<rect x="120" y="60" width="120" height="120" rx="22" fill="#FFFFFF" fill-opacity="0.07" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="1.5"></rect>
+<rect x="148" y="88" width="64" height="64" rx="14" fill="#6F97FF" fill-opacity="0.35" stroke="#FFFFFF" stroke-opacity="0.75" stroke-width="1.5"></rect>
+<path d="M166 108h28M166 120h28M166 132h18" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="2" stroke-linecap="round"></path>
+</svg>
+</section>
+</div>
+
+<section id="componentes" style="width: 100%; max-width: 1200px; box-sizing: border-box; margin: 0 auto; padding: 44px clamp(16px, 4vw, 24px) 0; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 8px 24px">
+<h2 style="margin: 0; font-size: 26px; font-weight: 800; letter-spacing: -0.02em; color: #0F1A33">Todos los componentes</h2>
+<span style="font-size: 14px; font-weight: 500; color: #5F6B85">8 publicaciones</span>
+</div>
+<div class="ac-chips" role="group" aria-label="Filtrar por marca" style="display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px">
+<button type="button" aria-pressed="true" style="flex: 0 0 auto; height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid {{accent}}; background: {{accent}}; color: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 600; white-space: nowrap; cursor: pointer">Todas</button>
+<button type="button" aria-pressed="false" style="flex: 0 0 auto; height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid #DCE3F1; background: #FFFFFF; color: #0F1A33; font-family: inherit; font-size: 14px; font-weight: 600; white-space: nowrap; cursor: pointer">AMD</button>
+<button type="button" aria-pressed="false" style="flex: 0 0 auto; height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid #DCE3F1; background: #FFFFFF; color: #0F1A33; font-family: inherit; font-size: 14px; font-weight: 600; white-space: nowrap; cursor: pointer">Cooler Master</button>
+<button type="button" aria-pressed="false" style="flex: 0 0 auto; height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid #DCE3F1; background: #FFFFFF; color: #0F1A33; font-family: inherit; font-size: 14px; font-weight: 600; white-space: nowrap; cursor: pointer">Corsair</button>
+<button type="button" aria-pressed="false" style="flex: 0 0 auto; height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid #DCE3F1; background: #FFFFFF; color: #0F1A33; font-family: inherit; font-size: 14px; font-weight: 600; white-space: nowrap; cursor: pointer">Gigabyte</button>
+<button type="button" aria-pressed="false" style="flex: 0 0 auto; height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid #DCE3F1; background: #FFFFFF; color: #0F1A33; font-family: inherit; font-size: 14px; font-weight: 600; white-space: nowrap; cursor: pointer">Kingston</button>
+<button type="button" aria-pressed="false" style="flex: 0 0 auto; height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid #DCE3F1; background: #FFFFFF; color: #0F1A33; font-family: inherit; font-size: 14px; font-weight: 600; white-space: nowrap; cursor: pointer">MSI</button>
+<button type="button" aria-pressed="false" style="flex: 0 0 auto; height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid #DCE3F1; background: #FFFFFF; color: #0F1A33; font-family: inherit; font-size: 14px; font-weight: 600; white-space: nowrap; cursor: pointer">Samsung</button>
+<button type="button" aria-pressed="false" style="flex: 0 0 auto; height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid #DCE3F1; background: #FFFFFF; color: #0F1A33; font-family: inherit; font-size: 14px; font-weight: 600; white-space: nowrap; cursor: pointer">Seagate</button>
+</div>
+</section>
+
+<main style="width: 100%; max-width: 1200px; box-sizing: border-box; margin: 0 auto; padding: 20px clamp(16px, 4vw, 24px) 88px; flex: 1 0 auto">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr)); gap: 20px">
+<sc-for list="{{products}}" as="p" hint-placeholder-count="8">
+<article class="ac-card" style="background: #FFFFFF; border: 1px solid #E6EBF5; border-radius: 22px; padding: 10px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 1px 2px rgba(15,26,51,0.04)">
+<div style="position: relative; aspect-ratio: 4 / 3; border-radius: 16px; overflow: hidden; background: radial-gradient(circle at 50% 42%, #FFFFFF 0%, color-mix(in srgb, {{p.accent}} 11%, #FFFFFF) 72%); display: flex; align-items: center; justify-content: center">
+<dc-import name="ProductArt" kind="{{p.kind}}" accent="{{p.accent}}" size="md" hint-size="170px,113px"></dc-import>
+<a href="Producto.dc.html" tabIndex="-1" aria-hidden="true" style="position: absolute; inset: 0"></a>
+<sc-if value="{{p.lastOne}}" hint-placeholder-val="{{ false }}">
+<span style="position: absolute; top: 12px; left: 12px; height: 26px; padding: 0 10px; border-radius: 999px; background: {{p.accent}}; color: #FFFFFF; font-size: 12px; font-weight: 700; display: flex; align-items: center">Última unidad</span>
+</sc-if>
+<a href="https://wa.me/549XXXXXXXXXX" target="_blank" rel="noopener" aria-label="{{p.askLabel}}" title="Preguntar por WhatsApp" style="position: absolute; top: 8px; right: 8px; width: 44px; height: 44px; border-radius: 999px; background: #FFFFFF; color: #0D8243; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 14px -6px rgba(15,26,51,0.25)">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4A8.5 8.5 0 1 1 8 19.6z"></path><path d="M9.2 8.6c.2-.5.6-.6.9-.6h.5c.2 0 .4.1.5.4l.6 1.5c.1.2 0 .5-.1.7l-.5.6c.6 1.2 1.6 2.1 2.8 2.7l.6-.5c.2-.2.5-.2.7-.1l1.5.6c.3.1.4.3.4.5v.5c0 .3-.1.7-.6.9-.6.3-1.5.4-2.6 0-1.9-.7-3.6-2.4-4.3-4.3-.4-1.1-.3-2 0-2.6z"></path></svg>
+</a>
+<sc-if value="{{p.multi}}" hint-placeholder-val="{{ false }}">
+<div role="img" aria-label="{{p.photosLabel}}" style="position: absolute; left: 0; right: 0; bottom: 12px; display: flex; justify-content: center; align-items: center; gap: 5px; pointer-events: none">
+<sc-for list="{{p.dots}}" as="d" hint-placeholder-count="3">
+<span style="width: {{d.w}}; height: 6px; border-radius: 999px; background: {{d.bg}}"></span>
+</sc-for>
+</div>
+</sc-if>
+</div>
+<div style="padding: 2px 6px 6px; display: flex; flex-direction: column; gap: 6px; flex: 1 1 auto">
+<h3 style="margin: 0; font-size: 15px; font-weight: 700; line-height: 1.35; color: #0F1A33; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden"><a class="ac-tl" href="Producto.dc.html" style="color: #0F1A33">{{p.title}}</a></h3>
+<p style="margin: 0; font-size: 13px; font-weight: 600; color: #5F6B85">{{p.subLabel}}</p>
+<p style="margin: 0; font-size: 13px; line-height: 1.5; color: #5F6B85; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">{{p.description}}</p>
+<div style="margin-top: auto; padding-top: 6px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-size: 21px; font-weight: 800; letter-spacing: -0.02em; color: #0F1A33; font-variant-numeric: tabular-nums">{{p.priceLabel}}</span>
+<sc-if value="{{p.notInCart}}" hint-placeholder-val="{{ true }}">
+<button type="button" style="height: 44px; border: 0; border-radius: 999px; background: {{p.accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; box-shadow: 0 8px 18px -10px {{p.accent}}">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.7a1.5 1.5 0 0 0 1.5-1.1L21 8H6.2"></path><circle cx="9.5" cy="20" r="1.2"></circle><circle cx="17" cy="20" r="1.2"></circle></svg>
+<span>Agregar al carrito</span>
+</button>
+</sc-if>
+<sc-if value="{{p.inCart}}" hint-placeholder-val="{{ false }}">
+<div style="height: 44px; border-radius: 999px; background: color-mix(in srgb, {{p.accent}} 10%, #FFFFFF); display: flex; align-items: center; justify-content: space-between">
+<button type="button" aria-label="Quitar uno" style="width: 44px; height: 44px; border: 0; border-radius: 999px; background: transparent; color: {{p.accent}}; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 12h12"></path></svg>
+</button>
+<span style="font-size: 13px; font-weight: 700; color: {{p.accent}}; white-space: nowrap">{{p.qtyLabel}}</span>
+<button type="button" aria-label="Agregar uno" disabled="{{p.atMax}}" style="width: 44px; height: 44px; border: 0; border-radius: 999px; background: transparent; color: {{p.accent}}; opacity: {{p.plusOpacity}}; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 6v12M6 12h12"></path></svg>
+</button>
+</div>
+</sc-if>
+</div>
+</div>
+</article>
+</sc-for>
+</div>
+</main>
+
+<footer style="background: #FFFFFF; border-top: 1px solid #E6EBF5">
+<div style="max-width: 1200px; margin: 0 auto; padding: 36px clamp(16px, 4vw, 24px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 360px">
+<div style="display: flex; align-items: center; gap: 10px">
+<span style="width: 34px; height: 34px; border-radius: 11px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; flex: 0 0 34px">
+<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"></rect><rect x="9.5" y="9.5" width="5" height="5" rx="0.5"></rect><path d="M9 2.5v3M15 2.5v3M9 18.5v3M15 18.5v3M2.5 9h3M2.5 15h3M18.5 9h3M18.5 15h3"></path></svg>
+</span>
+<span style="display: flex; align-items: baseline; gap: 5px; font-size: 17px; letter-spacing: -0.02em; white-space: nowrap">
+<span style="font-weight: 800; color: #0F1A33">Adriel</span>
+<span style="font-weight: 700; color: {{accent}}">Componentes</span>
+</span>
+</div>
+<p style="margin: 0; font-size: 14px; line-height: 1.55; color: #5F6B85">Componentes de PC que tengo libres. Consultas y coordinación por WhatsApp.</p>
+</div>
+<nav aria-label="Redes y contacto" style="display: flex; flex-wrap: wrap; gap: 10px">
+<a href="https://instagram.com/" target="_blank" rel="noopener" style="height: 48px; padding: 0 18px 0 7px; box-sizing: border-box; border: 1px solid #E1E7F3; border-radius: 999px; display: flex; align-items: center; gap: 10px; color: #0F1A33; text-decoration: none; font-size: 14px; font-weight: 700">
+<span style="width: 34px; height: 34px; border-radius: 999px; background: color-mix(in srgb, {{accent}} 10%, #FFFFFF); color: {{accent}}; display: flex; align-items: center; justify-content: center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"></circle></svg>
+</span>
+<span>Instagram</span>
+</a>
+<a href="https://wa.me/549XXXXXXXXXX" target="_blank" rel="noopener" style="height: 48px; padding: 0 18px 0 7px; box-sizing: border-box; border: 1px solid #E1E7F3; border-radius: 999px; display: flex; align-items: center; gap: 10px; color: #0F1A33; text-decoration: none; font-size: 14px; font-weight: 700">
+<span style="width: 34px; height: 34px; border-radius: 999px; background: #E3F5EA; color: #0D8243; display: flex; align-items: center; justify-content: center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4A8.5 8.5 0 1 1 8 19.6z"></path><path d="M9.2 8.6c.2-.5.6-.6.9-.6h.5c.2 0 .4.1.5.4l.6 1.5c.1.2 0 .5-.1.7l-.5.6c.6 1.2 1.6 2.1 2.8 2.7l.6-.5c.2-.2.5-.2.7-.1l1.5.6c.3.1.4.3.4.5v.5c0 .3-.1.7-.6.9-.6.3-1.5.4-2.6 0-1.9-.7-3.6-2.4-4.3-4.3-.4-1.1-.3-2 0-2.6z"></path></svg>
+</span>
+<span>WhatsApp</span>
+</a>
+<a href="mailto:" style="height: 48px; padding: 0 18px 0 7px; box-sizing: border-box; border: 1px solid #E1E7F3; border-radius: 999px; display: flex; align-items: center; gap: 10px; color: #0F1A33; text-decoration: none; font-size: 14px; font-weight: 700">
+<span style="width: 34px; height: 34px; border-radius: 999px; background: color-mix(in srgb, {{accent}} 10%, #FFFFFF); color: {{accent}}; display: flex; align-items: center; justify-content: center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"></rect><path d="M3.5 6.5l8.5 6 8.5-6"></path></svg>
+</span>
+<span>Email</span>
+</a>
+</nav>
+</div>
+<div style="border-top: 1px solid #EEF2F8">
+<p style="max-width: 1200px; box-sizing: border-box; margin: 0 auto; padding: 18px clamp(16px, 4vw, 24px); font-size: 13px; color: #5F6B85">© 2026 Adriel Componentes</p>
+</div>
+</footer>
+
+<a href="https://wa.me/549XXXXXXXXXX" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp" style="position: fixed; right: 24px; bottom: 24px; z-index: 40; width: 60px; height: 60px; border-radius: 999px; background: #16A04F; color: #FFFFFF; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 6px rgba(22,160,79,0.14), 0 14px 28px -10px rgba(13,130,67,0.7)">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4A8.5 8.5 0 1 1 8 19.6z"></path><path d="M9.2 8.6c.2-.5.6-.6.9-.6h.5c.2 0 .4.1.5.4l.6 1.5c.1.2 0 .5-.1.7l-.5.6c.6 1.2 1.6 2.1 2.8 2.7l.6-.5c.2-.2.5-.2.7-.1l1.5.6c.3.1.4.3.4.5v.5c0 .3-.1.7-.6.9-.6.3-1.5.4-2.6 0-1.9-.7-3.6-2.4-4.3-4.3-.4-1.1-.3-2 0-2.6z"></path></svg>
+</a>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#1F5BEF","options":["#1F5BEF","#5B3DF5","#0E7490","#0F1A33"]},"$preview":{"width":1280,"height":1720}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#1F5BEF';
+    const fmt = (n) => '$ ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    const data = [
+      { kind: 'ram', brand: 'Kingston', title: 'Memoria RAM Fury Beast 16 GB (2×8) DDR4 3200 MHz', description: 'Kit de dos módulos, funcionando perfecto. Sacado de una PC de uso hogareño.', price: 38000, stock: 2, images: 3, qty: 2 },
+      { kind: 'gpu', brand: 'MSI', title: 'Placa de video GeForce GTX 1660 Super 6 GB', description: 'Modelo Ventus XS. Nunca usada para minería, con caja original.', price: 185000, stock: 1, images: 5, qty: 0 },
+      { kind: 'ssd', brand: 'Samsung', title: 'SSD NVMe 980 512 GB M.2', description: 'En muy buen estado. Ideal como disco de sistema.', price: 42000, stock: 3, images: 2, qty: 1 },
+      { kind: 'cpu', brand: 'AMD', title: 'Procesador Ryzen 5 3600 AM4', description: 'Incluye el cooler Wraith Stealth original. Sin pines doblados.', price: 95000, stock: 1, images: 3, qty: 1 },
+      { kind: 'psu', brand: 'Corsair', title: 'Fuente CX650M 650 W 80 Plus Bronze', description: 'Semi-modular, con todos los cables y la caja.', price: 70000, stock: 1, images: 4, qty: 0 },
+      { kind: 'mobo', brand: 'Gigabyte', title: 'Motherboard B450M DS3H AM4', description: 'BIOS actualizado, compatible con Ryzen 5000. Con tapa trasera.', price: 80000, stock: 1, images: 3, qty: 0 },
+      { kind: 'hdd', brand: 'Seagate', title: 'Disco rígido Barracuda 1 TB 7200 rpm', description: 'Formateado y testeado, sin sectores dañados.', price: 25000, stock: 4, images: 1, qty: 0 },
+      { kind: 'cooler', brand: 'Cooler Master', title: 'Cooler de CPU Hyper 212', description: 'Con pasta térmica nueva y todos los anclajes.', price: 30000, stock: 2, images: 2, qty: 0 }
+    ];
+    const products = data.map((p) => {
+      const dots = [];
+      for (let i = 0; i < Math.min(p.images, 5); i++) {
+        dots.push({ w: i === 0 ? '18px' : '6px', bg: i === 0 ? accent : 'color-mix(in srgb, ' + accent + ' 30%, #FFFFFF)' });
+      }
+      return {
+        kind: p.kind,
+        accent: accent,
+        title: p.title,
+        description: p.description,
+        priceLabel: fmt(p.price),
+        subLabel: p.brand + ' · ' + (p.stock === 1 ? '1 disponible' : p.stock + ' disponibles'),
+        lastOne: p.stock === 1,
+        multi: p.images > 1,
+        photosLabel: p.images + ' fotos',
+        dots: dots,
+        inCart: p.qty > 0,
+        notInCart: p.qty === 0,
+        qtyLabel: p.qty + ' en el carrito',
+        atMax: p.qty >= p.stock,
+        plusOpacity: p.qty >= p.stock ? '0.35' : '1',
+        askLabel: 'Preguntar por WhatsApp: ' + p.title
+      };
+    });
+    return { accent: accent, products: products };
+  }
+}
+</script>
+</body>
+</html>

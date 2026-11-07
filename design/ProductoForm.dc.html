@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Adriel Componentes — Cargar componente</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0;background:#F3F6FC}
+a{color:#1F5BEF}a:hover{color:#1747C7}
+.ac-input::placeholder{color:#67728C}
+@media (max-width:560px){.ac-hide-sm{display:none}}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-direction: column; background: #F3F6FC; color: #0F1A33; font-family: 'Plus Jakarta Sans', Inter, system-ui, -apple-system, 'Segoe UI', sans-serif">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #E6EBF5">
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 24px); height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<div style="display: flex; align-items: center; gap: 12px; min-width: 0">
+<span style="width: 38px; height: 38px; border-radius: 12px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; flex: 0 0 38px; box-shadow: 0 6px 14px -6px {{accent}}">
+<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"></rect><rect x="9.5" y="9.5" width="5" height="5" rx="0.5"></rect><path d="M9 2.5v3M15 2.5v3M9 18.5v3M15 18.5v3M2.5 9h3M2.5 15h3M18.5 9h3M18.5 15h3"></path></svg>
+</span>
+<span style="display: flex; align-items: baseline; gap: 5px; font-size: 19px; letter-spacing: -0.02em; white-space: nowrap">
+<span style="font-weight: 800; color: #0F1A33">Adriel</span>
+<span class="ac-hide-sm" style="font-weight: 700; color: {{accent}}">Componentes</span>
+</span>
+<span style="height: 26px; padding: 0 10px; border-radius: 999px; background: #0F1A33; color: #FFFFFF; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; display: flex; align-items: center">Panel</span>
+</div>
+<div style="display: flex; align-items: center; gap: 8px">
+<a href="Main.dc.html" style="height: 44px; padding: 0 16px 0 14px; box-sizing: border-box; border: 1px solid #E1E7F3; border-radius: 999px; background: #FFFFFF; color: #0F1A33; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; text-decoration: none; white-space: nowrap">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path></svg>
+<span class="ac-hide-sm">Ver tienda</span>
+</a>
+<span aria-hidden="true" style="width: 40px; height: 40px; border-radius: 999px; background: color-mix(in srgb, {{accent}} 12%, #FFFFFF); color: {{accent}}; font-size: 15px; font-weight: 800; display: flex; align-items: center; justify-content: center">A</span>
+<a href="Login.dc.html" aria-label="Cerrar sesión" title="Cerrar sesión" style="width: 44px; height: 44px; box-sizing: border-box; border: 1px solid #E1E7F3; border-radius: 999px; background: #FFFFFF; color: #0F1A33; display: flex; align-items: center; justify-content: center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 20H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3M16 16l4-4-4-4M20 12H9"></path></svg>
+</a>
+</div>
+</div>
+</header>
+
+<main style="flex: 1 0 auto; width: 100%; max-width: 1200px; box-sizing: border-box; margin: 0 auto; padding: 24px clamp(16px, 4vw, 24px) 40px; display: flex; flex-direction: column; gap: 20px">
+
+<div style="display: flex; flex-direction: column; gap: 10px">
+<a href="Admin.dc.html" style="align-self: flex-start; min-height: 32px; display: flex; align-items: center; gap: 6px; color: #5F6B85; font-size: 14px; font-weight: 600; text-decoration: none">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+<span>Mis componentes</span>
+</a>
+<h1 style="margin: 0; font-size: 30px; font-weight: 800; line-height: 1.1; letter-spacing: -0.025em; color: #0F1A33">Nuevo componente</h1>
+<p style="margin: 0; font-size: 15px; color: #5F6B85">Completá los datos y publicalo. Lo vas a poder editar cuando quieras.</p>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px">
+
+<div style="flex: 1 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+
+<sc-if value="{{err}}" hint-placeholder-val="{{ false }}">
+<div role="alert" style="display: flex; gap: 12px; align-items: flex-start; padding: 16px 18px; border-radius: 18px; background: #FEF2F1; border: 1px solid #F8CFCA; color: #A11D13">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: 0 0 20px; margin-top: 1px"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5v5.5M12 16.5v.01"></path></svg>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 14px; font-weight: 700">Faltan 2 datos para publicar</span>
+<span style="font-size: 13px; line-height: 1.45">Completá el título y el precio.</span>
+</div>
+</div>
+</sc-if>
+
+<section aria-labelledby="ac-sec-fotos" style="background: #FFFFFF; border: 1px solid #E6EBF5; border-radius: 22px; padding: 24px clamp(18px, 3vw, 28px); display: flex; flex-direction: column; gap: 16px; box-shadow: 0 1px 2px rgba(15,26,51,0.04)">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 id="ac-sec-fotos" style="margin: 0; font-size: 17px; font-weight: 800; color: #0F1A33">Fotos</h2>
+<p style="margin: 0; font-size: 13px; color: #5F6B85">La primera es la portada. Arrastralas para cambiar el orden.</p>
+</div>
+<span style="flex: 0 0 auto; font-size: 13px; font-weight: 600; color: #5F6B85; font-variant-numeric: tabular-nums">{{photoCount}}</span>
+</div>
+
+<label for="ac-files" style="min-height: 150px; box-sizing: border-box; padding: 24px; border-radius: 18px; border: 1.5px dashed #B9C6E2; background: #F7F9FD; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; cursor: pointer">
+<span style="width: 48px; height: 48px; border-radius: 999px; background: color-mix(in srgb, {{accent}} 12%, #FFFFFF); color: {{accent}}; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V5M7.5 9.5L12 5l4.5 4.5M5 19h14"></path></svg>
+</span>
+<span style="font-size: 15px; font-weight: 700; color: #0F1A33">Arrastrá tus fotos acá</span>
+<span style="font-size: 14px; color: #5F6B85">o <span style="color: {{accent}}; font-weight: 700; text-decoration: underline">elegilas desde tu dispositivo</span></span>
+<span style="font-size: 12px; color: #5F6B85">JPG, PNG o WEBP · hasta 8 fotos</span>
+</label>
+<input id="ac-files" type="file" accept="image/*" multiple="{{ true }}" style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none">
+
+<sc-if value="{{hasPhotos}}" hint-placeholder-val="{{ true }}">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 10px">
+<sc-for list="{{photos}}" as="ph" hint-placeholder-count="4">
+<div style="position: relative; aspect-ratio: 1 / 1; box-sizing: border-box; border-radius: 16px; overflow: hidden; border: {{ph.border}}; background: radial-gradient(circle at 50% 45%, #FFFFFF 0%, color-mix(in srgb, {{ph.accent}} 12%, #FFFFFF) 72%); display: flex; align-items: center; justify-content: center">
+<dc-import name="ProductArt" kind="gpu" accent="{{ph.accent}}" size="sm" hint-size="62px,41px"></dc-import>
+<sc-if value="{{ph.cover}}" hint-placeholder-val="{{ false }}">
+<span style="position: absolute; left: 7px; bottom: 7px; height: 22px; padding: 0 8px; border-radius: 999px; background: {{ph.accent}}; color: #FFFFFF; font-size: 11px; font-weight: 700; display: flex; align-items: center">Portada</span>
+</sc-if>
+<sc-if value="{{ph.notCover}}" hint-placeholder-val="{{ true }}">
+<span style="position: absolute; left: 7px; bottom: 7px; height: 22px; min-width: 22px; padding: 0 7px; box-sizing: border-box; border-radius: 999px; background: rgba(255,255,255,0.92); color: #3B4763; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center">{{ph.n}}</span>
+</sc-if>
+<button type="button" aria-label="{{ph.removeLabel}}" style="position: absolute; top: 0; right: 0; width: 44px; height: 44px; border: 0; padding: 0; background: transparent; display: flex; align-items: flex-start; justify-content: flex-end; cursor: pointer">
+<span style="margin: 7px 7px 0 0; width: 26px; height: 26px; border-radius: 999px; background: rgba(15,26,51,0.75); color: #FFFFFF; display: flex; align-items: center; justify-content: center">
+<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+</span>
+</button>
+</div>
+</sc-for>
+</div>
+</sc-if>
+</section>
+
+<section aria-labelledby="ac-sec-info" style="background: #FFFFFF; border: 1px solid #E6EBF5; border-radius: 22px; padding: 24px clamp(18px, 3vw, 28px); display: flex; flex-direction: column; gap: 20px; box-shadow: 0 1px 2px rgba(15,26,51,0.04)">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 id="ac-sec-info" style="margin: 0; font-size: 17px; font-weight: 800; color: #0F1A33">Información</h2>
+<p style="margin: 0; font-size: 13px; color: #5F6B85">Lo que ve el comprador en la tarjeta y en el detalle.</p>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+<label for="ac-title" style="font-size: 14px; font-weight: 700; color: #0F1A33">Título</label>
+<span style="font-size: 12px; color: #5F6B85; font-variant-numeric: tabular-nums">{{titleCount}}</span>
+</div>
+<input class="ac-input" id="ac-title" type="text" readOnly="{{ true }}" placeholder="Ej: Memoria RAM Fury Beast 16 GB DDR4" value="{{title}}" aria-invalid="{{err}}" style="width: 100%; box-sizing: border-box; height: 50px; padding: 0 16px; border-radius: 14px; border: 1.5px solid {{titleBorder}}; background: #F7F9FD; font-family: inherit; font-size: 15px; color: #0F1A33; outline: none">
+<sc-if value="{{err}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #C4271D">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5v5.5M12 16.5v.01"></path></svg>
+<span>Escribí un título.</span>
+</p>
+</sc-if>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="ac-brand" style="font-size: 14px; font-weight: 700; color: #0F1A33">Marca</label>
+<input class="ac-input" id="ac-brand" type="text" readOnly="{{ true }}" placeholder="Ej: Kingston" value="{{brand}}" style="width: 100%; box-sizing: border-box; height: 50px; padding: 0 16px; border-radius: 14px; border: 1.5px solid #E1E7F3; background: #F7F9FD; font-family: inherit; font-size: 15px; color: #0F1A33; outline: none">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+<span style="font-size: 13px; color: #5F6B85">Ya usadas:</span>
+<sc-for list="{{brandChips}}" as="b" hint-placeholder-count="5">
+<button type="button" style="height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid {{b.bd}}; background: {{b.bg}}; color: {{b.fg}}; font-family: inherit; font-size: 13px; font-weight: 700; cursor: pointer">{{b.label}}</button>
+</sc-for>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+<label for="ac-desc" style="font-size: 14px; font-weight: 700; color: #0F1A33">Descripción</label>
+<span style="font-size: 12px; color: #5F6B85; font-variant-numeric: tabular-nums">{{descCount}}</span>
+</div>
+<textarea class="ac-input" id="ac-desc" rows="5" readOnly="{{ true }}" placeholder="Estado, qué incluye y cualquier detalle a tener en cuenta." value="{{description}}" aria-describedby="ac-desc-help" style="width: 100%; box-sizing: border-box; min-height: 132px; padding: 14px 16px; border-radius: 14px; border: 1.5px solid #E1E7F3; background: #F7F9FD; font-family: inherit; font-size: 15px; line-height: 1.55; color: #0F1A33; resize: vertical; outline: none"></textarea>
+<p id="ac-desc-help" style="margin: 0; font-size: 13px; color: #5F6B85">Tip: contá por qué lo vendés y si incluye caja o accesorios.</p>
+</div>
+</section>
+
+<section aria-labelledby="ac-sec-precio" style="background: #FFFFFF; border: 1px solid #E6EBF5; border-radius: 22px; padding: 24px clamp(18px, 3vw, 28px); display: flex; flex-direction: column; gap: 20px; box-shadow: 0 1px 2px rgba(15,26,51,0.04)">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h2 id="ac-sec-precio" style="margin: 0; font-size: 17px; font-weight: 800; color: #0F1A33">Precio y stock</h2>
+<p style="margin: 0; font-size: 13px; color: #5F6B85">Con 0 unidades el componente se oculta de la tienda.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="ac-price" style="font-size: 14px; font-weight: 700; color: #0F1A33">Precio</label>
+<div style="position: relative">
+<span aria-hidden="true" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 15px; font-weight: 700; color: #5F6B85">$</span>
+<input class="ac-input" id="ac-price" type="text" inputMode="numeric" readOnly="{{ true }}" placeholder="0" value="{{price}}" aria-invalid="{{err}}" style="width: 100%; box-sizing: border-box; height: 50px; padding: 0 16px 0 34px; border-radius: 14px; border: 1.5px solid {{priceBorder}}; background: #F7F9FD; font-family: inherit; font-size: 16px; font-weight: 700; color: #0F1A33; font-variant-numeric: tabular-nums; outline: none">
+</div>
+<sc-if value="{{err}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: #C4271D">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5v5.5M12 16.5v.01"></path></svg>
+<span>Ingresá un precio mayor a 0.</span>
+</p>
+</sc-if>
+<sc-if value="{{noErr}}" hint-placeholder-val="{{ true }}">
+<p style="margin: 0; font-size: 13px; color: #5F6B85">En pesos, sin centavos.</p>
+</sc-if>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="ac-stock" style="font-size: 14px; font-weight: 700; color: #0F1A33">Cantidad</label>
+<div style="height: 50px; box-sizing: border-box; border-radius: 14px; border: 1.5px solid #E1E7F3; background: #F7F9FD; display: flex; align-items: center; justify-content: space-between; padding: 0 3px">
+<button type="button" aria-label="Restar uno" style="width: 44px; height: 44px; border: 0; border-radius: 11px; background: transparent; color: #0F1A33; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 12h12"></path></svg>
+</button>
+<input id="ac-stock" type="text" inputMode="numeric" readOnly="{{ true }}" value="1" style="width: 64px; height: 44px; border: 0; background: transparent; text-align: center; font-family: inherit; font-size: 16px; font-weight: 800; color: #0F1A33; font-variant-numeric: tabular-nums; outline: none">
+<button type="button" aria-label="Sumar uno" style="width: 44px; height: 44px; border: 0; border-radius: 11px; background: transparent; color: #0F1A33; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 6v12M6 12h12"></path></svg>
+</button>
+</div>
+<p style="margin: 0; font-size: 13px; color: #5F6B85">Unidades disponibles para vender.</p>
+</div>
+</div>
+</section>
+</div>
+
+<aside aria-label="Vista previa" style="flex: 1 1 320px; max-width: 400px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+<span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #5F6B85">Vista previa</span>
+<span style="font-size: 13px; color: #5F6B85">Así se ve en la tienda</span>
+</div>
+<article style="background: #FFFFFF; border: 1px solid #E6EBF5; border-radius: 22px; padding: 10px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 20px 40px -24px rgba(15,26,51,0.28)">
+<div style="position: relative; aspect-ratio: 4 / 3; border-radius: 16px; overflow: hidden; background: radial-gradient(circle at 50% 42%, #FFFFFF 0%, color-mix(in srgb, {{accent}} 11%, #FFFFFF) 72%); display: flex; align-items: center; justify-content: center">
+<dc-import name="ProductArt" kind="{{previewKind}}" accent="{{accent}}" size="md" hint-size="170px,113px"></dc-import>
+<sc-if value="{{full}}" hint-placeholder-val="{{ true }}">
+<span style="position: absolute; top: 12px; left: 12px; height: 26px; padding: 0 10px; border-radius: 999px; background: {{accent}}; color: #FFFFFF; font-size: 12px; font-weight: 700; display: flex; align-items: center">Última unidad</span>
+<div style="position: absolute; left: 0; right: 0; bottom: 12px; display: flex; justify-content: center; align-items: center; gap: 5px">
+<span style="width: 18px; height: 6px; border-radius: 999px; background: {{accent}}"></span>
+<span style="width: 6px; height: 6px; border-radius: 999px; background: color-mix(in srgb, {{accent}} 30%, #FFFFFF)"></span>
+<span style="width: 6px; height: 6px; border-radius: 999px; background: color-mix(in srgb, {{accent}} 30%, #FFFFFF)"></span>
+<span style="width: 6px; height: 6px; border-radius: 999px; background: color-mix(in srgb, {{accent}} 30%, #FFFFFF)"></span>
+</div>
+</sc-if>
+<span aria-hidden="true" style="position: absolute; top: 8px; right: 8px; width: 44px; height: 44px; border-radius: 999px; background: #FFFFFF; color: #0D8243; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 14px -6px rgba(15,26,51,0.25)">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4A8.5 8.5 0 1 1 8 19.6z"></path><path d="M9.2 8.6c.2-.5.6-.6.9-.6h.5c.2 0 .4.1.5.4l.6 1.5c.1.2 0 .5-.1.7l-.5.6c.6 1.2 1.6 2.1 2.8 2.7l.6-.5c.2-.2.5-.2.7-.1l1.5.6c.3.1.4.3.4.5v.5c0 .3-.1.7-.6.9-.6.3-1.5.4-2.6 0-1.9-.7-3.6-2.4-4.3-4.3-.4-1.1-.3-2 0-2.6z"></path></svg>
+</span>
+</div>
+<div style="padding: 2px 6px 6px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 15px; font-weight: 700; line-height: 1.35; color: {{previewTitleColor}}; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">{{previewTitle}}</span>
+<span style="font-size: 13px; font-weight: 600; color: #5F6B85">{{previewSub}}</span>
+<span style="font-size: 13px; line-height: 1.5; color: #5F6B85; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">{{previewDesc}}</span>
+<span style="padding-top: 6px; font-size: 21px; font-weight: 800; letter-spacing: -0.02em; color: #0F1A33; font-variant-numeric: tabular-nums">{{previewPrice}}</span>
+<span aria-hidden="true" style="margin-top: 6px; height: 44px; border-radius: 999px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; font-weight: 700">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.7a1.5 1.5 0 0 0 1.5-1.1L21 8H6.2"></path><circle cx="9.5" cy="20" r="1.2"></circle><circle cx="17" cy="20" r="1.2"></circle></svg>
+<span>Agregar al carrito</span>
+</span>
+</div>
+</article>
+</aside>
+</div>
+</main>
+
+<div style="position: sticky; bottom: 0; z-index: 20; background: rgba(255,255,255,0.94); backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px); border-top: 1px solid #E6EBF5">
+<div style="max-width: 1200px; margin: 0 auto; padding: 14px clamp(16px, 4vw, 24px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<span style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #5F6B85">
+<span style="width: 8px; height: 8px; border-radius: 999px; background: #D6A100"></span>
+<span>Sin publicar</span>
+</span>
+<div style="display: flex; gap: 10px; flex: 0 1 auto; margin-left: auto">
+<a href="Admin.dc.html" style="height: 50px; padding: 0 22px; box-sizing: border-box; border: 1px solid #E1E7F3; border-radius: 999px; background: #FFFFFF; color: #0F1A33; display: flex; align-items: center; font-size: 15px; font-weight: 700; text-decoration: none">Cancelar</a>
+<button type="submit" style="height: 50px; padding: 0 26px 0 22px; border: 0; border-radius: 999px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; gap: 8px; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; box-shadow: 0 12px 24px -12px {{accent}}">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
+<span>Publicar componente</span>
+</button>
+</div>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#1F5BEF","options":["#1F5BEF","#5B3DF5","#0E7490","#0F1A33"]},"estado":{"editor":"enum","default":"completo","options":["completo","vacio","errores"]},"$preview":{"width":1280,"height":1440}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#1F5BEF';
+    const estado = this.props.estado ?? 'completo';
+    const full = estado === 'completo';
+    const err = estado === 'errores';
+    const title = full ? 'Placa de video GeForce GTX 1660 Super 6 GB' : '';
+    const description = full ? 'Modelo Ventus XS. Nunca usada para minería, con caja original.\nLa saqué porque actualicé la PC. Se entrega limpia y con pasta térmica renovada.' : '';
+    const brand = full ? 'MSI' : '';
+    const photos = full ? [1, 2, 3, 4].map((n) => ({
+      n: n,
+      accent: accent,
+      cover: n === 1,
+      notCover: n !== 1,
+      border: n === 1 ? '2px solid ' + accent : '1px solid #E1E7F3',
+      removeLabel: 'Quitar foto ' + n
+    })) : [];
+    const brandChips = ['Kingston', 'MSI', 'Samsung', 'AMD', 'Corsair'].map((b) => {
+      const active = b === brand;
+      return {
+        label: b,
+        bg: active ? 'color-mix(in srgb, ' + accent + ' 12%, #FFFFFF)' : '#FFFFFF',
+        fg: active ? accent : '#0F1A33',
+        bd: active ? accent : '#E1E7F3'
+      };
+    });
+    return {
+      accent: accent,
+      full: full,
+      err: err,
+      noErr: !err,
+      photos: photos,
+      hasPhotos: photos.length > 0,
+      photoCount: photos.length + ' de 8',
+      title: title,
+      titleCount: title.length + '/80',
+      titleBorder: err ? '#D92D20' : '#E1E7F3',
+      brand: brand,
+      brandChips: brandChips,
+      description: description,
+      descCount: description.length + '/400',
+      price: full ? '185.000' : '',
+      priceBorder: err ? '#D92D20' : '#E1E7F3',
+      previewKind: full ? 'gpu' : 'generico',
+      previewTitle: title || 'Título del componente',
+      previewTitleColor: title ? '#0F1A33' : '#67728C',
+      previewSub: full ? 'MSI · 1 disponible' : 'Marca · 1 disponible',
+      previewDesc: description || 'La descripción aparece acá.',
+      previewPrice: full ? '$ 185.000' : '$ 0'
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Adriel Componentes — Carrito abierto</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0;background:#F3F6FC}
+a{color:#1F5BEF}
+@media (max-width:760px){.ac-hero-art{display:none}}
+@media (max-width:560px){.ac-hide-sm{display:none}}
+</style>
+</helmet>
+<div style="position: relative; height: 100vh; overflow: hidden; display: flex; flex-direction: column; background: #F3F6FC; color: #0F1A33; font-family: 'Plus Jakarta Sans', Inter, system-ui, -apple-system, 'Segoe UI', sans-serif">
+
+<header style="background: #FFFFFF; border-bottom: 1px solid #E6EBF5">
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 24px); height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 16px">
+<span style="display: flex; align-items: center; gap: 10px; color: #0F1A33">
+<span style="width: 38px; height: 38px; border-radius: 12px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; flex: 0 0 38px; box-shadow: 0 6px 14px -6px {{accent}}">
+<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"></rect><rect x="9.5" y="9.5" width="5" height="5" rx="0.5"></rect><path d="M9 2.5v3M15 2.5v3M9 18.5v3M15 18.5v3M2.5 9h3M2.5 15h3M18.5 9h3M18.5 15h3"></path></svg>
+</span>
+<span style="display: flex; align-items: baseline; gap: 5px; font-size: 19px; letter-spacing: -0.02em; white-space: nowrap">
+<span style="font-weight: 800; color: #0F1A33">Adriel</span>
+<span style="font-weight: 700; color: {{accent}}">Componentes</span>
+</span>
+</span>
+<div style="display: flex; align-items: center; gap: 10px">
+<span style="position: relative; width: 44px; height: 44px; box-sizing: border-box; border: 1px solid #E1E7F3; border-radius: 999px; background: #FFFFFF; color: #0F1A33; display: flex; align-items: center; justify-content: center">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.7a1.5 1.5 0 0 0 1.5-1.1L21 8H6.2"></path><circle cx="9.5" cy="20" r="1.2"></circle><circle cx="17" cy="20" r="1.2"></circle></svg>
+<span style="position: absolute; top: -4px; right: -4px; min-width: 20px; height: 20px; padding: 0 5px; box-sizing: border-box; border-radius: 999px; background: {{accent}}; color: #FFFFFF; border: 2px solid #FFFFFF; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center">4</span>
+</span>
+<span style="height: 44px; padding: 0 16px; box-sizing: border-box; border: 1px solid #E1E7F3; border-radius: 999px; background: #FFFFFF; color: #0F1A33; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700">
+<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.8"></circle><path d="M4.5 20c1.2-3.6 4.1-5.3 7.5-5.3s6.3 1.7 7.5 5.3"></path></svg>
+<span class="ac-hide-sm">Iniciar sesión</span>
+</span>
+</div>
+</div>
+</header>
+
+<div style="width: 100%; max-width: 1200px; box-sizing: border-box; margin: 0 auto; padding: 24px clamp(16px, 4vw, 24px) 0">
+<section style="position: relative; overflow: hidden; border-radius: 28px; min-height: 220px; box-sizing: border-box; padding: 36px clamp(24px, 5vw, 56px); display: flex; align-items: center; justify-content: space-between; gap: 24px; background: radial-gradient(circle at 76% 50%, color-mix(in srgb, {{accent}} 60%, transparent) 0%, transparent 52%), linear-gradient(115deg, #060E24 0%, #0B1B4B 55%, #102C78 100%); color: #FFFFFF">
+<div style="position: relative; display: flex; flex-direction: column; gap: 12px; max-width: 540px">
+<span style="align-self: flex-start; height: 30px; padding: 0 12px; border-radius: 999px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.16); display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #C3D3FF">
+<span style="width: 7px; height: 7px; border-radius: 999px; background: #4ADE9B"></span>
+<span>8 componentes disponibles</span>
+</span>
+<h1 style="margin: 0; font-size: clamp(32px, 4.4vw, 46px); font-weight: 800; line-height: 1.04; letter-spacing: -0.03em; color: #FFFFFF">Componentes de PC</h1>
+<p style="margin: 0; max-width: 440px; font-size: 16px; line-height: 1.55; color: #C9D5F5">Hardware que tengo libre para vender. Elegí lo que te sirva y consultame directo por WhatsApp.</p>
+</div>
+<svg class="ac-hero-art" width="360" height="200" viewBox="0 20 360 200" fill="none" aria-hidden="true" style="position: relative; flex: 0 0 auto">
+<g stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M250 80h30l14-14h40"></path><path d="M250 100h56l8 8h30"></path><path d="M250 140h44l12 12h34"></path><path d="M250 160h22l18 18h44"></path><path d="M110 80H80L66 66H26"></path><path d="M110 100H54l-8 8H16"></path><path d="M110 140H66l-12 12H20"></path><path d="M110 160H88l-18 18H26"></path><path d="M160 50V36l-10-10"></path><path d="M200 50V28"></path><path d="M160 190v14l-10 10"></path><path d="M200 190v22"></path></g>
+<g stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="2.4" stroke-linecap="round"><path d="M140 50v8M160 50v8M180 50v8M200 50v8M220 50v8M140 182v8M160 182v8M180 182v8M200 182v8M220 182v8M110 80h8M110 100h8M110 120h8M110 140h8M110 160h8M242 80h8M242 100h8M242 120h8M242 140h8M242 160h8"></path></g>
+<rect x="120" y="60" width="120" height="120" rx="22" fill="#FFFFFF" fill-opacity="0.07" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="1.5"></rect>
+<rect x="148" y="88" width="64" height="64" rx="14" fill="#6F97FF" fill-opacity="0.35" stroke="#FFFFFF" stroke-opacity="0.75" stroke-width="1.5"></rect>
+<path d="M166 108h28M166 120h28M166 132h18" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="2" stroke-linecap="round"></path>
+</svg>
+</section>
+</div>
+
+<div style="width: 100%; max-width: 1200px; box-sizing: border-box; margin: 0 auto; padding: 44px clamp(16px, 4vw, 24px) 0; display: flex; flex-direction: column; gap: 20px">
+<h2 style="margin: 0; font-size: 26px; font-weight: 800; letter-spacing: -0.02em; color: #0F1A33">Todos los componentes</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr)); gap: 20px">
+<sc-for list="{{bg}}" as="p" hint-placeholder-count="4">
+<div style="background: #FFFFFF; border: 1px solid #E6EBF5; border-radius: 22px; padding: 10px; display: flex; flex-direction: column; gap: 12px">
+<div style="aspect-ratio: 4 / 3; border-radius: 16px; overflow: hidden; background: radial-gradient(circle at 50% 42%, #FFFFFF 0%, color-mix(in srgb, {{p.accent}} 11%, #FFFFFF) 72%); display: flex; align-items: center; justify-content: center">
+<dc-import name="ProductArt" kind="{{p.kind}}" accent="{{p.accent}}" size="md" hint-size="170px,113px"></dc-import>
+</div>
+<div style="padding: 2px 6px 6px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 15px; font-weight: 700; line-height: 1.35; color: #0F1A33">{{p.title}}</span>
+<span style="font-size: 21px; font-weight: 800; color: #0F1A33">{{p.priceLabel}}</span>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<div aria-hidden="true" style="position: absolute; inset: 0; z-index: 40; background: rgba(6,14,36,0.5); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px)"></div>
+
+<aside role="dialog" aria-modal="true" aria-labelledby="ac-cart-title" style="position: absolute; top: 0; right: 0; bottom: 0; z-index: 50; width: 440px; max-width: 100%; box-sizing: border-box; background: #F5F7FC; border-radius: 26px 0 0 26px; overflow: hidden; display: flex; flex-direction: column; box-shadow: -24px 0 60px -30px rgba(6,14,36,0.6)">
+<div style="padding: 18px 16px 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<div style="display: flex; align-items: center; gap: 10px">
+<h2 id="ac-cart-title" style="margin: 0; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: #0F1A33">Tu carrito</h2>
+<span style="height: 26px; min-width: 26px; padding: 0 8px; box-sizing: border-box; border-radius: 999px; background: color-mix(in srgb, {{accent}} 12%, #FFFFFF); color: {{accent}}; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center">4</span>
+</div>
+<button type="button" aria-label="Cerrar carrito" style="width: 44px; height: 44px; border: 1px solid #E1E7F3; border-radius: 999px; background: #FFFFFF; color: #0F1A33; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+</button>
+</div>
+
+<div style="flex: 1 1 auto; overflow-y: auto; padding: 4px 16px 16px; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{items}}" as="c" hint-placeholder-count="3">
+<div style="background: #FFFFFF; border: 1px solid #E6EBF5; border-radius: 20px; padding: 12px; display: flex; gap: 12px">
+<span style="width: 80px; height: 80px; flex: 0 0 80px; border-radius: 14px; overflow: hidden; background: radial-gradient(circle at 50% 42%, #FFFFFF 0%, color-mix(in srgb, {{c.accent}} 11%, #FFFFFF) 72%); display: flex; align-items: center; justify-content: center">
+<dc-import name="ProductArt" kind="{{c.kind}}" accent="{{c.accent}}" size="sm" hint-size="62px,41px"></dc-import>
+</span>
+<div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<div style="display: flex; align-items: flex-start; gap: 4px">
+<span style="flex: 1 1 auto; min-width: 0; padding-top: 2px; font-size: 14px; font-weight: 700; line-height: 1.35; color: #0F1A33; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">{{c.title}}</span>
+<button type="button" aria-label="{{c.removeLabel}}" style="flex: 0 0 44px; width: 44px; height: 44px; margin: -8px -8px 0 0; border: 0; border-radius: 999px; background: transparent; color: #5F6B85; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4.5A1.5 1.5 0 0 1 10.5 3h3A1.5 1.5 0 0 1 15 4.5V7"></path></svg>
+</button>
+</div>
+<span style="font-size: 13px; color: #5F6B85">{{c.unitLabel}}</span>
+<div style="margin-top: auto; padding-top: 8px; display: flex; align-items: center; justify-content: space-between; gap: 8px">
+<span style="font-size: 16px; font-weight: 800; color: {{c.accent}}; font-variant-numeric: tabular-nums">{{c.lineLabel}}</span>
+<div style="height: 44px; border-radius: 999px; background: color-mix(in srgb, {{c.accent}} 10%, #FFFFFF); display: flex; align-items: center">
+<button type="button" aria-label="Quitar uno" style="width: 40px; height: 44px; border: 0; border-radius: 999px; background: transparent; color: {{c.accent}}; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 12h12"></path></svg>
+</button>
+<span style="min-width: 18px; text-align: center; font-size: 14px; font-weight: 800; color: {{c.accent}}">{{c.qty}}</span>
+<button type="button" aria-label="Agregar uno" disabled="{{c.atMax}}" style="width: 40px; height: 44px; border: 0; border-radius: 999px; background: transparent; color: {{c.accent}}; opacity: {{c.plusOpacity}}; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 6v12M6 12h12"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+
+<div style="background: #FFFFFF; border-top: 1px solid #E6EBF5; padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<span style="font-size: 14px; color: #5F6B85">Componentes</span>
+<span style="font-size: 14px; font-weight: 700; color: #0F1A33">4</span>
+</div>
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-top: 10px; border-top: 1px dashed #DCE3F1">
+<span style="font-size: 16px; font-weight: 800; color: #0F1A33">Total estimado</span>
+<span style="font-size: 26px; font-weight: 800; letter-spacing: -0.02em; color: #0F1A33; font-variant-numeric: tabular-nums">$ 213.000</span>
+</div>
+<p style="margin: 0; font-size: 13px; line-height: 1.5; color: #5F6B85">Precio y disponibilidad se confirman por WhatsApp. Tu carrito queda guardado en este navegador.</p>
+<a href="https://wa.me/549XXXXXXXXXX" target="_blank" rel="noopener" style="margin-top: 4px; height: 54px; border-radius: 999px; background: #0D8243; color: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 15px; font-weight: 700; text-decoration: none; box-shadow: 0 12px 24px -12px rgba(13,130,67,0.8)">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5l1.3-4A8.5 8.5 0 1 1 8 19.6z"></path><path d="M9.2 8.6c.2-.5.6-.6.9-.6h.5c.2 0 .4.1.5.4l.6 1.5c.1.2 0 .5-.1.7l-.5.6c.6 1.2 1.6 2.1 2.8 2.7l.6-.5c.2-.2.5-.2.7-.1l1.5.6c.3.1.4.3.4.5v.5c0 .3-.1.7-.6.9-.6.3-1.5.4-2.6 0-1.9-.7-3.6-2.4-4.3-4.3-.4-1.1-.3-2 0-2.6z"></path></svg>
+<span>Preguntar por WhatsApp</span>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</a>
+<button type="button" style="height: 44px; border: 0; border-radius: 999px; background: transparent; color: #5F6B85; font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer">Vaciar carrito</button>
+</div>
+</aside>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#1F5BEF","options":["#1F5BEF","#5B3DF5","#0E7490","#0F1A33"]},"$preview":{"width":1280,"height":800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#1F5BEF';
+    const bg = [
+      { kind: 'ram', title: 'Memoria RAM Fury Beast 16 GB (2×8) DDR4 3200 MHz', priceLabel: '$ 38.000' },
+      { kind: 'gpu', title: 'Placa de video GeForce GTX 1660 Super 6 GB', priceLabel: '$ 185.000' },
+      { kind: 'ssd', title: 'SSD NVMe 980 512 GB M.2', priceLabel: '$ 42.000' },
+      { kind: 'cpu', title: 'Procesador Ryzen 5 3600 AM4', priceLabel: '$ 95.000' }
+    ].map((p) => Object.assign({ accent: accent }, p));
+    const items = [
+      { kind: 'ram', title: 'Memoria RAM Fury Beast 16 GB (2×8) DDR4 3200 MHz', unitLabel: 'Kingston · $ 38.000 c/u', lineLabel: '$ 76.000', qty: 2, atMax: true },
+      { kind: 'ssd', title: 'SSD NVMe 980 512 GB M.2', unitLabel: 'Samsung · $ 42.000 c/u', lineLabel: '$ 42.000', qty: 1, atMax: false },
+      { kind: 'cpu', title: 'Procesador Ryzen 5 3600 AM4', unitLabel: 'AMD · $ 95.000 c/u', lineLabel: '$ 95.000', qty: 1, atMax: true }
+    ].map((c) => Object.assign({ accent: accent, plusOpacity: c.atMax ? '0.35' : '1', removeLabel: 'Quitar ' + c.title + ' del carrito' }, c));
+    return { accent: accent, bg: bg, items: items };
+  }
+}
+</script>
+</body>
+</html>

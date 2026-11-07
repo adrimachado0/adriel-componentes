@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Adriel Componentes — Panel</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0;background:#F3F6FC}
+a{color:#1F5BEF}
+.ac-input::placeholder{color:#67728C}
+.ac-sr{position:absolute !important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media (max-width:560px){.ac-hide-sm{display:none}}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-direction: column; background: #F3F6FC; color: #0F1A33; font-family: 'Plus Jakarta Sans', Inter, system-ui, -apple-system, 'Segoe UI', sans-serif">
+
+<header style="position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,0.92); backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px); border-bottom: 1px solid #E6EBF5">
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 24px); height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<div style="display: flex; align-items: center; gap: 12px; min-width: 0">
+<span style="width: 38px; height: 38px; border-radius: 12px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; flex: 0 0 38px; box-shadow: 0 6px 14px -6px {{accent}}">
+<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"></rect><rect x="9.5" y="9.5" width="5" height="5" rx="0.5"></rect><path d="M9 2.5v3M15 2.5v3M9 18.5v3M15 18.5v3M2.5 9h3M2.5 15h3M18.5 9h3M18.5 15h3"></path></svg>
+</span>
+<span style="display: flex; align-items: baseline; gap: 5px; font-size: 19px; letter-spacing: -0.02em; white-space: nowrap">
+<span style="font-weight: 800; color: #0F1A33">Adriel</span>
+<span class="ac-hide-sm" style="font-weight: 700; color: {{accent}}">Componentes</span>
+</span>
+<span style="height: 26px; padding: 0 10px; border-radius: 999px; background: #0F1A33; color: #FFFFFF; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; display: flex; align-items: center">Panel</span>
+</div>
+<div style="display: flex; align-items: center; gap: 8px">
+<a href="Main.dc.html" style="height: 44px; padding: 0 16px 0 14px; box-sizing: border-box; border: 1px solid #E1E7F3; border-radius: 999px; background: #FFFFFF; color: #0F1A33; display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; text-decoration: none; white-space: nowrap">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"></path></svg>
+<span class="ac-hide-sm">Ver tienda</span>
+</a>
+<span aria-hidden="true" style="width: 40px; height: 40px; border-radius: 999px; background: color-mix(in srgb, {{accent}} 12%, #FFFFFF); color: {{accent}}; font-size: 15px; font-weight: 800; display: flex; align-items: center; justify-content: center">A</span>
+<a href="Login.dc.html" aria-label="Cerrar sesión" title="Cerrar sesión" style="width: 44px; height: 44px; box-sizing: border-box; border: 1px solid #E1E7F3; border-radius: 999px; background: #FFFFFF; color: #0F1A33; display: flex; align-items: center; justify-content: center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 20H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3M16 16l4-4-4-4M20 12H9"></path></svg>
+</a>
+</div>
+</div>
+</header>
+
+<main style="flex: 1 0 auto; width: 100%; max-width: 1200px; box-sizing: border-box; margin: 0 auto; padding: 32px clamp(16px, 4vw, 24px) 96px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h1 style="margin: 0; font-size: 30px; font-weight: 800; line-height: 1.1; letter-spacing: -0.025em; color: #0F1A33">Mis componentes</h1>
+<p style="margin: 0; font-size: 15px; color: #5F6B85">{{summaryLabel}}</p>
+</div>
+<a href="ProductoForm.dc.html" style="height: 48px; padding: 0 22px 0 18px; box-sizing: border-box; border-radius: 999px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; text-decoration: none; box-shadow: 0 12px 24px -12px {{accent}}">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+<span>Nuevo componente</span>
+</a>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<div style="position: relative; flex: 1 1 280px; max-width: 420px">
+<label for="ac-search" class="ac-sr">Buscar componentes</label>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5F6B85" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%)"><circle cx="11" cy="11" r="6.5"></circle><path d="M20 20l-4.2-4.2"></path></svg>
+<input class="ac-input" id="ac-search" type="search" readOnly="{{ true }}" placeholder="Buscar por título o marca" style="width: 100%; box-sizing: border-box; height: 48px; padding: 0 16px 0 44px; border-radius: 999px; border: 1.5px solid #E1E7F3; background: #FFFFFF; font-family: inherit; font-size: 14px; color: #0F1A33; outline: none; appearance: none; -webkit-appearance: none">
+</div>
+<div role="group" aria-label="Filtrar por estado" style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: #FFFFFF; border: 1px solid #E1E7F3; overflow-x: auto; max-width: 100%; box-sizing: border-box">
+<button type="button" aria-pressed="true" style="flex: 0 0 auto; height: 44px; padding: 0 16px; border: 0; border-radius: 999px; background: #0F1A33; color: #FFFFFF; display: flex; align-items: center; gap: 8px; font-family: inherit; font-size: 14px; font-weight: 700; white-space: nowrap; cursor: pointer">
+<span>Todos</span><span style="font-size: 12px; font-weight: 700; color: #B8C3DA">{{countAll}}</span>
+</button>
+<button type="button" aria-pressed="false" style="flex: 0 0 auto; height: 44px; padding: 0 16px; border: 0; border-radius: 999px; background: transparent; color: #0F1A33; display: flex; align-items: center; gap: 8px; font-family: inherit; font-size: 14px; font-weight: 700; white-space: nowrap; cursor: pointer">
+<span>En venta</span><span style="font-size: 12px; font-weight: 700; color: #5F6B85">{{countOn}}</span>
+</button>
+<button type="button" aria-pressed="false" style="flex: 0 0 auto; height: 44px; padding: 0 16px; border: 0; border-radius: 999px; background: transparent; color: #0F1A33; display: flex; align-items: center; gap: 8px; font-family: inherit; font-size: 14px; font-weight: 700; white-space: nowrap; cursor: pointer">
+<span>Sin stock</span><span style="font-size: 12px; font-weight: 700; color: #5F6B85">{{countOff}}</span>
+</button>
+</div>
+</div>
+
+<div style="background: #FFFFFF; border: 1px solid #E6EBF5; border-radius: 22px; overflow: hidden; box-shadow: 0 1px 2px rgba(15,26,51,0.04)">
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="6">
+<div style="padding: 14px 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; border-top: {{r.borderTop}}">
+<div style="flex: 1 1 320px; min-width: 0; display: flex; align-items: center; gap: 14px">
+<span style="width: 68px; height: 68px; flex: 0 0 68px; border-radius: 16px; overflow: hidden; background: radial-gradient(circle at 50% 42%, #FFFFFF 0%, color-mix(in srgb, {{r.accent}} 11%, #FFFFFF) 72%); display: flex; align-items: center; justify-content: center">
+<dc-import name="ProductArt" kind="{{r.kind}}" accent="{{r.accent}}" size="sm" hint-size="62px,41px"></dc-import>
+</span>
+<div style="min-width: 0; display: flex; flex-direction: column; gap: 7px">
+<span style="font-size: 15px; font-weight: 700; line-height: 1.3; color: #0F1A33; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{r.title}}</span>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 13px; color: #5F6B85">
+<span style="height: 24px; padding: 0 9px; border-radius: 999px; background: {{r.statusBg}}; color: {{r.statusFg}}; font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 6px">
+<span style="width: 6px; height: 6px; border-radius: 999px; background: {{r.statusFg}}"></span>
+<span>{{r.statusLabel}}</span>
+</span>
+<span>{{r.brand}}</span>
+<span aria-hidden="true">·</span>
+<span>{{r.photosLabel}}</span>
+</div>
+</div>
+</div>
+<div style="flex: 0 1 auto; margin-left: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px">
+<div style="min-width: 110px; display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #5F6B85">Precio</span>
+<span style="font-size: 16px; font-weight: 800; color: #0F1A33; font-variant-numeric: tabular-nums">{{r.priceLabel}}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #5F6B85">Stock</span>
+<div role="group" aria-label="{{r.stockLabel}}" style="height: 44px; border-radius: 999px; background: #F3F6FC; border: 1px solid #E6EBF5; box-sizing: border-box; display: flex; align-items: center">
+<button type="button" aria-label="Restar uno" disabled="{{r.atZero}}" style="width: 40px; height: 42px; border: 0; border-radius: 999px; background: transparent; color: #0F1A33; opacity: {{r.minusOpacity}}; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 12h12"></path></svg>
+</button>
+<span style="min-width: 22px; text-align: center; font-size: 15px; font-weight: 800; color: #0F1A33; font-variant-numeric: tabular-nums">{{r.stock}}</span>
+<button type="button" aria-label="Sumar uno" style="width: 40px; height: 42px; border: 0; border-radius: 999px; background: transparent; color: #0F1A33; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 6v12M6 12h12"></path></svg>
+</button>
+</div>
+</div>
+<div style="display: flex; gap: 6px">
+<button type="button" aria-label="{{r.editLabel}}" title="Editar" style="width: 44px; height: 44px; border: 1px solid #E1E7F3; border-radius: 999px; background: #FFFFFF; color: #0F1A33; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9a2.1 2.1 0 0 0-4-4L4 16v4z"></path><path d="M13.5 6.5l4 4"></path></svg>
+</button>
+<button type="button" aria-label="{{r.delLabel}}" title="Eliminar" style="width: 44px; height: 44px; border: 1px solid #E1E7F3; border-radius: 999px; background: #FFFFFF; color: #5F6B85; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4.5A1.5 1.5 0 0 1 10.5 3h3A1.5 1.5 0 0 1 15 4.5V7"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</sc-for>
+
+<sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 64px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px">
+<span style="width: 64px; height: 64px; border-radius: 999px; background: color-mix(in srgb, {{accent}} 10%, #FFFFFF); color: {{accent}}; display: flex; align-items: center; justify-content: center">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"></rect><rect x="9.5" y="9.5" width="5" height="5" rx="0.5"></rect><path d="M9 2.5v3M15 2.5v3M9 18.5v3M15 18.5v3M2.5 9h3M2.5 15h3M18.5 9h3M18.5 15h3"></path></svg>
+</span>
+<p style="margin: 0; font-size: 17px; font-weight: 800; color: #0F1A33">Todavía no cargaste componentes</p>
+<p style="margin: 0; max-width: 340px; font-size: 14px; line-height: 1.5; color: #5F6B85">Cargá el primero con sus fotos, precio y cantidad, y aparece en la tienda.</p>
+<a href="ProductoForm.dc.html" style="margin-top: 6px; height: 46px; padding: 0 22px; box-sizing: border-box; border-radius: 999px; background: {{accent}}; color: #FFFFFF; display: flex; align-items: center; font-size: 14px; font-weight: 700; text-decoration: none">Nuevo componente</a>
+</div>
+</sc-if>
+</div>
+</main>
+
+<sc-if value="{{confirmOpen}}" hint-placeholder-val="{{ false }}">
+<div style="position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; padding: 16px; box-sizing: border-box">
+<div aria-hidden="true" style="position: absolute; inset: 0; background: rgba(6,14,36,0.5); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px)"></div>
+<div role="dialog" aria-modal="true" aria-labelledby="ac-del-title" style="position: relative; width: 100%; max-width: 420px; box-sizing: border-box; padding: 28px; border-radius: 24px; background: #FFFFFF; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 40px 80px -30px rgba(6,14,36,0.6)">
+<span style="width: 52px; height: 52px; border-radius: 999px; background: #FEF2F1; color: #C4271D; display: flex; align-items: center; justify-content: center">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12M9 7V4.5A1.5 1.5 0 0 1 10.5 3h3A1.5 1.5 0 0 1 15 4.5V7"></path></svg>
+</span>
+<h2 id="ac-del-title" style="margin: 4px 0 0; font-size: 20px; font-weight: 800; letter-spacing: -0.02em; color: #0F1A33">¿Eliminar este componente?</h2>
+<p style="margin: 0; font-size: 14px; line-height: 1.55; color: #5F6B85">“Placa de video GeForce GTX 1660 Super 6 GB” se va a quitar de la tienda. Esta acción no se puede deshacer.</p>
+<div style="margin-top: 8px; display: flex; gap: 10px">
+<button type="button" style="flex: 1 1 0; height: 48px; border: 1px solid #E1E7F3; border-radius: 999px; background: #FFFFFF; color: #0F1A33; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">Cancelar</button>
+<button type="button" style="flex: 1 1 0; height: 48px; border: 0; border-radius: 999px; background: #C4271D; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer">Eliminar</button>
+</div>
+</div>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#1F5BEF","options":["#1F5BEF","#5B3DF5","#0E7490","#0F1A33"]},"vista":{"editor":"enum","default":"lista","options":["lista","eliminar","vacio"]},"$preview":{"width":1280,"height":1160}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#1F5BEF';
+    const vista = this.props.vista ?? 'lista';
+    const fmt = (n) => '$ ' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    const data = [
+      { kind: 'gpu', brand: 'MSI', title: 'Placa de video GeForce GTX 1660 Super 6 GB', price: 185000, stock: 1, images: 5 },
+      { kind: 'ram', brand: 'Kingston', title: 'Memoria RAM Fury Beast 16 GB (2×8) DDR4 3200 MHz', price: 38000, stock: 2, images: 3 },
+      { kind: 'ssd', brand: 'Samsung', title: 'SSD NVMe 980 512 GB M.2', price: 42000, stock: 3, images: 2 },
+      { kind: 'cpu', brand: 'AMD', title: 'Procesador Ryzen 5 3600 AM4', price: 95000, stock: 1, images: 3 },
+      { kind: 'psu', brand: 'Corsair', title: 'Fuente CX650M 650 W 80 Plus Bronze', price: 70000, stock: 1, images: 4 },
+      { kind: 'mobo', brand: 'Gigabyte', title: 'Motherboard B450M DS3H AM4', price: 80000, stock: 1, images: 3 },
+      { kind: 'hdd', brand: 'Seagate', title: 'Disco rígido Barracuda 1 TB 7200 rpm', price: 25000, stock: 4, images: 1 },
+      { kind: 'cooler', brand: 'Cooler Master', title: 'Cooler de CPU Hyper 212', price: 30000, stock: 2, images: 2 },
+      { kind: 'psu', brand: 'EVGA', title: 'Fuente 500 W 80 Plus White', price: 30000, stock: 0, images: 2 }
+    ];
+    const empty = vista === 'vacio';
+    const rows = empty ? [] : data.map((p, i) => {
+      const on = p.stock > 0;
+      return {
+        kind: p.kind,
+        accent: accent,
+        title: p.title,
+        brand: p.brand,
+        photosLabel: p.images === 1 ? '1 foto' : p.images + ' fotos',
+        statusLabel: on ? 'En venta' : 'Sin stock · oculto',
+        statusBg: on ? '#E3F5EA' : '#FEF2F1',
+        statusFg: on ? '#0D7A3E' : '#B42318',
+        priceLabel: fmt(p.price),
+        stock: p.stock,
+        atZero: p.stock === 0,
+        minusOpacity: p.stock === 0 ? '0.35' : '1',
+        borderTop: i === 0 ? '0' : '1px solid #EEF2F8',
+        editLabel: 'Editar ' + p.title,
+        delLabel: 'Eliminar ' + p.title,
+        stockLabel: 'Stock de ' + p.title
+      };
+    });
+    return {
+      accent: accent,
+      rows: rows,
+      empty: empty,
+      confirmOpen: vista === 'eliminar',
+      summaryLabel: empty ? '0 publicaciones' : '9 publicaciones · 15 unidades en stock',
+      countAll: empty ? 0 : 9,
+      countOn: empty ? 0 : 8,
+      countOff: empty ? 0 : 1
+    };
+  }
+}
+</script>
+</body>
+</html>
